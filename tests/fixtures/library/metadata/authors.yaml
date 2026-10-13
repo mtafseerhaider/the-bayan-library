@@ -1,0 +1,20 @@
+# Fixture: list-file layout (docs/07). Sample data for tests only.
+- id: author-al-farabi
+  name: Al-Farabi
+  birth_year: 872
+  death_year: 950
+  civilization: Islamic Civilization
+  disciplines: [Philosophy, Logic, Music]
+  status: reviewed
+  summary: Philosopher known as the Second Teacher after Aristotle.
+- id: author-ibn-sina
+  name: Ibn Sina
+  birth_year: 980
+  death_year: 1037
+  civilization: Islamic Civilization
+  region: Persia
+  disciplines: [Philosophy, Medicine, Logic]
+  major_works: [book-the-book-of-healing]
+  influenced_by: [author-al-farabi]
+  status: reviewed
+  summary: Philosopher and physician whose synthesis shaped later thought.

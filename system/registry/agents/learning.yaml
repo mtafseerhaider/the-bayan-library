@@ -1,0 +1,276 @@
+# Learning system agents, coordinated by learning-coach. The Study Notes
+# Agent (core.yaml) also belongs to this system.
+#
+# All learning agents support three explanation levels:
+#   eli8      - Explain Like I'm 8: the idea in the simplest honest words
+#   general   - for an intelligent non-specialist
+#   technical - for a specialist, with precise terminology
+# Technical terms are glossed automatically by the terminology-glossing
+# skill (footnotes, per docs/21-study-notes-and-knowledge-capture-system.md).
+
+family: learning
+agents:
+  - agent_id: learning-how-to-learn
+    name: Learning How To Learn Agent
+    purpose: Teach the reader how to read, study and remember well.
+    responsibilities:
+      - Reading modes (survey, analytical, syntopical, research)
+      - Choosing a method per book and goal
+      - Meta-learning reviews of what is working
+    inputs: [Reader goals, difficulty scores, review data]
+    outputs: [Method guides, study strategy per book]
+    complexity_class: C
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [concept-explanation, difficulty-assessment, reflection-prompting]
+    memory: {read: [working, session, project, repository, personal-reflection], write: [session]}
+    token_budget: {input: 15000, output: 3000}
+    explanation_levels: [eli8, general, technical]
+    escalation_rules: [Method changes to docs/19 are methodology changes (G4).]
+    evaluation_metrics:
+      - {metric: strategy_followed_rate, target: "tracked by owner"}
+    quality:
+      validation: [Strategy names a reading mode and a review plan]
+      failure_handling: [Default to analytical reading with standard reviews]
+      review_gate: G2
+      human_approval: every_item
+    reports_to: learning-coach
+    collaborates_with: [learning-coach, memory-retention, difficulty-assessor]
+
+  - agent_id: knowledge-capture
+    name: Knowledge Capture Agent
+    purpose: Run the capture workflow from highlight to permanent note.
+    responsibilities:
+      - Capture inbox processing
+      - Note typing and linking
+      - Vocabulary and concept capture cards
+    inputs: [Highlights, reading notes, source passages]
+    outputs: [Typed note drafts, capture cards]
+    complexity_class: B
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [study-note-generation, vocabulary-analysis, tag-generation]
+    memory: {read: [working, session, repository], write: [session]}
+    token_budget: {input: 15000, output: 3000}
+    explanation_levels: [eli8, general, technical]
+    escalation_rules: [Inbox triage and tagging run on haiku.]
+    evaluation_metrics:
+      - {metric: inbox_age_days, target: "<= 7"}
+      - {metric: notes_with_links, target: ">= 0.9"}
+    quality:
+      validation: [Note type set, source cited, links resolve]
+      failure_handling: [Leave item in inbox with reason]
+      review_gate: G2
+      human_approval: every_item
+    reports_to: learning-coach
+    collaborates_with: [study-notes, metadata]
+
+  - agent_id: memory-retention
+    name: Memory Retention Agent
+    purpose: Prevent forgetting with spaced review at 1, 7, 30, 90 and 365 days.
+    responsibilities:
+      - Review scheduling (deterministic)
+      - Recall prompts from notes and vocabulary
+      - Retention statistics
+    inputs: [Review history, notes, vocabulary cards]
+    outputs: [Daily review queue, recall prompts, retention report]
+    complexity_class: A
+    default_model: haiku
+    fallback_model: sonnet
+    permission_level: 2
+    required_skills: [spaced-repetition-scheduling, knowledge-compression]
+    memory: {read: [working, session, repository, personal-reflection], write: [session, personal-reflection]}
+    token_budget: {input: 5000, output: 1000}
+    escalation_rules: [Scheduling never calls a model.]
+    evaluation_metrics:
+      - {metric: recall_rate_30d, target: ">= 0.8"}
+      - {metric: overdue_reviews, target: "<= 20"}
+    quality:
+      validation: [Intervals match the schedule, prompts sourced from reviewed notes]
+      failure_handling: [Reschedule missed reviews to the next day]
+      review_gate: G0
+      human_approval: none
+    reports_to: learning-coach
+    collaborates_with: [knowledge-capture, quran-arabic]
+
+  - agent_id: wisdom-extractor
+    name: Wisdom Extraction Agent
+    purpose: Ask of every note what is true, useful, memorable and actionable.
+    responsibilities:
+      - Wisdom cards from reviewed notes and summaries
+      - Life principles for the daily practice
+    inputs: [Reviewed notes and summaries]
+    outputs: [Wisdom cards]
+    complexity_class: C
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [wisdom-extraction, knowledge-compression]
+    memory: {read: [working, session, repository, canonical], write: [session]}
+    token_budget: {input: 15000, output: 2000}
+    explanation_levels: [eli8, general, technical]
+    escalation_rules: [Only reviewed sources are eligible inputs.]
+    evaluation_metrics:
+      - {metric: card_traceability, target: "1.0"}
+    quality:
+      validation: [Each card cites its source note]
+      failure_handling: [Drop untraceable cards]
+      review_gate: G2
+      human_approval: every_item
+    reports_to: learning-coach
+    collaborates_with: [daily-life-principle, application-tracker]
+
+  - agent_id: application-tracker
+    name: Application Tracking Agent
+    purpose: Track which ideas the owner chose to apply and what happened.
+    responsibilities:
+      - Application log upkeep
+      - Follow-up prompts on chosen actions
+      - Monthly application summary
+    inputs: [Wisdom cards, journal entries, action prompts]
+    outputs: [Application log updates, follow-ups]
+    complexity_class: A
+    default_model: haiku
+    fallback_model: sonnet
+    permission_level: 2
+    required_skills: [spaced-repetition-scheduling, reflection-prompting]
+    memory: {read: [working, session, personal-reflection], write: [session, personal-reflection]}
+    token_budget: {input: 5000, output: 800}
+    escalation_rules: [Private by default; never published.]
+    evaluation_metrics:
+      - {metric: follow_up_on_time, target: ">= 0.9"}
+    quality:
+      validation: [Writes only to personal-reflection memory]
+      failure_handling: [Skip follow-up, log reason]
+      review_gate: G0
+      human_approval: none
+    reports_to: learning-coach
+    collaborates_with: [reflection-journal, quran-personal-transformation]
+
+  - agent_id: author-decoder
+    name: Author Decoding Agent
+    purpose: Reconstruct an author's problem, audience, method and assumptions.
+    responsibilities:
+      - Author decoding cards (docs/19)
+      - Background knowledge the reader needs first
+    inputs: [Author records, representative passages, influence map]
+    outputs: [Decoding cards]
+    complexity_class: C
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [author-decoding, influence-analysis]
+    memory: {read: [working, session, repository, canonical], write: [session]}
+    token_budget: {input: 25000, output: 4000}
+    explanation_levels: [eli8, general, technical]
+    escalation_rules: [Theologians and philosophers in class D domains escalate to opus.]
+    evaluation_metrics:
+      - {metric: decoding_completeness, target: "1.0 of framework questions"}
+    quality:
+      validation: [Claims sourced, interpretation labelled]
+      failure_handling: [Return to draft]
+      review_gate: G2
+      human_approval: every_item
+    reports_to: learning-coach
+    collaborates_with: [language-analyst, voice-analyst, register-analyst]
+
+  - agent_id: language-analyst
+    name: Language Analysis Agent
+    purpose: Analyse an author's language, vocabulary and key terms.
+    responsibilities: [Key term lists, vocabulary difficulty, terminology glossary]
+    inputs: [Passages, glossary]
+    outputs: [Language analysis notes, vocabulary cards]
+    complexity_class: B
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [vocabulary-analysis, terminology-glossing]
+    memory: {read: [working, session, repository], write: [session]}
+    token_budget: {input: 15000, output: 2500}
+    explanation_levels: [eli8, general, technical]
+    escalation_rules: [Original-language philology escalates to the domain agent.]
+    evaluation_metrics:
+      - {metric: term_coverage, target: ">= 0.9 of key terms glossed"}
+    quality:
+      validation: [Terms defined with sources]
+      failure_handling: [Mark undefined terms]
+      review_gate: G2
+      human_approval: every_item
+    reports_to: author-decoder
+    collaborates_with: [author-decoder]
+
+  - agent_id: voice-analyst
+    name: Voice Analysis Agent
+    purpose: Describe the author's voice (stance, persona, tone).
+    responsibilities: [Voice profile, examples, reading tips]
+    inputs: [Passages]
+    outputs: [Voice notes]
+    complexity_class: B
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [author-decoding]
+    memory: {read: [working, session, repository], write: [session]}
+    token_budget: {input: 12000, output: 2000}
+    explanation_levels: [eli8, general, technical]
+    escalation_rules: []
+    evaluation_metrics:
+      - {metric: example_backed_claims, target: "1.0"}
+    quality:
+      validation: [Every claim illustrated by a quoted passage]
+      failure_handling: [Drop unillustrated claims]
+      review_gate: G2
+      human_approval: every_item
+    reports_to: author-decoder
+    collaborates_with: [author-decoder, register-analyst]
+
+  - agent_id: register-analyst
+    name: Register Analysis Agent
+    purpose: Identify the register (formal, technical, poetic, devotional) of a text.
+    responsibilities: [Register classification, implications for reading]
+    inputs: [Passages]
+    outputs: [Register notes]
+    complexity_class: B
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [author-decoding, terminology-glossing]
+    memory: {read: [working, session, repository], write: [session]}
+    token_budget: {input: 10000, output: 1500}
+    explanation_levels: [eli8, general, technical]
+    escalation_rules: [Simple classification may downgrade to haiku.]
+    evaluation_metrics:
+      - {metric: classification_agreement, target: ">= 0.85 with human labels"}
+    quality:
+      validation: [Register drawn from the controlled list in docs/19]
+      failure_handling: [Mark as mixed register]
+      review_gate: G1
+      human_approval: sampled
+    reports_to: author-decoder
+    collaborates_with: [voice-analyst, difficulty-assessor]
+
+  - agent_id: difficulty-assessor
+    name: Difficulty Assessment Agent
+    purpose: Score works on the difficulty matrix so paths start at the right level.
+    responsibilities: [Difficulty scores, recommended reader level, prerequisites]
+    inputs: [Record cards, executive summaries, sample passages]
+    outputs: [Difficulty metadata suggestions]
+    complexity_class: A
+    default_model: haiku
+    fallback_model: sonnet
+    permission_level: 2
+    required_skills: [difficulty-assessment]
+    memory: {read: [working, session, repository], write: [session]}
+    token_budget: {input: 6000, output: 800}
+    escalation_rules: [Disagreement with an existing reviewed score escalates to sonnet.]
+    evaluation_metrics:
+      - {metric: score_agreement, target: ">= 0.8 with human scores"}
+    quality:
+      validation: [All matrix dimensions scored]
+      failure_handling: [Leave unscored, flag]
+      review_gate: G1
+      human_approval: sampled
+    reports_to: learning-coach
+    collaborates_with: [reading-guide, learning-how-to-learn]

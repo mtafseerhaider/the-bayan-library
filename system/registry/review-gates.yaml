@@ -1,0 +1,67 @@
+# Review gates. An output starts at its agent's declared gate
+# (quality.review_gate in agents/*.yaml; a tier's default_review_gate is
+# the starting point for new agents) and is then raised to the strictest
+# gate demanded by its change classes (permissions.yaml mandatory_review)
+# or by a degraded fallback. Gates are only ever raised at run time,
+# never lowered.
+
+version: 1
+
+gates:
+  - gate: G0
+    name: Automated checks
+    description: >-
+      CI validation only (lint, schema, links, graph integrity). A human
+      still merges, but content review is not required.
+    human_review: none
+    sample_rate: 0.0
+    applies_to: [reports, regenerated indexes, formatting-only changes]
+
+  - gate: G1
+    name: Sampled review
+    description: >-
+      CI plus the Quality Assurance Agent's rubric score. A human reviews a
+      random sample and every item the QA agent flags.
+    human_review: sampled
+    sample_rate: 0.2
+    min_qa_score: 0.85
+    applies_to: [metadata updates, tags, daily entries, index rebuilds]
+
+  - gate: G2
+    name: Editorial review
+    description: Every item is read by a human editor before merge.
+    human_review: every_item
+    sample_rate: 1.0
+    min_qa_score: 0.80
+    applies_to: [summaries, notes, author and poet profiles, primers]
+
+  - gate: G3
+    name: Scholarly review
+    description: >-
+      Every item is read by a human with the sources open. Claims must cite
+      sources; interpretive claims must be labelled as interpretation and
+      competing views must be represented.
+    human_review: every_item_with_sources
+    sample_rate: 1.0
+    min_qa_score: 0.85
+    requires_citations: true
+    applies_to: [religious interpretation, historical claims, comparative theology]
+
+  - gate: G4
+    name: Chief Librarian approval
+    description: >-
+      Mandatory approval by the repository owner, via CODEOWNERS on the
+      affected paths. Requires a written rationale, a bias audit where
+      relevant, and a cooling-off period before merge.
+    human_review: owner_approval
+    sample_rate: 1.0
+    min_qa_score: 0.90
+    requires_citations: true
+    requires_rationale: true
+    cooling_off_hours: 72
+    applies_to:
+      - canon changes
+      - ranking changes
+      - governance changes
+      - Quran methodology changes
+      - architecture changes

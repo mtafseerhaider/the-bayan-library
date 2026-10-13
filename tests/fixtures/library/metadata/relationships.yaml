@@ -1,0 +1,5 @@
+- source: author-al-farabi
+  relationship: influenced
+  target: author-ibn-sina
+  confidence: high
+  citations: ["Gutas, Avicenna and the Aristotelian Tradition (2014)"]

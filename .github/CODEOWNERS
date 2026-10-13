@@ -1,0 +1,12 @@
+# Paths that require the owner's approval (review gate G4). With branch
+# protection set to "Require review from Code Owners", no change to these
+# paths can merge without the Editor-in-Chief.
+
+/canon/                 @mtafseerhaider
+/reading-paths/         @mtafseerhaider
+/docs/                  @mtafseerhaider
+/system/                @mtafseerhaider
+/.github/               @mtafseerhaider
+/scripts/               @mtafseerhaider
+/README.md              @mtafseerhaider
+/LICENSE                @mtafseerhaider

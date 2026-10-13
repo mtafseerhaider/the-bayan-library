@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mtafseerhaider/the-bayan-library/system/schemas/registry/workflows.schema.json",
+  "title": "Agent workflows",
+  "type": "object",
+  "required": [
+    "version",
+    "workflows"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer"
+    },
+    "workflows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "workflow_id",
+          "name",
+          "trigger",
+          "steps",
+          "review_gate",
+          "budget_ref"
+        ],
+        "properties": {
+          "trigger": {
+            "type": "object",
+            "required": [
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "enum": [
+                  "schedule",
+                  "event",
+                  "manual"
+                ]
+              }
+            }
+          },
+          "steps": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "agent",
+                "skills"
+              ]
+            }
+          },
+          "review_gate": {
+            "pattern": "^G[0-4]$"
+          }
+        }
+      }
+    }
+  }
+}

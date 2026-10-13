@@ -1,0 +1,157 @@
+# Model routing framework.
+#
+# Golden rule: use the smallest model with the smallest context that can
+# reliably solve the task. Deterministic work runs as a script and uses no
+# model at all. The reference router is scripts/bayan/router.py.
+
+version: 1
+
+complexity_classes:
+  - class: A
+    name: Simple
+    model: haiku
+    effort: low
+    description: Well-specified, single-source, checkable output.
+    examples: [metadata fixes, tag generation, link validation, formatting]
+  - class: B
+    name: Moderate
+    model: sonnet
+    effort: medium
+    description: Single-work understanding and faithful prose.
+    examples: [book summaries, author profiles, study notes]
+  - class: C
+    name: Complex
+    model: sonnet
+    effort: high
+    description: Multi-source structure-building; escalate when required.
+    examples: [reading paths, theme analysis, concept mapping]
+  - class: D
+    name: Expert
+    model: opus
+    effort: high
+    description: Contested, high-stakes scholarship requiring judgment.
+    examples: [canon ranking, Islamic philosophy, comparative theology]
+  - class: E
+    name: Strategic
+    model: opus
+    effort: xhigh
+    description: Decisions that shape the system itself.
+    examples: [governance, architecture, methodology]
+
+# Escalation moves one rung up the ladder at a time and must be justified
+# in the run log. A missing justification fails the route.
+escalation_rules:
+  - from: haiku
+    to: sonnet
+    justification_required: true
+    triggers:
+      - {signal: source_count, operator: gt, value: 3,
+         reason: More than 3 sources.}
+      - {signal: comparative, operator: eq, value: true,
+         reason: Comparative reasoning.}
+      - {signal: multi_document_synthesis, operator: eq, value: true,
+         reason: Multi-document synthesis.}
+      - {signal: qa_failures, operator: gte, value: 2,
+         reason: Output failed QA twice at this tier.}
+  - from: sonnet
+    to: opus
+    justification_required: true
+    triggers:
+      - {signal: canon_decision, operator: eq, value: true,
+         reason: Canon decision.}
+      - {signal: methodology_design, operator: eq, value: true,
+         reason: Methodology design.}
+      - {signal: cross_civilizational, operator: eq, value: true,
+         reason: Cross-civilizational analysis.}
+      - {signal: strategic_planning, operator: eq, value: true,
+         reason: Strategic planning.}
+      - {signal: qa_failures, operator: gte, value: 2,
+         reason: Output failed QA twice at this tier.}
+
+# Opus must never be used for these task types. The router downgrades
+# automatically and records the downgrade.
+downgrade_rules:
+  forbidden_on_opus:
+    - link_validation
+    - tagging
+    - formatting
+    - metadata_cleanup
+    - repetitive_operation
+    - index_build
+    - daily_selection
+    - spaced_repetition_scheduling
+  downgrade_to: haiku
+  # Batch-eligible work (no reader waiting) goes through the Batch API.
+  batch_eligible:
+    - tagging
+    - metadata_cleanup
+    - knowledge_compression
+    - difficulty_assessment
+    - vocabulary_analysis
+    - daily_entry
+
+# Budget policy: when the assembled context exceeds the model budget, the
+# router first compresses (climbs down the retrieval ladder), then asks for
+# justification. It never escalates a model just to get a bigger window.
+budget_policy:
+  on_input_overflow: [compress_context, split_task, require_justification]
+  on_output_overflow: [split_task, require_justification]
+  justification_field: budget_justification
+
+# Routing matrix: task type -> class. Model, effort and budget follow from
+# the class via models.yaml. `execution: script` means no model is called.
+task_types:
+  # Class A
+  - {task: link_validation, class: A, execution: script}
+  - {task: metadata_cleanup, class: A, execution: hybrid}
+  - {task: metadata_validation, class: A, execution: script}
+  - {task: tagging, class: A, execution: model}
+  - {task: formatting, class: A, execution: hybrid}
+  - {task: index_build, class: A, execution: script}
+  - {task: duplicate_detection, class: A, execution: hybrid}
+  - {task: daily_selection, class: A, execution: hybrid}
+  - {task: spaced_repetition_scheduling, class: A, execution: script}
+  - {task: knowledge_compression, class: A, execution: model}
+  - {task: difficulty_assessment, class: A, execution: model}
+  - {task: terminology_glossing, class: A, execution: model}
+  - {task: repetitive_operation, class: A, execution: hybrid}
+  - {task: cost_reporting, class: A, execution: script}
+  # Class B
+  - {task: book_summary, class: B, execution: model}
+  - {task: author_profile, class: B, execution: model}
+  - {task: study_note, class: B, execution: model}
+  - {task: concept_explanation, class: B, execution: model}
+  - {task: poetry_analysis, class: B, execution: model}
+  - {task: vocabulary_analysis, class: B, execution: model}
+  - {task: language_simplification, class: B, execution: model}
+  - {task: daily_entry, class: B, execution: model}
+  - {task: citation_verification, class: B, execution: hybrid}
+  - {task: arabic_root_analysis, class: B, execution: model}
+  - {task: reflection_prompt, class: B, execution: model}
+  - {task: qa_review, class: B, execution: hybrid}
+  # Class C
+  - {task: reading_path, class: C, execution: model}
+  - {task: theme_analysis, class: C, execution: model}
+  - {task: concept_mapping, class: C, execution: model}
+  - {task: knowledge_graph_proposal, class: C, execution: model}
+  - {task: influence_analysis, class: C, execution: model}
+  - {task: comparative_analysis, class: C, execution: model}
+  - {task: research_synthesis, class: C, execution: model}
+  - {task: wisdom_extraction, class: C, execution: model}
+  - {task: author_decoding, class: C, execution: model}
+  - {task: quran_theme_mapping, class: C, execution: model}
+  - {task: translation_comparison, class: C, execution: model}
+  - {task: representation_check, class: C, execution: hybrid}
+  - {task: risk_assessment, class: C, execution: model}
+  - {task: schema_migration, class: C, execution: hybrid}
+  # Class D
+  - {task: canon_ranking, class: D, execution: model}
+  - {task: bias_audit, class: D, execution: model}
+  - {task: islamic_philosophy, class: D, execution: model}
+  - {task: comparative_theology, class: D, execution: model}
+  - {task: tafsir_comparison, class: D, execution: model}
+  - {task: civilizational_analysis, class: D, execution: model}
+  # Class E
+  - {task: governance, class: E, execution: model}
+  - {task: architecture, class: E, execution: model}
+  - {task: methodology_design, class: E, execution: model}

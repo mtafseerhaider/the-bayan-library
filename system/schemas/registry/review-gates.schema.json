@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mtafseerhaider/the-bayan-library/system/schemas/registry/review-gates.schema.json",
+  "title": "Review gates",
+  "type": "object",
+  "required": [
+    "version",
+    "gates"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer"
+    },
+    "gates": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "object",
+        "required": [
+          "gate",
+          "name",
+          "human_review",
+          "sample_rate"
+        ],
+        "properties": {
+          "gate": {
+            "pattern": "^G[0-4]$"
+          },
+          "sample_rate": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "min_qa_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    }
+  }
+}

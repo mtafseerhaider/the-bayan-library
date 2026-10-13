@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mtafseerhaider/the-bayan-library/system/schemas/metadata/civilization.schema.json",
+  "title": "Civilization record",
+  "type": "object",
+  "required": [
+    "id",
+    "name"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^civilization-[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "period_start": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "period_end": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "major_figures": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "major_themes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "summary": {
+      "type": "string",
+      "maxLength": 900,
+      "description": "Retrieval layer 1: at most 120 words."
+    },
+    "executive_summary_path": {
+      "type": "string",
+      "description": "Retrieval layer 2: path to a <= 600-word executive summary."
+    },
+    "content_path": {
+      "type": "string",
+      "description": "Retrieval layer 3: path to the full content page."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "reviewed",
+        "canonical",
+        "deprecated"
+      ]
+    },
+    "replaced_by": {
+      "type": "string",
+      "description": "For deprecated records: the ID that supersedes this one."
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "provenance": {
+      "$ref": "common.schema.json#/$defs/provenance"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,4 @@
+# Tooling for scripts/ (validation, index, graph, router, cost report).
+# No model SDK: CI never calls a paid model API.
+PyYAML==6.0.3
+jsonschema==4.26.0

@@ -1,0 +1,115 @@
+# Repository-wide validation. Runs on every pull request and on pushes to
+# main and develop. Deterministic and offline: no secrets, no model calls.
+name: validate
+
+on:
+  pull_request:
+    # labeled/unlabeled: the `agent permissions` job keys on the
+    # ai-generated label, which is usually added after the PR is opened.
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+  push:
+    branches: [main, develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  markdown:
+    name: markdownlint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+      - name: Lint Markdown
+        run: npx --yes markdownlint-cli2@0.14.0 "**/*.md" "#node_modules"
+
+  registry:
+    name: registry
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Validate registries
+        run: python scripts/validate-registry.py
+      - name: Generated catalogs are current
+        run: python scripts/generate-registry-docs.py --check
+
+  content:
+    name: content
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Validate metadata (IDs are permanent against the base branch)
+        run: |
+          if [ -n "${GITHUB_BASE_REF}" ]; then
+            python scripts/validate-metadata.py --base-ref "origin/${GITHUB_BASE_REF}"
+          else
+            python scripts/validate-metadata.py
+          fi
+      - name: Validate knowledge graph
+        run: python scripts/validate-knowledge-graph.py
+      - name: Validate reading paths
+        run: python scripts/validate-reading-paths.py
+      - name: Validate internal links
+        run: python scripts/validate-links.py
+      - name: Retrieval index is current
+        run: python scripts/build-index.py --check
+
+  permissions:
+    name: agent permissions
+    if: >-
+      github.event_name == 'pull_request' &&
+      contains(github.event.pull_request.labels.*.name, 'ai-generated')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Changed files stay inside the agent's tier
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: >-
+          python scripts/check-permissions.py
+          --pr-body-env PR_BODY
+          --base "origin/${GITHUB_BASE_REF}"
+
+  tests:
+    name: unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Run tests
+        run: python -m unittest discover -s tests -t tests -v

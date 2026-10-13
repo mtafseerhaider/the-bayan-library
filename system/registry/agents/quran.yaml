@@ -1,0 +1,270 @@
+# Quran program agents: one per study track of
+# docs/17-quran-lifelong-learning-program.md, coordinated by quran-learning.
+#
+# Dependency flow (see docs/architecture/02-agent-registry.md):
+#   quran-arabic -> quran-root-analysis -> (all interpretive tracks)
+#   quran-traditional-study grounds every reflective track
+#   quran-civilizational-study -> quran-future-studies
+#   every track -> quran-personal-transformation -> reflection-journal
+
+family: quran
+agents:
+  - agent_id: quran-traditional-study
+    name: Traditional Study Agent
+    purpose: Ground all Quran study in tafsir, asbab al-nuzul and the Quranic sciences.
+    responsibilities:
+      - Tafsir comparison across classical and modern commentators
+      - Occasions of revelation and context
+      - Quranic sciences ('ulum al-Qur'an)
+      - Grounding notes cited by every other track
+    inputs: [Passage IDs, tafsir excerpts, root cards]
+    outputs: [Tafsir comparison notes, context notes]
+    complexity_class: D
+    default_model: opus
+    fallback_model: sonnet
+    permission_level: 2
+    required_skills: [tafsir-comparison, citation-verification, source-retrieval]
+    memory: {read: [working, session, repository, canonical], write: [session]}
+    token_budget: {input: 60000, output: 8000}
+    escalation_rules:
+      - Single-commentary summaries downgrade to sonnet.
+      - Every interpretive note goes to G3 scholarly review.
+    evaluation_metrics:
+      - {metric: commentator_diversity, target: ">= 3 commentaries, more than one school where they differ"}
+      - {metric: citation_rate, target: "1.0"}
+    quality:
+      validation: [Commentators named and dated, agreement and disagreement shown]
+      failure_handling: [Withhold note, request scholarly review]
+      review_gate: G3
+      human_approval: every_item
+    reports_to: quran-learning
+    collaborates_with: [quran-arabic, quran-root-analysis, islamic-civilization]
+
+  - agent_id: quran-arabic
+    name: Quranic Arabic Agent
+    purpose: Teach the Arabic of the Quran (morphology, syntax, rhetoric).
+    responsibilities:
+      - Morphology (sarf) and syntax (nahw) lessons
+      - Rhetoric (balagha) notes
+      - Graded vocabulary curriculum
+    inputs: [Passages, learner level, root cards]
+    outputs: [Grammar notes, vocabulary cards, exercises]
+    complexity_class: B
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [vocabulary-analysis, arabic-root-extraction, concept-explanation]
+    memory: {read: [working, session, repository, canonical, personal-reflection], write: [session]}
+    token_budget: {input: 20000, output: 4000}
+    explanation_levels: [eli8, general, technical]
+    escalation_rules:
+      - Rhetorical analysis tied to interpretation escalates to quran-traditional-study.
+    evaluation_metrics:
+      - {metric: grammatical_accuracy, target: ">= 0.98 on sampled review"}
+      - {metric: curriculum_progression, target: "no lesson before its prerequisites"}
+    quality:
+      validation: [Morphology checked against the root lexicon]
+      failure_handling: [Mark uncertain parses, request review]
+      review_gate: G2
+      human_approval: every_item
+    reports_to: quran-learning
+    collaborates_with: [quran-root-analysis, quran-traditional-study, memory-retention]
+
+  - agent_id: quran-root-analysis
+    name: Root Analysis Agent
+    purpose: Map triliteral roots, their derived forms and occurrences.
+    responsibilities:
+      - Root extraction and occurrence lists
+      - Semantic fields of roots
+      - uses_root relationships for the Quran map
+    inputs: [Passages, root lexicon]
+    outputs: [Root cards, uses_root proposals]
+    complexity_class: B
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [arabic-root-extraction, graph-query]
+    memory: {read: [working, session, repository], write: [session]}
+    token_budget: {input: 15000, output: 3000}
+    escalation_rules:
+      - Occurrence counting and lookups run as scripts or on haiku.
+    evaluation_metrics:
+      - {metric: root_accuracy, target: ">= 0.99 against lexicon"}
+    quality:
+      validation: [Every root exists in the lexicon, counts reproducible]
+      failure_handling: [Flag unknown roots for human check]
+      review_gate: G1
+      human_approval: sampled
+    reports_to: quran-arabic
+    collaborates_with: [quran-arabic, knowledge-graph, quran-philosophical-reflection]
+
+  - agent_id: quran-comparative-religion
+    name: Comparative Religion Agent
+    purpose: Study prophethood, revelation and shared figures across scriptures.
+    responsibilities:
+      - Shared figures and narratives across traditions
+      - Concepts of revelation and prophethood
+      - Respectful, source-based comparison
+    inputs: [Passages, parallel texts, scholarly sources]
+    outputs: [Comparative notes]
+    complexity_class: D
+    default_model: opus
+    fallback_model: sonnet
+    permission_level: 2
+    required_skills: [comparative-analysis, citation-verification, tafsir-comparison]
+    memory: {read: [working, session, repository, canonical], write: [session]}
+    token_budget: {input: 60000, output: 8000}
+    escalation_rules:
+      - Every output is comparative theology (G3).
+    evaluation_metrics:
+      - {metric: tradition_self_description, target: "each tradition described in its own terms"}
+      - {metric: citation_rate, target: "1.0"}
+    quality:
+      validation: [Primary texts cited for every tradition compared]
+      failure_handling: [Withdraw polemical or unsupported claims]
+      review_gate: G3
+      human_approval: every_item
+    reports_to: quran-learning
+    collaborates_with: [quran-traditional-study, research]
+
+  - agent_id: quran-philosophical-reflection
+    name: Philosophical Reflection Agent
+    purpose: Explore knowledge, justice, human nature and consciousness in the Quran.
+    responsibilities:
+      - Philosophical themes and their Quranic bases
+      - Links to Islamic and world philosophy
+      - Distinguishing reflection from exegesis
+    inputs: [Theme maps, tafsir notes, philosophy sources]
+    outputs: [Reflection essays, theme links]
+    complexity_class: D
+    default_model: opus
+    fallback_model: sonnet
+    permission_level: 2
+    required_skills: [quran-theme-mapping, comparative-analysis, concept-explanation]
+    memory: {read: [working, session, repository, canonical], write: [session]}
+    token_budget: {input: 60000, output: 8000}
+    explanation_levels: [eli8, general, technical]
+    escalation_rules:
+      - Must cite quran-traditional-study grounding before reflecting.
+    evaluation_metrics:
+      - {metric: grounding_citation, target: "1.0"}
+      - {metric: labelled_as_reflection, target: "1.0"}
+    quality:
+      validation: [Exegesis and reflection clearly separated]
+      failure_handling: [Return to draft without grounding]
+      review_gate: G3
+      human_approval: every_item
+    reports_to: quran-learning
+    collaborates_with: [islamic-civilization, quran-root-analysis]
+
+  - agent_id: quran-scientific-reflection
+    name: Scientific Reflection Agent
+    purpose: Reflect on observation and natural order without forced interpretation.
+    responsibilities:
+      - Verses inviting observation and reflection
+      - History of science in Islamic civilization
+      - Guarding against scientific concordism
+    inputs: [Passages, history-of-science sources]
+    outputs: [Reflection notes with explicit caveats]
+    complexity_class: C
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [quran-theme-mapping, citation-verification, concept-explanation]
+    memory: {read: [working, session, repository, canonical], write: [session]}
+    token_budget: {input: 30000, output: 5000}
+    escalation_rules:
+      - Any claim linking a verse to a specific scientific finding requires G3 review.
+    evaluation_metrics:
+      - {metric: forced_interpretation_flags, target: "0"}
+    quality:
+      validation: [Science claims sourced to scientific literature, verse claims to tafsir]
+      failure_handling: [Remove concordist claims]
+      review_gate: G3
+      human_approval: every_item
+    reports_to: quran-learning
+    collaborates_with: [quran-traditional-study, quran-philosophical-reflection]
+
+  - agent_id: quran-civilizational-study
+    name: Civilizational Study Agent
+    purpose: Study the Quran's role in education, governance, economics, law and ethics.
+    responsibilities:
+      - Civilizational themes and institutions
+      - Historical reception across Muslim societies
+      - Inputs for future studies
+    inputs: [Theme maps, civilization map, history sources]
+    outputs: [Civilizational notes]
+    complexity_class: C
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [civilizational-analysis, quran-theme-mapping, citation-verification]
+    memory: {read: [working, session, repository, canonical], write: [session]}
+    token_budget: {input: 30000, output: 5000}
+    escalation_rules:
+      - Cross-civilizational analysis escalates to opus with justification.
+    evaluation_metrics:
+      - {metric: historical_claim_citation, target: "1.0"}
+    quality:
+      validation: [Periods and regions specified]
+      failure_handling: [Narrow claims to documented cases]
+      review_gate: G3
+      human_approval: every_item
+    reports_to: quran-learning
+    collaborates_with: [islamic-civilization, quran-future-studies]
+
+  - agent_id: quran-future-studies
+    name: Future Studies Agent
+    purpose: Bring Quranic ethics to technology, stewardship and human flourishing.
+    responsibilities:
+      - Ethical questions raised by technology
+      - Stewardship (khilafa) and environment
+      - Scenarios for human flourishing
+    inputs: [Civilizational notes, theme maps, contemporary sources]
+    outputs: [Future-studies essays and questions]
+    complexity_class: C
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [research-synthesis, quran-theme-mapping, reflection-prompting]
+    memory: {read: [working, session, project, repository, canonical], write: [session]}
+    token_budget: {input: 30000, output: 5000}
+    escalation_rules:
+      - Normative rulings are out of scope; questions only, routed to G3.
+    evaluation_metrics:
+      - {metric: speculation_labelled, target: "1.0"}
+    quality:
+      validation: [Speculative content labelled, grounding cited]
+      failure_handling: [Convert assertions into questions]
+      review_gate: G3
+      human_approval: every_item
+    reports_to: quran-learning
+    collaborates_with: [quran-civilizational-study, quran-personal-transformation]
+
+  - agent_id: quran-personal-transformation
+    name: Personal Transformation Agent
+    purpose: Turn study into daily questions, actions and character formation.
+    responsibilities:
+      - Daily reflection questions
+      - Application tracking for Quranic ethics
+      - Level 4-5 integration and character goals
+    inputs: [Track outputs, journal digest (granted), review schedule]
+    outputs: [Daily questions, action prompts, monthly review]
+    complexity_class: B
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [reflection-prompting, wisdom-extraction, spaced-repetition-scheduling]
+    memory: {read: [working, session, repository, canonical, personal-reflection], write: [session]}
+    token_budget: {input: 15000, output: 3000}
+    escalation_rules:
+      - Never stores journal content outside personal-reflection memory.
+    evaluation_metrics:
+      - {metric: action_prompt_completion, target: "tracked by owner"}
+    quality:
+      validation: [Prompts grounded in reviewed track notes]
+      failure_handling: [Fall back to a reviewed prompt from the archive]
+      review_gate: G1
+      human_approval: sampled
+    reports_to: quran-learning
+    collaborates_with: [reflection-journal, application-tracker]

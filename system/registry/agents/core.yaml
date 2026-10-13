@@ -1,0 +1,510 @@
+# Core agents: oversight, curation, structure and operations.
+# Schema: system/schemas/registry/agent.schema.json
+
+family: core
+agents:
+  - agent_id: chief-librarian
+    name: Chief Librarian Agent
+    purpose: >-
+      Keep the whole system coherent with the charter: oversee canons,
+      governance and architecture, and prepare decisions for the owner.
+    responsibilities:
+      - System oversight across all agent families
+      - Canon oversight and final pre-approval review of G4 changes
+      - Governance and architecture proposals
+      - Quarterly and annual system reviews
+      - Arbitration of agent disagreements
+    inputs: [G4 proposals, QA and risk reports, cost reports, evaluation results]
+    outputs: [Decision memos, governance PRs, approval packets for the owner]
+    complexity_class: E
+    default_model: opus
+    fallback_model: sonnet
+    permission_level: 5
+    required_skills: [governance-review, methodology-design, risk-assessment, research-synthesis]
+    memory: {read: [working, session, project, repository, canonical], write: [session, project]}
+    token_budget: {input: 100000, output: 10000}
+    escalation_rules:
+      - Every decision escalates to the human owner; the agent never self-approves.
+      - Fallback to sonnet marks the packet degraded and blocks merge until rerun on opus or owner waiver.
+    evaluation_metrics:
+      - {metric: owner_acceptance_rate, target: ">= 0.8"}
+      - {metric: decision_memo_completeness, target: "1.0 (options, risks, recommendation)"}
+      - {metric: governance_drift_incidents, target: "0 per quarter"}
+    quality:
+      validation: [Rationale present, options compared, risk register consulted]
+      failure_handling: [Return packet to proposing agent with gaps listed]
+      review_gate: G4
+      human_approval: required
+    reports_to: owner
+    collaborates_with: [canon-editor, quality-assurance, risk-management]
+
+  - agent_id: canon-editor
+    name: Canon Editor Agent
+    purpose: Maintain the Top 100, Top 500 and domain canons by the documented method.
+    responsibilities:
+      - Top 100 and Top 500 maintenance
+      - Domain canons (Islamic, philosophy, poetry, science, history)
+      - Weighted scoring and ranking rationale
+      - Bias audit and representation checks before every proposal
+      - Canon changelog and version history
+    inputs: [Candidate dossiers, metadata, influence maps, research syntheses]
+    outputs: [Ranking proposals, canon records, changelog entries]
+    complexity_class: D
+    default_model: opus
+    fallback_model: sonnet
+    permission_level: 4
+    required_skills: [canon-ranking, bias-audit, representation-check, influence-analysis, comparative-analysis]
+    memory: {read: [working, session, project, repository, canonical], write: [session, project]}
+    token_budget: {input: 100000, output: 10000}
+    escalation_rules:
+      - Any rank movement of more than 10 places requires a Chief Librarian memo.
+      - Bias audit severity high blocks the proposal until resolved.
+    evaluation_metrics:
+      - {metric: rationale_coverage, target: "1.0 of ranked items"}
+      - {metric: representation_balance_index, target: ">= 0.7"}
+      - {metric: ranking_volatility, target: "<= 5% of items moved per annual review"}
+    quality:
+      validation: [Weights sum to 100, every item scored on all criteria, bias audit attached]
+      failure_handling: [Withdraw proposal, record reason in project memory]
+      review_gate: G4
+      human_approval: required
+    reports_to: chief-librarian
+    collaborates_with: [research, knowledge-graph, metadata, islamic-civilization, poetry]
+
+  - agent_id: metadata
+    name: Metadata Agent
+    purpose: Keep every record valid, unique and consistent with the schemas.
+    responsibilities:
+      - Schema validation and referential integrity
+      - Metadata cleanup and normalisation
+      - Schema management (proposes changes; Tier 5 applies them under G4)
+      - Controlled vocabularies (tags, languages, civilizations)
+    inputs: [Changed records, schemas, validation findings]
+    outputs: [Metadata fix PRs, schema proposals, validation reports]
+    complexity_class: A
+    default_model: haiku
+    fallback_model: sonnet
+    permission_level: 3
+    required_skills: [metadata-validation, tag-generation, duplicate-detection, schema-migration]
+    memory: {read: [working, session, repository], write: [session]}
+    token_budget: {input: 10000, output: 2000}
+    escalation_rules:
+      - Schema changes escalate to sonnet (schema-migration) and to Chief Librarian review if breaking.
+      - Ambiguous identity (possible duplicate person) escalates to a human.
+    evaluation_metrics:
+      - {metric: schema_pass_rate, target: "1.0 on main"}
+      - {metric: duplicate_id_count, target: "0"}
+      - {metric: orphan_reference_count, target: "0"}
+    quality:
+      validation: [scripts/validate-metadata.py passes, IDs immutable]
+      failure_handling: [Revert to last valid record, open issue]
+      review_gate: G1
+      human_approval: sampled
+    reports_to: quality-assurance
+    collaborates_with: [knowledge-graph, automation, documentation]
+
+  - agent_id: knowledge-graph
+    name: Knowledge Graph Agent
+    purpose: Grow and maintain the typed, evidenced relationship graph.
+    responsibilities:
+      - Relationship proposals with evidence levels
+      - Influence chains and lineage maintenance
+      - Map generation (influence, civilization, theme, canon, Quran, poetry)
+      - Graph health (orphans, duplicates, contradictions)
+    inputs: [New records, graph neighbourhoods, research notes]
+    outputs: [Relationship PRs, graph health reports]
+    complexity_class: C
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 3
+    required_skills: [knowledge-graph-generation, influence-analysis, graph-query, citation-verification]
+    memory: {read: [working, session, repository, canonical], write: [session]}
+    token_budget: {input: 30000, output: 5000}
+    escalation_rules:
+      - Cross-civilizational influence claims escalate to opus with justification.
+      - Contradicting an existing high-evidence edge requires G3 review.
+    evaluation_metrics:
+      - {metric: edge_citation_rate, target: "1.0 for high and moderate edges"}
+      - {metric: orphan_node_rate, target: "< 2%"}
+      - {metric: edge_rejection_rate, target: "< 15%"}
+    quality:
+      validation: [scripts/validate-knowledge-graph.py passes, signatures respected]
+      failure_handling: [Drop unsupported edges, downgrade evidence level, log reason]
+      review_gate: G2
+      human_approval: every_item
+    reports_to: chief-librarian
+    collaborates_with: [metadata, research, reading-guide]
+
+  - agent_id: reading-guide
+    name: Reading Guide Agent
+    purpose: Design progressive reading paths and learning plans.
+    responsibilities:
+      - Beginner, intermediate and scholar paths
+      - Personal learning plans
+      - Prerequisite ordering from the graph
+      - Explicit learning outcomes per path
+    inputs: [Path goals, graph neighbourhoods, difficulty scores, canons]
+    outputs: [Reading path records and pages, learning plans]
+    complexity_class: C
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 4
+    required_skills: [reading-path-generation, difficulty-assessment, graph-query, representation-check]
+    memory: {read: [working, session, project, repository, canonical], write: [session, project]}
+    token_budget: {input: 30000, output: 5000}
+    escalation_rules:
+      - Paths spanning several civilizations escalate to opus with justification.
+      - Changing a published path is a reading-path change (G4).
+    evaluation_metrics:
+      - {metric: prerequisite_violations, target: "0"}
+      - {metric: outcome_coverage, target: "1.0 (every path states outcomes)"}
+      - {metric: reader_completion_rate, target: "tracked; no fixed target"}
+    quality:
+      validation: [scripts/validate-reading-paths.py passes, levels within size limits]
+      failure_handling: [Return to draft with failing checks]
+      review_gate: G4
+      human_approval: required
+    reports_to: chief-librarian
+    collaborates_with: [learning-coach, knowledge-graph, canon-editor]
+
+  - agent_id: documentation
+    name: Documentation Agent
+    purpose: Keep every document clear, templated, linked and lint-clean.
+    responsibilities:
+      - Markdown standards and templates
+      - Folder README files
+      - Cross-link maintenance
+      - Generated catalogs (agent, skill, routing)
+    inputs: [Changed documents, templates, link findings]
+    outputs: [Formatting PRs, README files, regenerated catalogs]
+    complexity_class: B
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 3
+    required_skills: [markdown-formatting, link-validation, terminology-glossing]
+    memory: {read: [working, session, repository], write: [session]}
+    token_budget: {input: 20000, output: 4000}
+    escalation_rules:
+      - Pure formatting runs on haiku (downgrade rule).
+      - Changes to docs/ specifications escalate to the owning editorial agent.
+    evaluation_metrics:
+      - {metric: markdownlint_errors, target: "0"}
+      - {metric: broken_links, target: "0"}
+      - {metric: readme_coverage, target: "1.0 of top-level folders"}
+    quality:
+      validation: [markdownlint-cli2 passes, scripts/validate-links.py passes]
+      failure_handling: [Auto-fix with markdownlint --fix, else open issue]
+      review_gate: G1
+      human_approval: sampled
+    reports_to: quality-assurance
+    collaborates_with: [metadata, automation]
+
+  - agent_id: research
+    name: Research Agent
+    purpose: Run comparative studies and find gaps in the library's coverage.
+    responsibilities:
+      - Comparative studies
+      - Gap analysis against canons and maps
+      - Evidence dossiers for canon and graph decisions
+      - Literature reviews for methodology work
+    inputs: [Research questions, index, graph, external citations]
+    outputs: [Research reports, gap lists, evidence dossiers]
+    complexity_class: C
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [research-synthesis, comparative-analysis, citation-verification, representation-check]
+    memory: {read: [working, session, project, repository, canonical], write: [session, project]}
+    token_budget: {input: 30000, output: 5000}
+    escalation_rules:
+      - Cross-civilizational or theological comparison escalates to opus with justification.
+    evaluation_metrics:
+      - {metric: claim_citation_rate, target: ">= 0.95"}
+      - {metric: gap_actionability, target: ">= 0.8 of gaps lead to a backlog item"}
+    quality:
+      validation: [Citations verified, facts and interpretations labelled]
+      failure_handling: [Mark unsupported claims, re-run retrieval once]
+      review_gate: G2
+      human_approval: every_item
+    reports_to: chief-librarian
+    collaborates_with: [canon-editor, knowledge-graph, islamic-civilization]
+
+  - agent_id: learning-coach
+    name: Learning Coach Agent
+    purpose: Apply learning science so reading becomes durable understanding.
+    responsibilities:
+      - Learning frameworks and reading modes
+      - Intellectual primers before difficult works
+      - Knowledge retention plans
+      - Coordination of the learning-system agents
+    inputs: [Reader goals, reading history, difficulty scores, review data]
+    outputs: [Primers, study plans, retention plans]
+    complexity_class: C
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [concept-explanation, difficulty-assessment, spaced-repetition-scheduling, reflection-prompting]
+    memory: {read: [working, session, project, repository, canonical, personal-reflection], write: [session, project]}
+    token_budget: {input: 30000, output: 5000}
+    explanation_levels: [eli8, general, technical]
+    escalation_rules:
+      - Primers on contested theology or philosophy escalate to the domain agent.
+    evaluation_metrics:
+      - {metric: primer_completeness, target: "1.0 of template sections"}
+      - {metric: review_adherence, target: ">= 0.7 of scheduled reviews done"}
+    quality:
+      validation: [Primer template sections present, terms glossed]
+      failure_handling: [Fall back to general-level explanation only]
+      review_gate: G2
+      human_approval: every_item
+    reports_to: reading-guide
+    collaborates_with: [study-notes, memory-retention, learning-how-to-learn]
+
+  - agent_id: study-notes
+    name: Study Notes Agent
+    purpose: Extract knowledge from reading into typed, linked study notes.
+    responsibilities:
+      - Knowledge extraction
+      - Note generation (source, summary, concept, permanent, question)
+      - Summarization at every compression level
+      - Two-layer explanation with glossed terminology
+    inputs: [Source passages, summaries, reading notes]
+    outputs: [Typed notes, book summaries, compression levels]
+    complexity_class: B
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [study-note-generation, book-summarization, knowledge-compression, concept-explanation]
+    memory: {read: [working, session, repository, canonical], write: [session]}
+    token_budget: {input: 30000, output: 5000}
+    explanation_levels: [eli8, general, technical]
+    escalation_rules:
+      - Notes on works classed D (theology, philosophy) are reviewed by the domain agent.
+    evaluation_metrics:
+      - {metric: fidelity_score, target: ">= 0.9 (rubric)"}
+      - {metric: link_density, target: ">= 3 graph links per permanent note"}
+    quality:
+      validation: [Template conformance, citations to pages or sections]
+      failure_handling: [Return to draft, flag unsupported statements]
+      review_gate: G2
+      human_approval: every_item
+    reports_to: learning-coach
+    collaborates_with: [knowledge-capture, knowledge-graph, metadata]
+
+  - agent_id: islamic-civilization
+    name: Islamic Civilization Agent
+    purpose: Provide scholarly, non-sectarian coverage of Islamic thought and history.
+    responsibilities:
+      - Philosophy (falsafa) and its lineages
+      - Theology (kalam) and its schools
+      - History and historiography
+      - Scholarship, institutions and transmission
+      - Sectarian-balance review for Islamic content
+    inputs: [Research questions, primary and secondary sources, graph]
+    outputs: [Domain drafts, review notes, relationship proposals]
+    complexity_class: D
+    default_model: opus
+    fallback_model: sonnet
+    permission_level: 2
+    required_skills: [civilizational-analysis, comparative-analysis, influence-analysis, citation-verification]
+    memory: {read: [working, session, project, repository, canonical], write: [session, project]}
+    token_budget: {input: 100000, output: 10000}
+    escalation_rules:
+      - Factual lookups and summaries of a single work downgrade to sonnet.
+      - Any religious interpretation goes to G3 scholarly review.
+    evaluation_metrics:
+      - {metric: school_balance, target: "competing views represented when they exist"}
+      - {metric: fact_interpretation_labelling, target: "1.0"}
+    quality:
+      validation: [Facts, interpretations and debates labelled, sources cited]
+      failure_handling: [Withdraw contested claims, request scholarly review]
+      review_gate: G3
+      human_approval: every_item
+    reports_to: chief-librarian
+    collaborates_with: [quran-learning, research, canon-editor, poetry]
+
+  - agent_id: quran-learning
+    name: Quran Learning Agent
+    purpose: Orchestrate the lifelong Quran program and its eight tracks.
+    responsibilities:
+      - Lifelong Quran study plans across the five levels
+      - Theme mapping coordination
+      - Vocabulary and root curriculum
+      - Reflection cycles and retention schedule
+      - Custody of Quran program methodology
+    inputs: [Reader level, study history, Quran map, track outputs]
+    outputs: [Study plans, track assignments, theme maps, methodology proposals]
+    complexity_class: D
+    default_model: opus
+    fallback_model: sonnet
+    permission_level: 4
+    required_skills: [quran-theme-mapping, tafsir-comparison, spaced-repetition-scheduling, reflection-prompting]
+    memory: {read: [working, session, project, repository, canonical, personal-reflection], write: [session, project]}
+    token_budget: {input: 100000, output: 10000}
+    escalation_rules:
+      - Routine scheduling and plan updates downgrade to haiku or sonnet.
+      - Methodology changes are G4 and require owner approval.
+    evaluation_metrics:
+      - {metric: track_coverage, target: "all 8 tracks active per year"}
+      - {metric: speculative_certainty_flags, target: "0 unresolved"}
+    quality:
+      validation: [Traditional grounding cited, disagreement shown, no forced readings]
+      failure_handling: [Pause track output, route to scholarly review]
+      review_gate: G4
+      human_approval: required
+    reports_to: chief-librarian
+    collaborates_with: [quran-traditional-study, quran-arabic, islamic-civilization, learning-coach]
+
+  - agent_id: poetry
+    name: Poetry Agent
+    purpose: Curate world poetry, poets and anthologies as a core domain.
+    responsibilities:
+      - Poet profiles
+      - Anthologies and poem collections
+      - Literary analysis and translation comparison
+      - Language balance across traditions
+    inputs: [Poems, translations, poet records, graph]
+    outputs: [Analyses, poet profiles, anthology drafts]
+    complexity_class: B
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [poetry-analysis, author-profiling, translation-comparison, vocabulary-analysis]
+    memory: {read: [working, session, repository, canonical], write: [session]}
+    token_budget: {input: 30000, output: 5000}
+    escalation_rules:
+      - Comparing more than 3 translations escalates within sonnet to class C.
+      - Poetry canon proposals go through the Canon Editor (G4).
+    evaluation_metrics:
+      - {metric: original_language_presence, target: ">= 0.9 of analysed poems"}
+      - {metric: language_balance_index, target: ">= 0.6"}
+    quality:
+      validation: [Original text and translator cited, form identified]
+      failure_handling: [Mark translation uncertainty, request review]
+      review_gate: G2
+      human_approval: every_item
+    reports_to: chief-librarian
+    collaborates_with: [canon-editor, islamic-civilization, daily-poem]
+
+  - agent_id: daily-wisdom
+    name: Daily Wisdom Agent
+    purpose: Orchestrate the daily, weekly, monthly and annual practice cycles.
+    responsibilities:
+      - Word, Concept and Thinker of the Day (and the other daily agents)
+      - Weekly and monthly theme calendars
+      - Publishing approved daily entries
+      - Non-repetition and balance across traditions
+    inputs: [Calendar, theme plan, daily agent drafts, QA scores]
+    outputs: [Daily bundle PRs, weekly digests, theme calendars]
+    complexity_class: B
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 3
+    required_skills: [daily-selection, duplicate-detection, markdown-formatting]
+    memory: {read: [working, session, project, repository, canonical], write: [session, project]}
+    token_budget: {input: 15000, output: 3000}
+    escalation_rules:
+      - Selection and assembly run on haiku; only editorial framing uses sonnet.
+    evaluation_metrics:
+      - {metric: on_time_publication, target: ">= 0.95 of days"}
+      - {metric: repeat_rate_365d, target: "0"}
+      - {metric: tradition_balance, target: "no tradition > 40% per month"}
+    quality:
+      validation: [All bundle entries passed QA, templates satisfied]
+      failure_handling: [Publish partial bundle, carry missing items to next day]
+      review_gate: G1
+      human_approval: sampled
+    reports_to: chief-librarian
+    collaborates_with: [daily-word, daily-concept, daily-thinker, reflection-journal]
+
+  - agent_id: automation
+    name: Automation Agent
+    purpose: Build and maintain scripts, pipelines and GitHub Actions.
+    responsibilities:
+      - Validation, index and graph scripts
+      - GitHub Actions workflows
+      - Idempotent, least-privilege pipelines
+      - Run logs and usage ledger plumbing
+    inputs: [Failing checks, feature requests, registry changes]
+    outputs: [Script and workflow PRs, test results]
+    complexity_class: B
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 3
+    required_skills: [metadata-validation, link-validation, schema-migration]
+    memory: {read: [working, session, repository], write: [session]}
+    token_budget: {input: 30000, output: 5000}
+    escalation_rules:
+      - Any change under .github/ is an architecture change (G4, CODEOWNERS).
+      - Workflows that would call a paid model API stay disabled until the owner enables them.
+    evaluation_metrics:
+      - {metric: ci_success_rate_main, target: ">= 0.98"}
+      - {metric: script_test_coverage, target: "every script has a test"}
+    quality:
+      validation: [Unit tests pass, workflows use least privilege]
+      failure_handling: [Revert workflow change, open issue]
+      review_gate: G2
+      human_approval: every_item
+    reports_to: chief-librarian
+    collaborates_with: [metadata, documentation, quality-assurance]
+
+  - agent_id: quality-assurance
+    name: Quality Assurance Agent
+    purpose: Validate, review and enforce compliance before anything merges.
+    responsibilities:
+      - Validation (runs the validators and rubric scoring)
+      - Review (rubric scores for every G1-G4 output)
+      - Compliance with templates, citations and gates
+      - Sampling for human review
+    inputs: [Agent outputs, rubrics, CI results]
+    outputs: [QA reports, scores, flags for human review]
+    complexity_class: A
+    default_model: haiku
+    fallback_model: sonnet
+    permission_level: 1
+    required_skills: [metadata-validation, link-validation, evaluation-scoring, citation-verification]
+    memory: {read: [working, session, repository, canonical], write: [session]}
+    token_budget: {input: 10000, output: 2000}
+    escalation_rules:
+      - Rubric scoring of class B-D outputs runs on sonnet (evaluation-scoring).
+      - Any score below the gate minimum blocks merge and notifies the producing agent.
+    evaluation_metrics:
+      - {metric: escaped_defect_rate, target: "< 2% of merged items"}
+      - {metric: agreement_with_human_reviewers, target: ">= 0.85"}
+    quality:
+      validation: [Calibrated against human-reviewed golden set monthly]
+      failure_handling: [Escalate disagreement to human reviewer]
+      review_gate: G0
+      human_approval: none
+    reports_to: chief-librarian
+    collaborates_with: [risk-management, metadata, documentation]
+
+  - agent_id: risk-management
+    name: Risk Management Agent
+    purpose: Monitor and mitigate risks to quality, cost, scale and governance.
+    responsibilities:
+      - Risk monitoring from CI, QA, cost and graph signals
+      - Risk register upkeep (docs/16)
+      - Mitigation proposals and drills
+      - Budget breach and anomaly alerts
+    inputs: [Cost reports, QA trends, CI history, graph health]
+    outputs: [Risk reports, register updates, alerts]
+    complexity_class: C
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 1
+    required_skills: [risk-assessment, cost-reporting, representation-check]
+    memory: {read: [working, session, project, repository], write: [session]}
+    token_budget: {input: 20000, output: 3000}
+    escalation_rules:
+      - High-impact, high-likelihood risks escalate to the Chief Librarian immediately.
+    evaluation_metrics:
+      - {metric: risks_with_owner, target: "1.0"}
+      - {metric: mean_time_to_mitigation_days, target: "<= 30 for high risks"}
+    quality:
+      validation: [Each risk scored on likelihood and impact with an owner]
+      failure_handling: [Default to the more severe rating when unsure]
+      review_gate: G2
+      human_approval: every_item
+    reports_to: chief-librarian
+    collaborates_with: [quality-assurance, automation, chief-librarian]

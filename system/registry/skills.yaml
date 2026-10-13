@@ -1,0 +1,540 @@
+# Skill registry. A skill is a reusable, documented procedure with a fixed
+# input and output contract. Agents compose skills; skills compose other
+# skills through `dependencies` (which must form a DAG).
+#
+# execution:
+#   script  - deterministic code, no model call
+#   hybrid  - script first, model only for what the script cannot decide
+#   model   - model call with the recommended model class
+#
+# Models are class names resolved through models.yaml. Token budgets are
+# per invocation and may not exceed the recommended model's cap.
+#
+# A skill always runs on its own recommended model, whatever the class of
+# the agent invoking it: a class A agent that uses a class B skill pays
+# for one sonnet call for that step only. The router records it as the
+# skill's class, not as an escalation.
+
+version: 1
+
+skills:
+  # ------------------------------------------------------------ Class A
+  - skill_id: source-retrieval
+    name: Source Retrieval
+    purpose: Assemble the minimum context for a task via the retrieval ladder.
+    input: Task spec, target IDs, token budget.
+    output: Context pack (cards, summaries, excerpts) with token count.
+    dependencies: []
+    complexity_class: A
+    execution: hybrid
+    recommended_model: haiku
+    fallback_model: sonnet
+    token_budget: {input: 6000, output: 800}
+
+  - skill_id: graph-query
+    name: Graph Query
+    purpose: Return a bounded neighbourhood of the knowledge graph.
+    input: Seed IDs, relationship filter, depth (max 2), map ID.
+    output: Node cards and typed edges with evidence levels.
+    dependencies: []
+    complexity_class: A
+    execution: script
+    recommended_model: haiku
+    fallback_model: sonnet
+    token_budget: {input: 0, output: 0}
+
+  - skill_id: context-compression
+    name: Context Compression
+    purpose: Shrink retrieved context to the budget without losing claims.
+    input: Context pack, target token count, must-keep facts.
+    output: Compressed pack plus a list of dropped items.
+    dependencies: []
+    complexity_class: A
+    execution: model
+    recommended_model: haiku
+    fallback_model: sonnet
+    token_budget: {input: 10000, output: 2000}
+
+  - skill_id: knowledge-compression
+    name: Knowledge Compression
+    purpose: Produce the four idea-compression levels for a note or summary.
+    input: Reviewed summary or note.
+    output: Paragraph, sentence, phrase and keyword forms.
+    dependencies: []
+    complexity_class: A
+    execution: model
+    recommended_model: haiku
+    fallback_model: sonnet
+    token_budget: {input: 4000, output: 600}
+
+  - skill_id: terminology-glossing
+    name: Terminology Glossing
+    purpose: Detect technical terms and attach plain-language footnotes.
+    input: Draft text, glossary excerpt.
+    output: Text with footnoted terms and new glossary candidates.
+    dependencies: []
+    complexity_class: A
+    execution: model
+    recommended_model: haiku
+    fallback_model: sonnet
+    token_budget: {input: 6000, output: 1500}
+
+  - skill_id: markdown-formatting
+    name: Markdown Formatting
+    purpose: Conform a document to the templates and markdownlint rules.
+    input: Draft Markdown, template ID.
+    output: Lint-clean Markdown.
+    dependencies: []
+    complexity_class: A
+    execution: hybrid
+    recommended_model: haiku
+    fallback_model: sonnet
+    token_budget: {input: 8000, output: 2000}
+
+  - skill_id: link-validation
+    name: Link Validation
+    purpose: Find broken internal links and dangling IDs.
+    input: Changed files or whole repository.
+    output: Findings list with file and line.
+    dependencies: []
+    complexity_class: A
+    execution: script
+    recommended_model: haiku
+    fallback_model: haiku
+    token_budget: {input: 0, output: 0}
+
+  - skill_id: metadata-validation
+    name: Metadata Validation
+    purpose: Validate records against JSON Schemas and referential integrity.
+    input: Metadata records.
+    output: Findings classified critical, major or minor.
+    dependencies: []
+    complexity_class: A
+    execution: script
+    recommended_model: haiku
+    fallback_model: sonnet
+    token_budget: {input: 0, output: 0}
+
+  - skill_id: tag-generation
+    name: Tag Generation
+    purpose: Assign tags from the controlled vocabulary only.
+    input: Record card, summary, tag vocabulary.
+    output: Up to 8 tags, each from metadata/tags.yaml.
+    dependencies: [source-retrieval]
+    complexity_class: A
+    execution: model
+    recommended_model: haiku
+    fallback_model: sonnet
+    token_budget: {input: 3000, output: 200}
+
+  - skill_id: duplicate-detection
+    name: Duplicate Detection
+    purpose: Catch duplicate records, aliases and transliteration variants.
+    input: Candidate record, index cards.
+    output: Likely duplicates with similarity scores.
+    dependencies: [source-retrieval]
+    complexity_class: A
+    execution: hybrid
+    recommended_model: haiku
+    fallback_model: sonnet
+    token_budget: {input: 4000, output: 500}
+
+  - skill_id: difficulty-assessment
+    name: Difficulty Assessment
+    purpose: Score a work on the difficulty matrix of docs/19.
+    input: Record card, executive summary, sample passage.
+    output: Scores per dimension, overall level, rationale.
+    dependencies: [source-retrieval]
+    complexity_class: A
+    execution: model
+    recommended_model: haiku
+    fallback_model: sonnet
+    token_budget: {input: 5000, output: 600}
+
+  - skill_id: spaced-repetition-scheduling
+    name: Spaced Repetition Scheduling
+    purpose: Schedule reviews at 1, 7, 30, 90 and 365 days.
+    input: Review history.
+    output: Due-review queue.
+    dependencies: []
+    complexity_class: A
+    execution: script
+    recommended_model: haiku
+    fallback_model: haiku
+    token_budget: {input: 0, output: 0}
+
+  - skill_id: daily-selection
+    name: Daily Selection
+    purpose: Pick the day's item from the library without repeats.
+    input: Practice type, calendar theme, history of past picks.
+    output: Selected record ID with reason.
+    dependencies: [source-retrieval, duplicate-detection]
+    complexity_class: A
+    execution: hybrid
+    recommended_model: haiku
+    fallback_model: sonnet
+    token_budget: {input: 3000, output: 300}
+
+  - skill_id: cost-reporting
+    name: Cost Reporting
+    purpose: Aggregate the usage ledger against budgets.
+    input: Usage ledger (JSONL), budgets.yaml.
+    output: Markdown cost report with alerts.
+    dependencies: []
+    complexity_class: A
+    execution: script
+    recommended_model: haiku
+    fallback_model: haiku
+    token_budget: {input: 0, output: 0}
+
+  # ------------------------------------------------------------ Class B
+  - skill_id: citation-verification
+    name: Citation Verification
+    purpose: Check that every claim that needs a source has one that fits.
+    input: Draft with citations, bibliography entries.
+    output: Per-claim verdicts (supported, unsupported, needs source).
+    dependencies: [source-retrieval]
+    complexity_class: B
+    execution: hybrid
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 15000, output: 2000}
+
+  - skill_id: vocabulary-analysis
+    name: Vocabulary Analysis
+    purpose: Define a term with etymology, related words and usage.
+    input: Term, language, source passages.
+    output: Vocabulary card following the docs/21 template.
+    dependencies: [source-retrieval, terminology-glossing]
+    complexity_class: B
+    execution: model
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 6000, output: 1200}
+
+  - skill_id: language-simplification
+    name: Language Simplification
+    purpose: Re-express an idea for a younger or non-specialist reader.
+    input: Source explanation, target level (eli8, general).
+    output: Simplified text with a fidelity note.
+    dependencies: [terminology-glossing]
+    complexity_class: B
+    execution: model
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 5000, output: 1000}
+
+  - skill_id: concept-explanation
+    name: Concept Explanation
+    purpose: Explain a concept at ELI8, general and technical levels.
+    input: Concept ID, requested levels, source context.
+    output: Three-level explanation with glossed terms.
+    dependencies: [source-retrieval, language-simplification, terminology-glossing]
+    complexity_class: B
+    execution: model
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 10000, output: 2500}
+
+  - skill_id: book-summarization
+    name: Book Summarization
+    purpose: Produce the layered summary set for one work.
+    input: Book record, source text or notes, template.
+    output: One-line summary, executive summary, chapter breakdown.
+    dependencies: [source-retrieval, citation-verification, knowledge-compression, markdown-formatting, tag-generation]
+    complexity_class: B
+    execution: model
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 30000, output: 5000}
+
+  - skill_id: author-profiling
+    name: Author Profiling
+    purpose: Write an author or poet profile with influences and works.
+    input: Author record, sources, graph neighbourhood.
+    output: Profile following the author template, relationship proposals.
+    dependencies: [source-retrieval, graph-query, citation-verification, tag-generation]
+    complexity_class: B
+    execution: model
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 20000, output: 4000}
+
+  - skill_id: study-note-generation
+    name: Study Note Generation
+    purpose: Turn reading into typed notes with the two-layer explanation.
+    input: Source passages or summary, note type.
+    output: Source, summary, concept, permanent or question notes.
+    dependencies: [source-retrieval, concept-explanation, knowledge-compression, markdown-formatting]
+    complexity_class: B
+    execution: model
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 20000, output: 4000}
+
+  - skill_id: poetry-analysis
+    name: Poetry Analysis
+    purpose: Analyse a poem's form, imagery, themes and context.
+    input: Poem (original and translation), poet record.
+    output: Analysis note, theme tags, relationship proposals.
+    dependencies: [source-retrieval, vocabulary-analysis, citation-verification]
+    complexity_class: B
+    execution: model
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 15000, output: 3000}
+
+  - skill_id: arabic-root-extraction
+    name: Arabic Root Extraction
+    purpose: Identify triliteral roots, morphology and derived forms.
+    input: Passage or word list, root lexicon excerpt.
+    output: Root cards with occurrences and meanings.
+    dependencies: [source-retrieval]
+    complexity_class: B
+    execution: hybrid
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 8000, output: 2000}
+
+  - skill_id: reflection-prompting
+    name: Reflection Prompting
+    purpose: Generate questions that lead from an idea to personal action.
+    input: Idea or passage, reader level, recent journal digest (if granted).
+    output: Three to five reflection questions and one action prompt.
+    dependencies: [source-retrieval]
+    complexity_class: B
+    execution: model
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 4000, output: 800}
+
+  - skill_id: evaluation-scoring
+    name: Evaluation Scoring
+    purpose: Score an output against its rubric (model-graded evaluation).
+    input: Output, rubric, reference material.
+    output: Per-criterion scores, overall score, failure reasons.
+    dependencies: []
+    complexity_class: B
+    execution: model
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 12000, output: 1500}
+
+  # ------------------------------------------------------------ Class C
+  - skill_id: influence-analysis
+    name: Influence Analysis
+    purpose: Establish influence chains with evidence levels.
+    input: Seed entities, graph neighbourhood, sources.
+    output: Proposed influence edges with citations and confidence.
+    dependencies: [source-retrieval, graph-query, citation-verification]
+    complexity_class: C
+    execution: model
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 25000, output: 4000}
+
+  - skill_id: comparative-analysis
+    name: Comparative Analysis
+    purpose: Compare works, thinkers or ideas on explicit dimensions.
+    input: Entities, comparison dimensions, sources.
+    output: Comparison table and narrative with sources.
+    dependencies: [source-retrieval, citation-verification, context-compression]
+    complexity_class: C
+    execution: model
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 30000, output: 5000}
+
+  - skill_id: research-synthesis
+    name: Research Synthesis
+    purpose: Synthesise many sources into findings and gaps.
+    input: Research question, source set.
+    output: Findings, open questions, coverage gaps.
+    dependencies: [source-retrieval, comparative-analysis, citation-verification, context-compression]
+    complexity_class: C
+    execution: model
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 30000, output: 5000}
+
+  - skill_id: knowledge-graph-generation
+    name: Knowledge Graph Generation
+    purpose: Propose typed, evidenced relationships for new records.
+    input: New or changed records, graph neighbourhood.
+    output: Relationship proposals in metadata/relationships format.
+    dependencies: [metadata-validation, graph-query, influence-analysis, duplicate-detection]
+    complexity_class: C
+    execution: hybrid
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 20000, output: 3000}
+
+  - skill_id: representation-check
+    name: Representation Check
+    purpose: Measure coverage across civilizations, languages, eras, genders.
+    input: Candidate list, metadata.
+    output: Distribution table and flagged imbalances.
+    dependencies: [metadata-validation, graph-query]
+    complexity_class: C
+    execution: hybrid
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 10000, output: 2000}
+
+  - skill_id: reading-path-generation
+    name: Reading Path Generation
+    purpose: Order works into beginner, intermediate and scholar paths.
+    input: Path goal, candidate works, graph neighbourhood.
+    output: Path record with sequence, rationale and outcomes.
+    dependencies: [graph-query, difficulty-assessment, representation-check, metadata-validation]
+    complexity_class: C
+    execution: model
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 25000, output: 4000}
+
+  - skill_id: wisdom-extraction
+    name: Wisdom Extraction
+    purpose: Ask what is true, useful, memorable and actionable.
+    input: Reviewed summary or note.
+    output: Wisdom card (truths, uses, memory hooks, actions).
+    dependencies: [source-retrieval, knowledge-compression]
+    complexity_class: C
+    execution: model
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 10000, output: 1500}
+
+  - skill_id: author-decoding
+    name: Author Decoding
+    purpose: Reconstruct an author's problem, audience, method and voice.
+    input: Author record, representative passages.
+    output: Decoding card per docs/19 framework.
+    dependencies: [source-retrieval, vocabulary-analysis, influence-analysis]
+    complexity_class: C
+    execution: model
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 20000, output: 3000}
+
+  - skill_id: translation-comparison
+    name: Translation Comparison
+    purpose: Compare translations against the original for distortion.
+    input: Original text, two or more translations.
+    output: Divergence notes and a recommended reading translation.
+    dependencies: [source-retrieval, vocabulary-analysis]
+    complexity_class: C
+    execution: model
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 15000, output: 3000}
+
+  - skill_id: quran-theme-mapping
+    name: Quran Theme Mapping
+    purpose: Map passages to themes and concepts with roots and sources.
+    input: Surah or passage IDs, theme vocabulary.
+    output: has_theme and uses_root proposals with citations.
+    dependencies: [arabic-root-extraction, graph-query, citation-verification]
+    complexity_class: C
+    execution: model
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 20000, output: 3000}
+
+  - skill_id: risk-assessment
+    name: Risk Assessment
+    purpose: Score risks by likelihood and impact and propose mitigations.
+    input: Signals (CI, cost, QA, graph health), risk register.
+    output: Updated risk entries and alerts.
+    dependencies: [source-retrieval, cost-reporting]
+    complexity_class: C
+    execution: model
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 15000, output: 2500}
+
+  - skill_id: schema-migration
+    name: Schema Migration
+    purpose: Plan and apply backward-compatible schema changes.
+    input: Old and new schema, affected records.
+    output: Migration script, guidance, validation report.
+    dependencies: [metadata-validation]
+    complexity_class: C
+    execution: hybrid
+    recommended_model: sonnet
+    fallback_model: opus
+    token_budget: {input: 20000, output: 4000}
+
+  # ------------------------------------------------------------ Class D
+  - skill_id: bias-audit
+    name: Bias Audit
+    purpose: Audit a list or ranking for civilizational and other bias.
+    input: Ranking or list, representation report, methodology.
+    output: Bias findings with severity and corrective proposals.
+    dependencies: [representation-check, comparative-analysis]
+    complexity_class: D
+    execution: model
+    recommended_model: opus
+    fallback_model: sonnet
+    token_budget: {input: 40000, output: 6000}
+
+  - skill_id: canon-ranking
+    name: Canon Ranking
+    purpose: Score and rank candidates with the weighted canon method.
+    input: Candidates, criteria weights, evidence dossiers.
+    output: Ranked list with per-criterion scores and rationale.
+    dependencies: [metadata-validation, bias-audit, influence-analysis, comparative-analysis]
+    complexity_class: D
+    execution: model
+    recommended_model: opus
+    fallback_model: sonnet
+    token_budget: {input: 80000, output: 10000}
+
+  - skill_id: tafsir-comparison
+    name: Tafsir Comparison
+    purpose: Present classical and modern commentaries side by side.
+    input: Passage ID, selected tafsir excerpts.
+    output: Comparison noting agreement, disagreement and schools.
+    dependencies: [source-retrieval, arabic-root-extraction, citation-verification]
+    complexity_class: D
+    execution: model
+    recommended_model: opus
+    fallback_model: sonnet
+    token_budget: {input: 40000, output: 6000}
+
+  - skill_id: civilizational-analysis
+    name: Civilizational Analysis
+    purpose: Analyse ideas and institutions across civilizations.
+    input: Question, civilization-map neighbourhood, sources.
+    output: Analysis with transmissions, contrasts and evidence levels.
+    dependencies: [comparative-analysis, influence-analysis, graph-query]
+    complexity_class: D
+    execution: model
+    recommended_model: opus
+    fallback_model: sonnet
+    token_budget: {input: 60000, output: 8000}
+
+  # ------------------------------------------------------------ Class E
+  - skill_id: governance-review
+    name: Governance Review
+    purpose: Evaluate a proposed governance or architecture change.
+    input: Proposal, affected registries and docs, risk register.
+    output: Decision memo with options, risks and a recommendation.
+    dependencies: [risk-assessment, research-synthesis]
+    complexity_class: E
+    execution: model
+    recommended_model: opus
+    fallback_model: sonnet
+    token_budget: {input: 60000, output: 8000}
+
+  - skill_id: methodology-design
+    name: Methodology Design
+    purpose: Design or revise a methodology (canon, Quran study, notes).
+    input: Current methodology, evaluation results, research synthesis.
+    output: Methodology draft with rationale, metrics and migration plan.
+    dependencies: [research-synthesis, bias-audit, evaluation-scoring]
+    complexity_class: E
+    execution: model
+    recommended_model: opus
+    fallback_model: sonnet
+    token_budget: {input: 80000, output: 10000}

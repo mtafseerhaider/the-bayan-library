@@ -342,6 +342,13 @@ The AI succeeds when it:
 
 The objective is contribution rather than content generation alone.
 
+## Operating Architecture
+
+The agents, skills, permission tiers, model routing, token budgets and
+review gates that put this manual into practice are specified in the
+[AI-Native Architecture](architecture/README.md) and enforced by the
+registries in [`system/registry/`](../system/registry/).
+
 ## Manual Summary
 
 The AI Maintainer serves as an intelligent librarian, editor, researcher, and

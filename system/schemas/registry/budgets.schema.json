@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mtafseerhaider/the-bayan-library/system/schemas/registry/budgets.schema.json",
+  "title": "Cost budgets",
+  "type": "object",
+  "required": [
+    "version",
+    "monthly",
+    "envelopes",
+    "escalation",
+    "workflows",
+    "metrics"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer"
+    },
+    "monthly": {
+      "type": "object",
+      "required": [
+        "total_cap",
+        "alert_thresholds"
+      ],
+      "properties": {
+        "total_cap": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "envelopes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "cap",
+          "covers"
+        ]
+      }
+    },
+    "workflows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "workflow_id",
+          "per_run_cap"
+        ]
+      }
+    },
+    "agents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "agent_id",
+          "monthly_cap"
+        ]
+      }
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "description"
+        ]
+      }
+    }
+  }
+}

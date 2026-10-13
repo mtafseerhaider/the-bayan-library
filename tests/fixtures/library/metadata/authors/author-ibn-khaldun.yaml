@@ -1,0 +1,10 @@
+# Fixture: one-record-per-file layout.
+id: author-ibn-khaldun
+name: Ibn Khaldun
+birth_year: 1332
+death_year: 1406
+civilization: Islamic Civilization
+disciplines: [History, Sociology]
+major_works: [book-muqaddimah]
+status: canonical
+summary: Historian who proposed a theory of the rise and fall of dynasties.
