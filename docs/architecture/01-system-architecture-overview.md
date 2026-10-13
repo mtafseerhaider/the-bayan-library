@@ -44,7 +44,7 @@ directory that defines it.
 | --- | --- | --- | --- |
 | 1 | Governance (human owner) | Final approval, merges, policy | [Governance Model](../02-governance-model.md), `permissions.yaml` |
 | 2 | Orchestration | Run workflows, hand off between agents, enforce budgets | `workflows.yaml`, `budgets.yaml` |
-| 3 | Agent families | 44 agents in four families (core, quran, daily, learning) | `agents/*.yaml` |
+| 3 | Agent families | 46 agents in four families (core, quran, daily, learning) | `agents/*.yaml` |
 | 4 | Skills | 43 reusable procedures forming a dependency DAG | `skills.yaml` |
 | 5 | Model routing | Classes A-E to haiku, sonnet or opus; escalation and downgrade | `routing.yaml`, `models.yaml` |
 | 6 | Retrieval and memory | Retrieval ladder and six memory layers | `memory.yaml`, `metadata/index.yaml` |
@@ -274,7 +274,7 @@ readable, validated and navigable; only new drafting would pause.
 
 ## System Architecture Summary
 
-The Bayan Library is maintained by 44 agents composing 43 skills, routed to
+The Bayan Library is maintained by 46 agents composing 43 skills, routed to
 the smallest capable model, fed by a retrieval ladder over a typed
 knowledge graph, and checked by deterministic CI. Every output becomes a
 pull request, and only the human owner merges. Registries, not code or

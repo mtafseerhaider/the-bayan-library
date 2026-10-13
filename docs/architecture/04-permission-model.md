@@ -16,7 +16,7 @@ mandatory review) and the `permission_level` and `memory` fields of
 ## Principles
 
 - **Least privilege.** Each agent gets the lowest tier that lets it deliver
-  its outputs; 33 of 44 agents are Tier 2 and can only write drafts.
+  its outputs; 35 of 46 agents are Tier 2 and can only write drafts.
 - **Cumulative tiers.** Each tier inherits every action and path of the
   tier below it (`inherits`).
 - **One tier per agent.** `scripts/validate-registry.py` rejects an agent
@@ -104,7 +104,7 @@ These hold for every agent, whatever its tier:
 | Tier | Count | Agents |
 | --- | --- | --- |
 | 1 | 2 | `quality-assurance`, `risk-management` |
-| 2 | 33 | Core: `research`, `learning-coach`, `study-notes`, `islamic-civilization`, `poetry`. Quran: `quran-traditional-study`, `quran-arabic`, `quran-root-analysis`, `quran-comparative-religion`, `quran-philosophical-reflection`, `quran-scientific-reflection`, `quran-civilizational-study`, `quran-future-studies`, `quran-personal-transformation`. Daily: `daily-word`, `daily-concept`, `daily-book`, `daily-thinker`, `daily-poem`, `daily-civilization`, `daily-question`, `daily-life-principle`, `reflection-journal`. Learning: `learning-how-to-learn`, `knowledge-capture`, `memory-retention`, `wisdom-extractor`, `application-tracker`, `author-decoder`, `language-analyst`, `voice-analyst`, `register-analyst`, `difficulty-assessor` |
+| 2 | 35 | Core: `research`, `learning-coach`, `study-notes`, `islamic-civilization`, `poetry`. Quran: `quran-traditional-study`, `quran-arabic`, `quran-root-analysis`, `quran-comparative-religion`, `quran-philosophical-reflection`, `quran-scientific-reflection`, `quran-civilizational-study`, `quran-future-studies`, `quran-personal-transformation`. Daily: `daily-word`, `daily-concept`, `daily-book`, `daily-thinker`, `daily-poem`, `daily-civilization`, `daily-question`, `daily-life-principle`, `daily-quote`, `daily-verse`, `reflection-journal`. Learning: `learning-how-to-learn`, `knowledge-capture`, `memory-retention`, `wisdom-extractor`, `application-tracker`, `author-decoder`, `language-analyst`, `voice-analyst`, `register-analyst`, `difficulty-assessor` |
 | 3 | 5 | `metadata`, `knowledge-graph`, `documentation`, `daily-wisdom`, `automation` |
 | 4 | 3 | `canon-editor`, `reading-guide`, `quran-learning` |
 | 5 | 1 | `chief-librarian` |
@@ -228,7 +228,7 @@ Rules:
 
 ## Permission Model Summary
 
-Five cumulative tiers give each of the 44 agents exactly the authority its
+Five cumulative tiers give each of the 46 agents exactly the authority its
 outputs need, and most agents can only write drafts. The human owner sits
 above every tier as the sole approver. Branch protection, a separate
 machine identity, a CI path check against `permissions.yaml` and

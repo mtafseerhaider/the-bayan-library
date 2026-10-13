@@ -1,5 +1,7 @@
 # Cost governance budgets (USD). Starting values sized for a personal
-# library producing roughly 100 summaries and a daily practice per month;
+# library producing up to roughly 100 summaries and a daily practice per
+# month; the owner's review pace is 12 books a month (docs/architecture/17,
+# D-013), so a normal month is about USD 10;
 # revisit at every quarterly review. Enforcement: the orchestrator refuses a
 # call that would exceed a hard cap, and scripts/cost-report.py flags
 # breaches from the usage ledger.

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document explains how agents are defined, lists all 44 agents of The
+This document explains how agents are defined, lists all 46 agents of The
 Bayan Library by family, and shows how they relate: who orchestrates whom,
 who grounds whom, and who reports to whom. It ends with the procedure for
 adding an agent.
@@ -170,6 +170,8 @@ program, orchestrated by `daily-wisdom` (`daily.yaml`).
 | `daily-civilization` | Civilization of the Day Agent | 2 | A | haiku / sonnet | G1 | `daily-wisdom` |
 | `daily-question` | Question of the Day Agent | 2 | B | sonnet / opus | G1 | `daily-wisdom` |
 | `daily-life-principle` | Life Principle of the Day Agent | 2 | B | sonnet / opus | G1 | `daily-wisdom` |
+| `daily-quote` | Quote of the Day Agent | 2 | A | haiku / sonnet | G1 | `daily-wisdom` |
+| `daily-verse` | Verse of the Day Agent | 2 | B | sonnet / opus | G1 | `daily-wisdom` |
 | `reflection-journal` | Reflection Journal Agent | 2 | B | sonnet / opus | G2 | `daily-wisdom` |
 
 ### Learning Family
@@ -195,11 +197,11 @@ coordinated by `learning-coach` (`learning.yaml`).
 
 | Measure | A | B | C | D | E | Total |
 | --- | --- | --- | --- | --- | --- | --- |
-| Agents by class | 9 | 17 | 11 | 6 | 1 | 44 |
+| Agents by class | 10 | 18 | 11 | 6 | 1 | 46 |
 
 | Measure | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Tier 5 | Total |
 | --- | --- | --- | --- | --- | --- | --- |
-| Agents by tier | 2 | 33 | 5 | 3 | 1 | 44 |
+| Agents by tier | 2 | 35 | 5 | 3 | 1 | 46 |
 
 Seven agents default to opus, all of class D or E. Most of them carry an
 escalation rule that downgrades routine sub-tasks to sonnet or haiku.
@@ -258,7 +260,9 @@ flowchart LR
   DW --> V[daily-civilization]
   DW --> Q[daily-question]
   DW --> L[daily-life-principle]
-  W & C & B & T & P & V & Q & L --> QA[quality-assurance]
+  DW --> QT[daily-quote]
+  DW --> VS[daily-verse]
+  W & C & B & T & P & V & Q & L & QT & VS --> QA[quality-assurance]
   MR[memory-retention: review queue] --> PR
   RJ[reflection-journal: private prompt] -.private.-> PJ[(personal store)]
   QA --> PR[daily-wisdom: one PR, gate G1]
@@ -341,7 +345,7 @@ flowchart TD
   QL --- QSC[quran-scientific-reflection] & QCV[quran-civilizational-study]
   QL --- QFS[quran-future-studies] & QPT[quran-personal-transformation]
   QAR --- QRT[quran-root-analysis]
-  DW --- DAILY[8 daily agents and reflection-journal]
+  DW --- DAILY[10 daily agents and reflection-journal]
 ```
 
 Reporting is about supervision, not permission: a Tier 2 agent reporting to

@@ -55,7 +55,7 @@ budget below lives in machine-readable form under
 
 | Element | Count or rule |
 | --- | --- |
-| Agents | 44 in four families: core 16, Quran 9, daily 9, learning 10 |
+| Agents | 46 in four families: core 16, Quran 9, daily 11, learning 10 |
 | Skills | 43, in a validated dependency DAG |
 | Permission tiers | 5; every agent in exactly one; the owner above all |
 | Complexity classes | A Haiku, B and C Sonnet, D and E Opus |

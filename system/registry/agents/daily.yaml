@@ -198,6 +198,55 @@ agents:
     reports_to: daily-wisdom
     collaborates_with: [wisdom-extractor]
 
+  - agent_id: daily-quote
+    name: Quote of the Day Agent
+    purpose: Present one sourced quotation on wisdom, leadership, ethics, learning or character.
+    responsibilities: [Select a quotation record with a source, "Frame its context, author and one takeaway"]
+    inputs: [Quotation records, monthly theme, pick history]
+    outputs: [Quote of the Day entry]
+    complexity_class: A
+    default_model: haiku
+    fallback_model: sonnet
+    permission_level: 2
+    required_skills: [daily-selection, knowledge-compression]
+    memory: {read: [working, session, repository, canonical], write: [session]}
+    token_budget: {input: 4000, output: 600}
+    escalation_rules: ["Only quotation records with author and source are eligible; nothing is quoted from memory."]
+    evaluation_metrics:
+      - {metric: source_attribution, target: "1.0"}
+    quality:
+      validation: [Quotation record valid, source and context present]
+      failure_handling: [Pick the next candidate]
+      review_gate: G1
+      human_approval: sampled
+    reports_to: daily-wisdom
+    collaborates_with: [daily-thinker, wisdom-extractor]
+
+  - agent_id: daily-verse
+    name: Verse of the Day Agent
+    purpose: Present one scriptural verse (Quran, Bible, Bhagavad Gita, Tao Te Ching, Dhammapada) with its context.
+    responsibilities: [Select a passage with reviewed context notes, "Give its context, a cited translation and one reflection"]
+    inputs: [Passage records, reviewed context notes, theme calendar]
+    outputs: [Verse of the Day entry]
+    complexity_class: B
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [daily-selection, terminology-glossing]
+    memory: {read: [working, session, repository, canonical], write: [session]}
+    token_budget: {input: 6000, output: 1000}
+    escalation_rules: ["Only passages whose context notes passed G3 are eligible, which keeps the entry at G1.", "Context comes from reviewed notes; new interpretation is out of scope and goes to quran-learning or quran-comparative-religion."]
+    evaluation_metrics:
+      - {metric: translation_cited, target: "1.0"}
+      - {metric: context_present, target: "1.0"}
+    quality:
+      validation: [Passage record valid, translation and context cited]
+      failure_handling: [Pick the next candidate]
+      review_gate: G1
+      human_approval: sampled
+    reports_to: daily-wisdom
+    collaborates_with: [quran-learning, quran-comparative-religion]
+
   - agent_id: reflection-journal
     name: Reflection Journal Agent
     purpose: Help the owner record, digest and act on what they learn.

@@ -36,7 +36,7 @@ The registry defines ten workflows in three groups.
 
 | Workflow | Group | Trigger | Steps | Gate | Budget ref | Per-run cap (USD) |
 |---|---|---|---|---|---|---|
-| `daily-cycle` | Practice | schedule `0 4 * * *` | 13 | G1 | `daily-cycle` | 0.25 |
+| `daily-cycle` | Practice | schedule `0 4 * * *` | 15 | G1 | `daily-cycle` | 0.25 |
 | `weekly-cycle` | Practice | schedule `0 5 * * 0` | 5 | G1 | `weekly-cycle` | 1.50 |
 | `monthly-cycle` | Practice | schedule `0 6 1 * *` | 7 | G2 | `monthly-cycle` | 5.00 |
 | `annual-cycle` | Practice | schedule `0 6 2 1 *` | 6 | G4 | `annual-cycle` | 25.00 |
@@ -66,15 +66,18 @@ All cron expressions are UTC. `daily-cycle` is the only workflow marked
 | 7 | `daily-civilization` | `daily-selection`, `knowledge-compression` | Civilization of the Day |
 | 8 | `daily-question` | `reflection-prompting` | Question of the Day |
 | 9 | `daily-life-principle` | `daily-selection`, `wisdom-extraction` | Life Principle of the Day |
-| 10 | `memory-retention` | `spaced-repetition-scheduling` | Build the day's review queue |
-| 11 | `reflection-journal` | `reflection-prompting` | Prepare the private journal prompt |
-| 12 | `quality-assurance` | `evaluation-scoring` | Score every entry |
-| 13 | `daily-wisdom` | `markdown-formatting` | Open one PR with the day's bundle |
+| 10 | `daily-quote` | `daily-selection`, `knowledge-compression` | Quote of the Day |
+| 11 | `daily-verse` | `daily-selection`, `terminology-glossing` | Verse of the Day |
+| 14 | `memory-retention` | `spaced-repetition-scheduling` | Build the day's review queue |
+| 13 | `reflection-journal` | `reflection-prompting` | Prepare the private journal prompt |
+| 14 | `quality-assurance` | `evaluation-scoring` | Score every entry |
+| 15 | `daily-wisdom` | `markdown-formatting` | Open one PR with the day's bundle |
 
-Steps 2 to 9 are independent once step 1 has fixed the plan, so they are
+Steps 2 to 11 are independent once step 1 has fixed the plan, so they are
 submitted together as one Message Batches request (50% of list price).
 Entries are drafted from already reviewed records (`daily-book` compresses
-a reviewed summary, never a raw source), which keeps the cycle at G1.
+a reviewed summary, never a raw source; `daily-verse` uses only passages
+whose context notes passed G3), which keeps the cycle at G1.
 
 ```mermaid
 sequenceDiagram
@@ -86,9 +89,9 @@ sequenceDiagram
     participant Q as quality-assurance
     participant G as GitHub
     O->>W: start run, load theme calendar
-    W->>O: plan card (8 slots, no repeats in 365 days)
-    O->>B: submit steps 2-9 as one batch
-    B-->>O: 8 draft entries
+    W->>O: plan card (10 slots, no repeats in 365 days)
+    O->>B: submit steps 2-11 as one batch
+    B-->>O: 10 draft entries
     O->>M: build review queue (script)
     O->>J: journal prompt (private store only)
     O->>Q: score each entry against its rubric

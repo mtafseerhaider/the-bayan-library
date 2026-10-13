@@ -207,6 +207,8 @@ a human merges.
 | `daily-civilization` | daily | 2 | R | RW | - | R | R | - |
 | `daily-question` | daily | 2 | R | RW | - | R | - | - |
 | `daily-life-principle` | daily | 2 | R | RW | - | R | R | - |
+| `daily-quote` | daily | 2 | R | RW | - | R | R | - |
+| `daily-verse` | daily | 2 | R | RW | - | R | R | - |
 | `reflection-journal` | daily | 2 | R | RW | - | - | - | RW |
 | `learning-how-to-learn` | learning | 2 | R | RW | R | R | - | R |
 | `knowledge-capture` | learning | 2 | R | RW | - | R | - | - |
@@ -233,10 +235,10 @@ Summary of grants:
 | Layer | Readers | Writers |
 | --- | --- | --- |
 | Working | all 44 | none (assembled by the orchestrator) |
-| Session | all 44 | all 44 (own run only) |
+| Session | all 46 | all 46 (own run only) |
 | Project | 11 agents | 8 agents: `chief-librarian`, `canon-editor`, `reading-guide`, `research`, `learning-coach`, `islamic-civilization`, `quran-learning`, `daily-wisdom` |
-| Repository | 42 agents (all but `reflection-journal`, `application-tracker`) | none directly; PR only |
-| Canonical | 29 agents | none directly; PR only |
+| Repository | 44 agents (all but `reflection-journal`, `application-tracker`) | none directly; PR only |
+| Canonical | 31 agents | none directly; PR only |
 | Personal Reflection | 8 agents | 3 agents: `reflection-journal`, `memory-retention`, `application-tracker` |
 
 ## Personal Reflection Privacy

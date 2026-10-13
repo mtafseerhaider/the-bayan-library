@@ -30,6 +30,8 @@ workflows:
       - {agent: daily-civilization, skills: [daily-selection, knowledge-compression]}
       - {agent: daily-question, skills: [reflection-prompting]}
       - {agent: daily-life-principle, skills: [daily-selection, wisdom-extraction]}
+      - {agent: daily-quote, skills: [daily-selection, knowledge-compression]}
+      - {agent: daily-verse, skills: [daily-selection, terminology-glossing]}
       - {agent: memory-retention, skills: [spaced-repetition-scheduling], does: Build the day's review queue.}
       - {agent: reflection-journal, skills: [reflection-prompting], does: Prepare the private journal prompt.}
       - {agent: quality-assurance, skills: [evaluation-scoring], does: Score every entry.}

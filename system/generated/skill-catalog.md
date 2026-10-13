@@ -104,7 +104,7 @@
 | Recommended model | haiku |
 | Fallback model | sonnet |
 | Token budget | 3,000 in / 300 out |
-| Used by agents | daily-book; daily-civilization; daily-concept; daily-life-principle; daily-poem; daily-thinker; daily-wisdom; daily-word |
+| Used by agents | daily-book; daily-civilization; daily-concept; daily-life-principle; daily-poem; daily-quote; daily-thinker; daily-verse; daily-wisdom; daily-word |
 
 ### difficulty-assessment
 
@@ -172,7 +172,7 @@
 | Recommended model | haiku |
 | Fallback model | sonnet |
 | Token budget | 4,000 in / 600 out |
-| Used by agents | daily-book; daily-civilization; daily-thinker; memory-retention; reflection-journal; study-notes; wisdom-extractor |
+| Used by agents | daily-book; daily-civilization; daily-quote; daily-thinker; memory-retention; reflection-journal; study-notes; wisdom-extractor |
 
 ### link-validation
 
@@ -291,7 +291,7 @@
 | Recommended model | haiku |
 | Fallback model | sonnet |
 | Token budget | 6,000 in / 1,500 out |
-| Used by agents | daily-word; documentation; language-analyst; register-analyst |
+| Used by agents | daily-verse; daily-word; documentation; language-analyst; register-analyst |
 
 ### arabic-root-extraction
 

@@ -225,16 +225,17 @@ The whole `daily-cycle` runs overnight through the Batch API.
 ```text
 haiku  calls: daily-wisdom plan 3,000/300, daily-word 5,000/800,
        daily-book 5,000/800, daily-thinker 6,000/900,
-       daily-civilization 6,000/900          = 25,000 in / 3,700 out
-       25,000 x 0.10/1e6 + 3,700 x 0.50/1e6  = 0.0025 + 0.0019 = 0.0044
+       daily-civilization 6,000/900, daily-quote 4,000/600
+                                             = 29,000 in / 4,300 out
+       29,000 x 0.10/1e6 + 4,300 x 0.50/1e6  = 0.0029 + 0.0022 = 0.0051
 sonnet calls: daily-concept 8,000/1,500, daily-poem 8,000/1,500,
        daily-question 4,000/400, daily-life-principle 5,000/600,
-       reflection-journal 4,000/800, QA scoring 12,000/1,500
-                                             = 41,000 in / 6,300 out
-       41,000 x 2.00/1e6 + 6,300 x 10.00/1e6 = 0.0820 + 0.0630 = 0.1450
+       daily-verse 6,000/1,000, reflection-journal 4,000/800,
+       QA scoring 12,000/1,500               = 47,000 in / 7,300 out
+       47,000 x 2.00/1e6 + 7,300 x 10.00/1e6 = 0.0940 + 0.0730 = 0.1670
 script: memory-retention queue, formatting   = 0
-per run  = (0.0044 + 0.1450) x 0.5 batch     = 0.0747   (cap 0.25)
-month    = 30 x 0.0747                       = 2.24
+per run  = (0.0051 + 0.1670) x 0.5 batch     = 0.0861   (cap 0.25)
+month    = 30 x 0.0861                       = 2.58
 ```
 
 ### Book Ingestion
@@ -284,14 +285,19 @@ escalation allowance (charged to escalation-reserve)             = 1.50
 
 | Line | USD |
 | --- | --- |
-| Daily cycle (30 runs) | 2.24 |
+| Daily cycle (30 runs) | 2.58 |
 | Weekly cycle (4 runs) | 0.78 |
 | Monthly cycle | 0.63 |
 | Book ingestion (100 books) | 17.80 |
 | Canon revision (1 run) | 2.33 |
 | Oversight memo | 0.40 |
 | Escalation allowance | 1.50 |
-| Total | 25.67 (43% of cap) |
+| Total | 26.01 (43% of cap) |
+
+At the owner's chosen pace of 12 books a month (decision D-013), book
+ingestion is `12 x 0.178 = 2.14` and the same month totals about USD 10.35
+(17% of cap). The 100-book month above is the capacity the cap is sized
+for, not the expected spend.
 
 Opus spend is `0.28 + 0.52 + 0.52 + 0.40 + 0.40 = 2.12`, an `opus_share` of
 0.08 against the 0.35 limit. In January the `annual-cycle` (cap 25.00) can
@@ -301,7 +307,7 @@ take the month past the 80% alert; it should be scheduled with the owner.
 
 | Envelope | Estimated USD | Cap USD | Status |
 | --- | --- | --- | --- |
-| `daily-practice` | 1.88 | 8.00 | ok |
+| `daily-practice` | 2.22 | 8.00 | ok |
 | `content-production` | 11.13 | 22.00 | ok |
 | `structure` | 2.29 | 5.00 | ok |
 | `editorial` | 2.00 | 9.00 | ok; room for a second canon revision or a methodology change |
@@ -323,7 +329,7 @@ for 100 books.
 
 | Lever | Effect | Where |
 | --- | --- | --- |
-| Batch API | 50% off every batch-eligible call; the whole daily cycle runs batched (saves 2.24 per month) | `routing.yaml` `batch_eligible`, workflow `batch: true` |
+| Batch API | 50% off every batch-eligible call; the whole daily cycle runs batched (saves 2.58 per month) | `routing.yaml` `batch_eligible`, workflow `batch: true` |
 | Prompt caching | Stable prefix billed at the cache-read rate (sonnet 0.20 instead of 2.00) | Prefix ordering in [Token Optimization Framework](06-token-optimization-framework.md) |
 | Retrieval ladder | Cards and summaries instead of full text; about 94% fewer sonnet input tokens per book | `scripts/build-context.py` |
 | Chunk digests on haiku | Long works compressed at haiku prices before sonnet writes | `knowledge_compression` task |
@@ -339,6 +345,7 @@ further limited per run, per agent and per call. Every model call is a
 ledger line, checked before it is made, and summarised each month into a
 committed report with metrics and targets. A realistic month of daily
 practice, about 100 book ingestions, one canon revision and oversight costs
-about USD 26, with every envelope inside its cap.
+about USD 26, with every envelope inside its cap; at the owner's chosen
+pace of 12 books it is about USD 10.
 Batch processing, caching, the retrieval ladder, downgrades and reuse keep
 the library affordable as it grows.

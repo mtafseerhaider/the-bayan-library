@@ -21,7 +21,7 @@ class RegistryTests(unittest.TestCase):
 
     def test_every_agent_has_exactly_one_tier(self):
         reg = self.repo.registries()
-        self.assertEqual(len(reg.agents), 44)
+        self.assertEqual(len(reg.agents), 46)
         for agent in reg.agents.values():
             self.assertIn(agent["permission_level"], range(1, 6))
 

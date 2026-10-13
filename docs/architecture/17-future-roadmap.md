@@ -162,8 +162,8 @@ Phases 3 and 5 can run in parallel; phase 4 must not start before phase 3.
 
 ## Decision Log
 
-Decisions deliberately deferred or declined, with the condition for
-reopening them. New entries are added by G4 PR.
+Decisions deferred, declined or settled by the owner, with the condition
+for reopening them. New entries are added by G4 PR.
 
 | ID | Decision | Status | Reason | Reopen when |
 |---|---|---|---|---|
@@ -176,8 +176,12 @@ reopening them. New entries are added by G4 PR.
 | D-007 | Scheduled agent runs without per-run approval | Deferred | Human supervision first | Twelve months of phase 4 with no incidents |
 | D-008 | Fine-tuned or self-hosted models | Deferred | Routing classes cover the need; golden sets not yet mature | Phase 7 complete and a cost or continuity case exists |
 | D-009 | Open contributor programme | Deferred | Owner review capacity (R-048) | Delegated editors in place |
-| D-010 | Daily quote and verse agents | Deferred | `daily/` has these folders in docs/18 but no agents exist in the registry | Owner decides to extend `daily-cycle` |
+| D-010 | Daily quote and verse agents | Adopted (owner, 2026-10-13) | Specified in docs/18; `daily-quote` and `daily-verse` added to `daily-cycle` at G1 | Either feature is retired |
 | D-011 | Registry location for evaluation reports | Open | Not yet in any registry; `system/reports/evaluation/` proposed | Phase 7 starts |
+| D-012 | Monthly cost cap | Kept at USD 60 (owner, 2026-10-13) | A typical month is estimated at USD 10 to 26 | Two consecutive months above the 80% alert |
+| D-013 | Book ingestion pace | 12 a month (owner, 2026-10-13) | Owner review time, about 3.5 hours a week, sets the pace rather than cost | Owner chooses to review more, or delegated editors exist |
+| D-014 | Haiku cache-read price | Kept as a marked assumption (owner, 2026-10-13) | Affects estimates only, by cents | Published price confirmed |
+| D-015 | Action pinning | Adopted (owner, 2026-10-13) | Workflows use full commit SHAs with the tag in a comment | Not planned |
 
 ## Roadmap Summary
 

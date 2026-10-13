@@ -20,7 +20,7 @@ Related documents: [Agent Registry](02-agent-registry.md),
 
 ## Per-Agent QA Contract
 
-Every one of the 44 agents declares the same five quality fields. The
+Every one of the 46 agents declares the same five quality fields. The
 registry schema makes them mandatory, so an agent without a contract
 cannot be merged.
 
@@ -47,7 +47,7 @@ quality:
 | Gate | Human approval | Count | Agents |
 |---|---|---|---|
 | G0 | none | 3 | `quality-assurance`, `memory-retention`, `application-tracker` |
-| G1 | sampled (20%) | 15 | `metadata`, `documentation`, `daily-wisdom`, `daily-word`, `daily-concept`, `daily-book`, `daily-thinker`, `daily-poem`, `daily-civilization`, `daily-question`, `daily-life-principle`, `register-analyst`, `difficulty-assessor`, `quran-root-analysis`, `quran-personal-transformation` |
+| G1 | sampled (20%) | 17 | `metadata`, `documentation`, `daily-wisdom`, `daily-word`, `daily-concept`, `daily-book`, `daily-thinker`, `daily-poem`, `daily-civilization`, `daily-question`, `daily-life-principle`, `daily-quote`, `daily-verse`, `register-analyst`, `difficulty-assessor`, `quran-root-analysis`, `quran-personal-transformation` |
 | G2 | every item | 15 | `knowledge-graph`, `research`, `learning-coach`, `study-notes`, `poetry`, `automation`, `risk-management`, `reflection-journal`, `learning-how-to-learn`, `knowledge-capture`, `wisdom-extractor`, `author-decoder`, `language-analyst`, `voice-analyst`, `quran-arabic` |
 | G3 | every item, sources open | 7 | `islamic-civilization`, `quran-traditional-study`, `quran-comparative-religion`, `quran-philosophical-reflection`, `quran-scientific-reflection`, `quran-civilizational-study`, `quran-future-studies` |
 | G4 | owner approval | 4 | `chief-librarian`, `canon-editor`, `reading-guide`, `quran-learning` |

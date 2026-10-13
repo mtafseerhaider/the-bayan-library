@@ -202,7 +202,7 @@ workflows are assumptions to revisit at each quarterly review.
 
 | Workflow | Gate | Assumed volume | Minutes per item | Minutes per week |
 | --- | --- | --- | --- | --- |
-| `daily-cycle` | G1 | 7 bundles of 8 entries; 20 percent sampled plus flags | 4 per bundle | 28 |
+| `daily-cycle` | G1 | 7 bundles of 10 entries; 20 percent sampled plus flags | 4 per bundle | 28 |
 | `weekly-cycle` | G1 (notes G2) | 1 run; health report and inbox notes | 15 | 15 |
 | `monthly-cycle` | G2 | 1 per month: gap, graph, cost and risk reports | 60 | 15 |
 | `annual-cycle` | G4 | 1 per year: canon audit, paths, system review | 360 | 7 |
@@ -215,10 +215,12 @@ workflows are assumptions to revisit at each quarterly review.
 | Total | | | | about 215 |
 
 The largest and most elastic line is `book-ingestion`. The cost budget in
-`budgets.yaml` is sized for roughly 100 summaries a month, but at G2 that
+`budgets.yaml` has room for roughly 100 summaries a month, but at G2 that
 would need about eight hours of review a week. The review budget, not the
-cost budget, therefore sets ingestion pace: about three books a week, more
-only when the owner chooses to read more.
+cost budget, therefore sets ingestion pace. The owner set it at 12 books a
+month, about three a week (decision D-013 in the
+[Future Roadmap](17-future-roadmap.md#decision-log)); it rises only when the
+owner chooses to read more.
 
 ### Batching
 
