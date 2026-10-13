@@ -1,0 +1,8 @@
+{
+  // Default markdownlint rules apply; see docs/12-documentation-standards.md.
+  "default": true,
+
+  // Allow repeated subsection names (e.g. "Objective", "Deliverables")
+  // when they sit under different parent headings.
+  "MD024": { "siblings_only": true }
+}
