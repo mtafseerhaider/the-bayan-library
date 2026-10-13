@@ -1,0 +1,506 @@
+# Canon records. See docs/03 and canon/.
+records:
+- id: canon-top-100-books
+  title: Top 100 Greatest Books Ever Written
+  methodology: global-canon-methodology
+  last_updated: '2026-10-13'
+  version: '1.0'
+  summary: The 100 most significant books of world literature and thought, across
+    eras and civilizations, ranked with the six weighted criteria of the Global Canon
+    Methodology (docs/03). Version 1.0 is a draft proposal from the Canon Editor
+    agent awaiting the owner's G4 approval.
+  content_path: canon/top-100-books/README.md
+  status: draft
+  references:
+  - docs/03-global-canon-methodology.md
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+  entries:
+  - rank: 1
+    work_id: book-hebrew-bible
+    score: 99.0
+    rationale: Scripture of Judaism and the Christian Old Testament; its prophets,
+      law and narratives underlie all three Abrahamic traditions.
+  - rank: 2
+    work_id: book-quran
+    score: 99.0
+    rationale: The foundational text of Islam; it shaped law, theology, ethics, the
+      Arabic language and a civilization stretching from Andalusia to Southeast Asia.
+  - rank: 3
+    work_id: book-principia
+    score: 98.5
+    rationale: Unified terrestrial and celestial motion under universal laws and
+      founded classical physics.
+  - rank: 4
+    work_id: book-elements
+    score: 98.0
+    rationale: The model of deductive proof; taught across Greek, Arabic, Latin and
+      modern schools for over two thousand years.
+  - rank: 5
+    work_id: book-don-quixote
+    score: 97.5
+    rationale: Often called the first modern novel; its play of illusion and reality
+      runs through all later fiction.
+  - rank: 6
+    work_id: book-hamlet
+    score: 97.5
+    rationale: The most performed and interpreted tragedy in the world, a landmark
+      in the dramatic portrayal of consciousness.
+  - rank: 7
+    work_id: book-iliad
+    score: 97.5
+    rationale: The founding epic of Greek literature; its vision of honour, wrath
+      and mortality set the model for Western narrative art.
+  - rank: 8
+    work_id: book-odyssey
+    score: 97.5
+    rationale: The archetypal journey home; its craft of storytelling shaped narrative
+      from Virgil to Joyce.
+  - rank: 9
+    work_id: book-republic
+    score: 97.5
+    rationale: The cornerstone of philosophy on justice, knowledge and the soul,
+      read and answered by thinkers from al-Farabi to the moderns.
+  - rank: 10
+    work_id: book-new-testament
+    score: 97.0
+    rationale: The Gospels and Epistles founded Christianity and shaped European
+      law, art, ethics and institutions for two millennia.
+  - rank: 11
+    work_id: book-origin-of-species
+    score: 96.5
+    rationale: Set out evolution by natural selection, transforming biology and humanity's
+      understanding of its place in nature.
+  - rank: 12
+    work_id: book-critique-of-pure-reason
+    score: 96.0
+    rationale: Redrew the limits of knowledge and became the hinge of modern philosophy.
+  - rank: 13
+    work_id: book-divine-comedy
+    score: 96.0
+    rationale: A synthesis of medieval theology, philosophy and poetry that created
+      literary Italian; it absorbed debts to Islamic sources on the Mi'raj.
+  - rank: 14
+    work_id: book-analects
+    score: 95.5
+    rationale: Sayings of Confucius that formed the moral and political education
+      of China, Korea, Japan and Vietnam for over two thousand years.
+  - rank: 15
+    work_id: book-canon-of-medicine
+    score: 95.5
+    rationale: The standard medical textbook in the Islamic world and in European
+      universities until the 1600s.
+  - rank: 16
+    work_id: book-nicomachean-ethics
+    score: 95.5
+    rationale: The classic account of virtue and human flourishing, central to Islamic,
+      Jewish and Christian ethics alike.
+  - rank: 17
+    work_id: book-wealth-of-nations
+    score: 95.0
+    rationale: Founded modern economics; its ideas on markets and the division of
+      labour shaped policy worldwide.
+  - rank: 18
+    work_id: book-brothers-karamazov
+    score: 95.0
+    rationale: A novel of faith, doubt and freedom whose arguments shaped modern
+      philosophy, theology and psychology.
+  - rank: 19
+    work_id: book-war-and-peace
+    score: 95.0
+    rationale: A panorama of Russia in the Napoleonic wars that set the scale and
+      depth by which the novel is still measured.
+  - rank: 20
+    work_id: book-tao-te-ching
+    score: 94.5
+    rationale: The founding text of Daoism and among the most translated works in
+      history; a compressed meditation on the Way and on non-action.
+  - rank: 21
+    work_id: book-bhagavad-gita
+    score: 94.5
+    rationale: The dialogue on duty and devotion within the Mahabharata; central
+      to Hindu thought and read worldwide, from Gandhi to Oppenheimer.
+  - rank: 22
+    work_id: book-muqaddimah
+    score: 94.5
+    rationale: A theory of the rise and fall of states through asabiyya that anticipated
+      sociology, economics and the philosophy of history.
+  - rank: 23
+    work_id: book-confessions
+    score: 94.0
+    rationale: The first great autobiography of inner life; it shaped Christian theology
+      and the Western idea of the self.
+  - rank: 24
+    work_id: book-meditations-on-first-philosophy
+    score: 94.0
+    rationale: Its method of doubt and the cogito opened modern philosophy and the
+      problem of mind and body.
+  - rank: 25
+    work_id: book-algebra
+    score: 93.5
+    rationale: Founded algebra as a discipline and gave it its name; its author's
+      name gave us the word algorithm.
+  - rank: 26
+    work_id: book-faust
+    score: 93.5
+    rationale: Goethe's lifelong drama of striving and the bargain for knowledge,
+      the summit of German literature.
+  - rank: 27
+    work_id: book-thousand-and-one-nights
+    score: 93.0
+    rationale: The great frame-tale collection of Islamic civilization; after Galland's
+      1704 translation it reshaped world storytelling.
+  - rank: 28
+    work_id: book-ramayana
+    score: 93.0
+    rationale: The epic of Rama, retold across South and Southeast Asia in countless
+      languages, rites and performances.
+  - rank: 29
+    work_id: book-divan-of-hafez
+    score: 92.5
+    rationale: The summit of the Persian ghazal; consulted for omens in Iranian homes
+      and admired by Goethe.
+  - rank: 30
+    work_id: book-masnavi
+    score: 92.5
+    rationale: Called the Quran in Persian; the summit of Sufi poetry and one of
+      the most read works of spiritual literature worldwide.
+  - rank: 31
+    work_id: book-sahih-al-bukhari
+    score: 92.0
+    rationale: The most authoritative Sunni hadith collection; with the Quran it
+      underpins Islamic law, worship and ethics.
+  - rank: 32
+    work_id: book-oedipus-rex
+    score: 92.0
+    rationale: Aristotle's model tragedy; its themes of fate and self-knowledge echo
+      from philosophy to psychoanalysis.
+  - rank: 33
+    work_id: book-tale-of-genji
+    score: 92.0
+    rationale: Often called the world's first novel; the defining classic of Japanese
+      literature and aesthetics.
+  - rank: 34
+    work_id: book-mahabharata
+    score: 91.5
+    rationale: The longest epic poem known; a vast inquiry into duty, war and fate
+      that remains living culture across South and Southeast Asia.
+  - rank: 35
+    work_id: book-upanishads
+    score: 91.5
+    rationale: Foundation of Vedanta and of Indian metaphysics; their inquiry into
+      Brahman and Atman influenced thought from Shankara to Schopenhauer.
+  - rank: 36
+    work_id: book-shahnameh
+    score: 91.5
+    rationale: The national epic of Iran; it preserved the Persian language and memory
+      across the Persianate world from Anatolia to India.
+  - rank: 37
+    work_id: book-history-of-the-peloponnesian-war
+    score: 91.5
+    rationale: A founding work of critical history and political realism.
+  - rank: 38
+    work_id: book-histories
+    score: 91.5
+    rationale: The first great work of inquiry into the past, from which history
+      as a discipline takes its name.
+  - rank: 39
+    work_id: book-the-prince
+    score: 91.0
+    rationale: Separated politics from inherited moral theory and named a whole tradition
+      of realism.
+  - rank: 40
+    work_id: book-i-ching
+    score: 91.0
+    rationale: Among the oldest Chinese classics; its cosmology of change shaped
+      Confucian and Daoist thought across East Asia.
+  - rank: 41
+    work_id: book-summa-theologiae
+    score: 91.0
+    rationale: The great synthesis of Aristotle and Christian doctrine, built in
+      dialogue with Ibn Sina and Ibn Rushd.
+  - rank: 42
+    work_id: book-one-hundred-years-of-solitude
+    score: 91.0
+    rationale: The defining novel of magical realism and of the Latin American boom.
+  - rank: 43
+    work_id: book-les-miserables
+    score: 90.5
+    rationale: A vast social novel of justice and mercy, loved across the world.
+  - rank: 44
+    work_id: book-essays-montaigne
+    score: 90.5
+    rationale: Invented the essay as a form of self-examination and sceptical inquiry.
+  - rank: 45
+    work_id: book-gulistan
+    score: 90.5
+    rationale: The model of Persian prose and moral wisdom, taught in schools from
+      Istanbul to Delhi for seven centuries.
+  - rank: 46
+    work_id: book-paradise-lost
+    score: 90.5
+    rationale: The great English epic of the Fall, shaping the language of freedom,
+      rebellion and grace.
+  - rank: 47
+    work_id: book-records-of-the-grand-historian
+    score: 90.0
+    rationale: The model for every later Chinese dynastic history and a masterpiece
+      of biographical narrative.
+  - rank: 48
+    work_id: book-ihya-ulum-al-din
+    score: 90.0
+    rationale: Al-Ghazali's synthesis of law, theology and Sufism; for centuries
+      the most widely read work of Islamic spirituality after the Quran.
+  - rank: 49
+    work_id: book-aeneid
+    score: 90.0
+    rationale: Rome's founding epic and the central Latin school text of Europe for
+      two thousand years.
+  - rank: 50
+    work_id: book-on-the-revolutions
+    score: 89.5
+    rationale: Placed the sun at the centre and began the Scientific Revolution,
+      drawing on Maragha astronomers.
+  - rank: 51
+    work_id: book-conference-of-the-birds
+    score: 89.5
+    rationale: The allegory of the soul's journey to the Simurgh, the classic map
+      of the Sufi path.
+  - rank: 52
+    work_id: book-communist-manifesto
+    score: 89.0
+    rationale: The most consequential political pamphlet of modern times, behind
+      revolutions across three continents.
+  - rank: 53
+    work_id: book-things-fall-apart
+    score: 89.0
+    rationale: The foundational novel of modern African literature, answering colonial
+      narratives from within Igbo life.
+  - rank: 54
+    work_id: book-interpretation-of-dreams
+    score: 88.5
+    rationale: Founded psychoanalysis and changed how the modern world speaks of
+      the mind.
+  - rank: 55
+    work_id: book-book-of-optics
+    score: 88.5
+    rationale: Established that vision works by light entering the eye and pioneered
+      experimental method; studied by Bacon and Kepler.
+  - rank: 56
+    work_id: book-zhuangzi
+    score: 88.5
+    rationale: Daoist philosophy in parable and paradox, with lasting influence on
+      Chan and Zen Buddhism.
+  - rank: 57
+    work_id: book-second-treatise-of-government
+    score: 88.0
+    rationale: Natural rights and government by consent; a direct source for constitutional
+      democracies.
+  - rank: 58
+    work_id: book-the-second-sex
+    score: 88.0
+    rationale: The foundational philosophical work of modern feminism.
+  - rank: 59
+    work_id: book-social-contract
+    score: 88.0
+    rationale: Its idea of popular sovereignty fed the French Revolution and modern
+      democratic theory.
+  - rank: 60
+    work_id: book-pride-and-prejudice
+    score: 88.0
+    rationale: The perfected novel of manners, read and adapted worldwide for two
+      centuries.
+  - rank: 61
+    work_id: book-dream-of-the-red-chamber
+    score: 88.0
+    rationale: The greatest Chinese novel, with its own field of scholarship (Redology).
+  - rank: 62
+    work_id: book-madame-bovary
+    score: 88.0
+    rationale: Set the standard of the realist novel and of exact style.
+  - rank: 63
+    work_id: book-in-search-of-lost-time
+    score: 88.0
+    rationale: The great modern exploration of memory, time and consciousness in
+      fiction.
+  - rank: 64
+    work_id: book-the-art-of-war
+    score: 87.5
+    rationale: The classic of strategy, read by generals, statesmen and managers
+      across the world.
+  - rank: 65
+    work_id: book-panchatantra
+    score: 87.5
+    rationale: Animal fables on statecraft that travelled through Ibn al-Muqaffa's
+      Kalila wa-Dimna into dozens of languages.
+  - rank: 66
+    work_id: book-the-trial
+    score: 87.5
+    rationale: Its nightmare of faceless authority gave the world the word Kafkaesque.
+  - rank: 67
+    work_id: book-gilgamesh
+    score: 87.5
+    rationale: The oldest surviving great work of literature; a meditation on friendship
+      and death recovered from clay tablets.
+  - rank: 68
+    work_id: book-sirat-rasul-allah
+    score: 87.0
+    rationale: The earliest surviving full biography of the Prophet Muhammad, source
+      of every later sira.
+  - rank: 69
+    work_id: book-rubaiyat
+    score: 87.0
+    rationale: Quatrains on time and mortality; FitzGerald's 1859 version made them
+      among the most read poems in English.
+  - rank: 70
+    work_id: book-poems-of-du-fu
+    score: 87.0
+    rationale: Revered as China's greatest poet, the poet-historian of the An Lushan
+      rebellion.
+  - rank: 71
+    work_id: book-shakuntala
+    score: 87.0
+    rationale: The masterpiece of Sanskrit drama, whose translation moved Goethe
+      and the European Romantics.
+  - rank: 72
+    work_id: book-ficciones
+    score: 87.0
+    rationale: Labyrinthine stories that reshaped twentieth-century fiction and literary
+      theory.
+  - rank: 73
+    work_id: book-thus-spoke-zarathustra
+    score: 86.5
+    rationale: Nietzsche's poetic philosophy of the death of God and self-overcoming,
+      deeply felt in the twentieth century.
+  - rank: 74
+    work_id: book-journey-to-the-west
+    score: 86.5
+    rationale: The pilgrimage of Xuanzang and the Monkey King, one of the most retold
+      stories in East Asia.
+  - rank: 75
+    work_id: book-romance-of-the-three-kingdoms
+    score: 86.5
+    rationale: The great historical novel of China, shaping ideals of loyalty and
+      strategy across East Asia.
+  - rank: 76
+    work_id: book-moby-dick
+    score: 86.5
+    rationale: An encyclopaedic, metaphysical sea novel, the great American epic
+      in prose.
+  - rank: 77
+    work_id: book-ulysses
+    score: 86.5
+    rationale: The landmark of literary modernism, recasting the Odyssey as a single
+      Dublin day.
+  - rank: 78
+    work_id: book-nineteen-eighty-four
+    score: 86.0
+    rationale: The defining modern novel of totalitarianism; its vocabulary entered
+      every major language.
+  - rank: 79
+    work_id: book-leviathan
+    score: 86.0
+    rationale: Founded modern social-contract theory on a stark account of human
+      nature and sovereignty.
+  - rank: 80
+    work_id: book-metamorphoses
+    score: 86.0
+    rationale: The great storehouse of classical myth for European art and poetry.
+  - rank: 81
+    work_id: book-al-risala
+    score: 85.5
+    rationale: Founded usul al-fiqh, the method by which Islamic law is derived from
+      its sources.
+  - rank: 82
+    work_id: book-on-liberty
+    score: 85.5
+    rationale: The classic defence of individual freedom of thought and expression.
+  - rank: 83
+    work_id: book-leaves-of-grass
+    score: 85.0
+    rationale: Founded a democratic, free-verse poetics that changed modern poetry
+      worldwide.
+  - rank: 84
+    work_id: book-shijing
+    score: 84.5
+    rationale: The oldest Chinese anthology of poetry, a Confucian classic at the
+      root of East Asian lyric.
+  - rank: 85
+    work_id: book-dhammapada
+    score: 84.5
+    rationale: The most read anthology of the Buddha's teaching, carrying Buddhist
+      ethics across Asia and beyond.
+  - rank: 86
+    work_id: book-tahafut-al-tahafut
+    score: 84.5
+    rationale: Ibn Rushd's defence of philosophy against al-Ghazali; through Latin
+      Averroism it helped shape Scholasticism.
+  - rank: 87
+    work_id: book-gitanjali
+    score: 84.0
+    rationale: Devotional songs that brought Tagore the 1913 Nobel Prize, the first
+      for a non-European writer.
+  - rank: 88
+    work_id: book-decameron
+    score: 83.5
+    rationale: Founded Italian prose and the European novella tradition.
+  - rank: 89
+    work_id: book-beloved
+    score: 83.5
+    rationale: A haunting novel of slavery and memory, central to modern American
+      and world literature.
+  - rank: 90
+    work_id: book-a-vindication-of-the-rights-of-woman
+    score: 83.0
+    rationale: An early classic of feminist political philosophy arguing for women's
+      education and reason.
+  - rank: 91
+    work_id: book-muallaqat
+    score: 82.5
+    rationale: The suspended odes, the classical standard of Arabic poetry and a
+      key to Quranic Arabic.
+  - rank: 92
+    work_id: book-tirukkural
+    score: 82.5
+    rationale: The classic of Tamil ethics in 1,330 couplets, translated into dozens
+      of languages.
+  - rank: 93
+    work_id: book-divan-of-ghalib
+    score: 80.5
+    rationale: The summit of the Urdu ghazal and the most quoted poet of South Asia.
+  - rank: 94
+    work_id: book-narrow-road-to-the-deep-north
+    score: 80.0
+    rationale: The masterpiece of haibun by the master of haiku, the form now written
+      worldwide.
+  - rank: 95
+    work_id: book-call-to-arms
+    score: 79.5
+    rationale: Founded modern Chinese literature with stories such as A Madman's
+      Diary and The True Story of Ah Q.
+  - rank: 96
+    work_id: book-cairo-trilogy
+    score: 78.5
+    rationale: The great modern Arabic novel, tracing a Cairo family through Egypt's
+      twentieth century.
+  - rank: 97
+    work_id: book-posthumous-memoirs-of-bras-cubas
+    score: 78.5
+    rationale: A sardonic novel narrated by a dead man, the cornerstone of Brazilian
+      literature.
+  - rank: 98
+    work_id: book-tale-of-kieu
+    score: 77.0
+    rationale: The national poem of Vietnam, known by heart by generations of readers.
+  - rank: 99
+    work_id: book-popol-vuh
+    score: 76.5
+    rationale: The sacred narrative of the K'iche' Maya, the most important surviving
+      text of Mesoamerican civilization.
+  - rank: 100
+    work_id: book-epic-of-sundiata
+    score: 75.5
+    rationale: The oral epic of the founder of the Mali Empire, still performed by
+      griots across West Africa.

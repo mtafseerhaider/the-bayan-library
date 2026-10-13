@@ -1,0 +1,1799 @@
+# Book records for the Top 100 Greatest Books canon (canon/top-100-books).
+# Draft records from the Canon Editor agent, pending G4 review.
+records:
+- id: book-a-vindication-of-the-rights-of-woman
+  title: A Vindication of the Rights of Woman
+  author_id: author-mary-wollstonecraft
+  publication_year: 1792
+  language: English
+  civilization: Europe
+  genre:
+  - Political theory
+  canon_memberships:
+  - canon-top-100-books
+  summary: An early classic of feminist political philosophy arguing for women's
+    education and reason.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-aeneid
+  title: The Aeneid
+  original_title: Aeneis
+  author_id: poet-virgil
+  publication_year: 19 BCE
+  language: Latin
+  civilization: Rome
+  genre:
+  - Epic poetry
+  canon_memberships:
+  - canon-top-100-books
+  summary: Rome's founding epic and the central Latin school text of Europe for two
+    thousand years.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-al-risala
+  title: The Epistle on Legal Theory
+  original_title: al-Risala
+  author_id: author-al-shafii
+  publication_year: c. 815
+  language: Arabic
+  civilization: Islamic Civilization
+  genre:
+  - Jurisprudence
+  - Legal theory
+  canon_memberships:
+  - canon-top-100-books
+  summary: Founded usul al-fiqh, the method by which Islamic law is derived from
+    its sources.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-algebra
+  title: The Compendious Book on Calculation by Completion and Balancing
+  original_title: al-Kitab al-Mukhtasar fi Hisab al-Jabr wa'l-Muqabala
+  author_id: author-al-khwarizmi
+  publication_year: c. 820
+  language: Arabic
+  civilization: Islamic Civilization
+  genre:
+  - Mathematics
+  canon_memberships:
+  - canon-top-100-books
+  summary: Founded algebra as a discipline and gave it its name; its author's name
+    gave us the word algorithm.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-analects
+  title: The Analects
+  original_title: Lunyu
+  author_id: author-confucius
+  publication_year: c. 475-221 BCE
+  language: Classical Chinese
+  civilization: China
+  genre:
+  - Philosophy
+  - Ethics
+  canon_memberships:
+  - canon-top-100-books
+  summary: Sayings of Confucius that formed the moral and political education of
+    China, Korea, Japan and Vietnam for over two thousand years.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-beloved
+  title: Beloved
+  author_id: author-toni-morrison
+  publication_year: 1987
+  language: English
+  civilization: North America
+  genre:
+  - Novel
+  canon_memberships:
+  - canon-top-100-books
+  summary: A haunting novel of slavery and memory, central to modern American and
+    world literature.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-bhagavad-gita
+  title: The Bhagavad Gita
+  original_title: Bhagavad Gita
+  author_id: author-vyasa
+  publication_year: c. 200 BCE
+  language: Sanskrit
+  civilization: India
+  genre:
+  - Scripture
+  - Philosophy
+  canon_memberships:
+  - canon-top-100-books
+  summary: The dialogue on duty and devotion within the Mahabharata; central to Hindu
+    thought and read worldwide, from Gandhi to Oppenheimer.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-book-of-optics
+  title: Book of Optics
+  original_title: Kitab al-Manazir
+  author_id: author-ibn-al-haytham
+  publication_year: c. 1021
+  language: Arabic
+  civilization: Islamic Civilization
+  genre:
+  - Science
+  canon_memberships:
+  - canon-top-100-books
+  summary: Established that vision works by light entering the eye and pioneered
+    experimental method; studied by Bacon and Kepler.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-brothers-karamazov
+  title: The Brothers Karamazov
+  original_title: Brat'ya Karamazovy
+  author_id: author-fyodor-dostoevsky
+  publication_year: 1880
+  language: Russian
+  civilization: Europe
+  genre:
+  - Novel
+  canon_memberships:
+  - canon-top-100-books
+  summary: A novel of faith, doubt and freedom whose arguments shaped modern philosophy,
+    theology and psychology.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-cairo-trilogy
+  title: The Cairo Trilogy
+  original_title: al-Thulathiyya
+  author_id: author-naguib-mahfouz
+  publication_year: 1956-1957
+  language: Arabic
+  civilization: Islamic Civilization
+  genre:
+  - Novel
+  canon_memberships:
+  - canon-top-100-books
+  summary: The great modern Arabic novel, tracing a Cairo family through Egypt's
+    twentieth century.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-call-to-arms
+  title: Call to Arms
+  original_title: Nahan
+  author_id: author-lu-xun
+  publication_year: 1923
+  language: Chinese
+  civilization: China
+  genre:
+  - Short fiction
+  canon_memberships:
+  - canon-top-100-books
+  summary: Founded modern Chinese literature with stories such as A Madman's Diary
+    and The True Story of Ah Q.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-canon-of-medicine
+  title: The Canon of Medicine
+  original_title: al-Qanun fi al-Tibb
+  author_id: author-ibn-sina
+  publication_year: 1025
+  language: Arabic
+  civilization: Islamic Civilization
+  genre:
+  - Medicine
+  - Science
+  canon_memberships:
+  - canon-top-100-books
+  summary: The standard medical textbook in the Islamic world and in European universities
+    until the 1600s.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-communist-manifesto
+  title: The Communist Manifesto
+  original_title: Manifest der Kommunistischen Partei
+  author_id: author-karl-marx
+  publication_year: 1848
+  language: German
+  civilization: Europe
+  genre:
+  - Political theory
+  canon_memberships:
+  - canon-top-100-books
+  summary: The most consequential political pamphlet of modern times, behind revolutions
+    across three continents.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-conference-of-the-birds
+  title: The Conference of the Birds
+  original_title: Mantiq al-Tayr
+  author_id: poet-attar
+  publication_year: 1177
+  language: Persian
+  civilization: Islamic Civilization
+  genre:
+  - Poetry
+  - Mysticism
+  canon_memberships:
+  - canon-top-100-books
+  summary: The allegory of the soul's journey to the Simurgh, the classic map of
+    the Sufi path.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-confessions
+  title: Confessions
+  original_title: Confessiones
+  author_id: author-augustine
+  publication_year: c. 400
+  language: Latin
+  civilization: Rome
+  genre:
+  - Autobiography
+  - Theology
+  canon_memberships:
+  - canon-top-100-books
+  summary: The first great autobiography of inner life; it shaped Christian theology
+    and the Western idea of the self.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-critique-of-pure-reason
+  title: Critique of Pure Reason
+  original_title: Kritik der reinen Vernunft
+  author_id: author-immanuel-kant
+  publication_year: 1781
+  language: German
+  civilization: Europe
+  genre:
+  - Philosophy
+  canon_memberships:
+  - canon-top-100-books
+  summary: Redrew the limits of knowledge and became the hinge of modern philosophy.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-decameron
+  title: The Decameron
+  author_id: author-giovanni-boccaccio
+  publication_year: c. 1353
+  language: Italian
+  civilization: Europe
+  genre:
+  - Fiction
+  - Frame tale
+  canon_memberships:
+  - canon-top-100-books
+  summary: Founded Italian prose and the European novella tradition.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-dhammapada
+  title: The Dhammapada
+  original_title: Dhammapada
+  author_id: author-buddhist-oral-tradition
+  publication_year: c. 300 BCE
+  language: Pali
+  civilization: India
+  genre:
+  - Scripture
+  - Ethics
+  canon_memberships:
+  - canon-top-100-books
+  summary: The most read anthology of the Buddha's teaching, carrying Buddhist ethics
+    across Asia and beyond.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-divan-of-ghalib
+  title: The Divan of Ghalib
+  original_title: Divan-e Ghalib
+  author_id: poet-mirza-ghalib
+  publication_year: 1841
+  language: Urdu
+  civilization: Islamic Civilization
+  genre:
+  - Poetry
+  canon_memberships:
+  - canon-top-100-books
+  summary: The summit of the Urdu ghazal and the most quoted poet of South Asia.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-divan-of-hafez
+  title: The Divan of Hafez
+  original_title: Divan-e Hafez
+  author_id: poet-hafez
+  publication_year: c. 1368
+  language: Persian
+  civilization: Islamic Civilization
+  genre:
+  - Poetry
+  canon_memberships:
+  - canon-top-100-books
+  summary: The summit of the Persian ghazal; consulted for omens in Iranian homes
+    and admired by Goethe.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-divine-comedy
+  title: The Divine Comedy
+  original_title: Commedia
+  author_id: poet-dante-alighieri
+  publication_year: 1308-1321
+  language: Italian
+  civilization: Europe
+  genre:
+  - Epic poetry
+  - Theology
+  canon_memberships:
+  - canon-top-100-books
+  summary: A synthesis of medieval theology, philosophy and poetry that created literary
+    Italian; it absorbed debts to Islamic sources on the Mi'raj.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-don-quixote
+  title: Don Quixote
+  original_title: El ingenioso hidalgo don Quijote de la Mancha
+  author_id: author-miguel-de-cervantes
+  publication_year: 1605-1615
+  language: Spanish
+  civilization: Europe
+  genre:
+  - Novel
+  canon_memberships:
+  - canon-top-100-books
+  summary: Often called the first modern novel; its play of illusion and reality
+    runs through all later fiction.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-dream-of-the-red-chamber
+  title: Dream of the Red Chamber
+  original_title: Honglou Meng
+  author_id: author-cao-xueqin
+  publication_year: 1791
+  language: Chinese
+  civilization: China
+  genre:
+  - Novel
+  canon_memberships:
+  - canon-top-100-books
+  summary: The greatest Chinese novel, with its own field of scholarship (Redology).
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-elements
+  title: Elements
+  original_title: Stoicheia
+  author_id: author-euclid
+  publication_year: c. 300 BCE
+  language: Ancient Greek
+  civilization: Greece
+  genre:
+  - Mathematics
+  canon_memberships:
+  - canon-top-100-books
+  summary: The model of deductive proof; taught across Greek, Arabic, Latin and modern
+    schools for over two thousand years.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-epic-of-sundiata
+  title: The Epic of Sundiata
+  original_title: Sunjata
+  author_id: author-mande-griots
+  publication_year: c. 1300
+  language: Mande languages
+  civilization: Africa
+  genre:
+  - Epic poetry
+  - Oral tradition
+  canon_memberships:
+  - canon-top-100-books
+  summary: The oral epic of the founder of the Mali Empire, still performed by griots
+    across West Africa.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-essays-montaigne
+  title: Essays
+  original_title: Essais
+  author_id: author-michel-de-montaigne
+  publication_year: 1580
+  language: French
+  civilization: Europe
+  genre:
+  - Essays
+  - Philosophy
+  canon_memberships:
+  - canon-top-100-books
+  summary: Invented the essay as a form of self-examination and sceptical inquiry.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-faust
+  title: Faust
+  author_id: author-johann-wolfgang-von-goethe
+  publication_year: 1808-1832
+  language: German
+  civilization: Europe
+  genre:
+  - Drama
+  - Poetry
+  canon_memberships:
+  - canon-top-100-books
+  summary: Goethe's lifelong drama of striving and the bargain for knowledge, the
+    summit of German literature.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-ficciones
+  title: Ficciones
+  author_id: author-jorge-luis-borges
+  publication_year: 1944
+  language: Spanish
+  civilization: Latin America
+  genre:
+  - Short fiction
+  canon_memberships:
+  - canon-top-100-books
+  summary: Labyrinthine stories that reshaped twentieth-century fiction and literary
+    theory.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-gilgamesh
+  title: The Epic of Gilgamesh
+  original_title: Sha naqba imuru
+  author_id: author-sin-leqi-unninni
+  publication_year: c. 1200 BCE
+  language: Akkadian
+  civilization: Mesopotamia
+  genre:
+  - Epic poetry
+  canon_memberships:
+  - canon-top-100-books
+  summary: The oldest surviving great work of literature; a meditation on friendship
+    and death recovered from clay tablets.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-gitanjali
+  title: Gitanjali
+  original_title: Gitanjali
+  author_id: poet-rabindranath-tagore
+  publication_year: 1910
+  language: Bengali
+  civilization: India
+  genre:
+  - Poetry
+  canon_memberships:
+  - canon-top-100-books
+  summary: Devotional songs that brought Tagore the 1913 Nobel Prize, the first for
+    a non-European writer.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-gulistan
+  title: The Gulistan
+  original_title: Golestan
+  author_id: poet-saadi
+  publication_year: 1258
+  language: Persian
+  civilization: Islamic Civilization
+  genre:
+  - Prose and verse
+  - Ethics
+  canon_memberships:
+  - canon-top-100-books
+  summary: The model of Persian prose and moral wisdom, taught in schools from Istanbul
+    to Delhi for seven centuries.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-hamlet
+  title: Hamlet
+  author_id: author-william-shakespeare
+  publication_year: c. 1600
+  language: English
+  civilization: Europe
+  genre:
+  - Drama
+  canon_memberships:
+  - canon-top-100-books
+  summary: The most performed and interpreted tragedy in the world, a landmark in
+    the dramatic portrayal of consciousness.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-hebrew-bible
+  title: The Hebrew Bible (Tanakh)
+  original_title: Tanakh
+  author_id: author-hebrew-scriptural-tradition
+  publication_year: c. 1000-200 BCE
+  language: Hebrew and Aramaic
+  civilization: Ancient Israel
+  genre:
+  - Scripture
+  - History
+  - Poetry
+  canon_memberships:
+  - canon-top-100-books
+  summary: Scripture of Judaism and the Christian Old Testament; its prophets, law
+    and narratives underlie all three Abrahamic traditions.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-histories
+  title: The Histories
+  original_title: Historiai
+  author_id: author-herodotus
+  publication_year: c. 430 BCE
+  language: Ancient Greek
+  civilization: Greece
+  genre:
+  - History
+  canon_memberships:
+  - canon-top-100-books
+  summary: The first great work of inquiry into the past, from which history as a
+    discipline takes its name.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-history-of-the-peloponnesian-war
+  title: History of the Peloponnesian War
+  author_id: author-thucydides
+  publication_year: c. 400 BCE
+  language: Ancient Greek
+  civilization: Greece
+  genre:
+  - History
+  canon_memberships:
+  - canon-top-100-books
+  summary: A founding work of critical history and political realism.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-i-ching
+  title: The Book of Changes
+  original_title: Yijing
+  author_id: author-zhou-diviners
+  publication_year: c. 1000-300 BCE
+  language: Classical Chinese
+  civilization: China
+  genre:
+  - Divination
+  - Philosophy
+  canon_memberships:
+  - canon-top-100-books
+  summary: Among the oldest Chinese classics; its cosmology of change shaped Confucian
+    and Daoist thought across East Asia.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-ihya-ulum-al-din
+  title: The Revival of the Religious Sciences
+  original_title: Ihya' 'Ulum al-Din
+  author_id: author-al-ghazali
+  publication_year: c. 1100
+  language: Arabic
+  civilization: Islamic Civilization
+  genre:
+  - Theology
+  - Ethics
+  - Mysticism
+  canon_memberships:
+  - canon-top-100-books
+  summary: Al-Ghazali's synthesis of law, theology and Sufism; for centuries the
+    most widely read work of Islamic spirituality after the Quran.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-iliad
+  title: The Iliad
+  original_title: Ilias
+  author_id: poet-homer
+  publication_year: c. 750 BCE
+  language: Ancient Greek
+  civilization: Greece
+  genre:
+  - Epic poetry
+  canon_memberships:
+  - canon-top-100-books
+  summary: The founding epic of Greek literature; its vision of honour, wrath and
+    mortality set the model for Western narrative art.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-in-search-of-lost-time
+  title: In Search of Lost Time
+  original_title: À la recherche du temps perdu
+  author_id: author-marcel-proust
+  publication_year: 1913-1927
+  language: French
+  civilization: Europe
+  genre:
+  - Novel
+  canon_memberships:
+  - canon-top-100-books
+  summary: The great modern exploration of memory, time and consciousness in fiction.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-interpretation-of-dreams
+  title: The Interpretation of Dreams
+  original_title: Die Traumdeutung
+  author_id: author-sigmund-freud
+  publication_year: 1899
+  language: German
+  civilization: Europe
+  genre:
+  - Psychology
+  canon_memberships:
+  - canon-top-100-books
+  summary: Founded psychoanalysis and changed how the modern world speaks of the
+    mind.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-journey-to-the-west
+  title: Journey to the West
+  original_title: Xiyou Ji
+  author_id: author-wu-chengen
+  publication_year: c. 1592
+  language: Chinese
+  civilization: China
+  genre:
+  - Novel
+  canon_memberships:
+  - canon-top-100-books
+  summary: The pilgrimage of Xuanzang and the Monkey King, one of the most retold
+    stories in East Asia.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-leaves-of-grass
+  title: Leaves of Grass
+  author_id: poet-walt-whitman
+  publication_year: 1855
+  language: English
+  civilization: North America
+  genre:
+  - Poetry
+  canon_memberships:
+  - canon-top-100-books
+  summary: Founded a democratic, free-verse poetics that changed modern poetry worldwide.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-les-miserables
+  title: Les Misérables
+  author_id: author-victor-hugo
+  publication_year: 1862
+  language: French
+  civilization: Europe
+  genre:
+  - Novel
+  canon_memberships:
+  - canon-top-100-books
+  summary: A vast social novel of justice and mercy, loved across the world.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-leviathan
+  title: Leviathan
+  author_id: author-thomas-hobbes
+  publication_year: 1651
+  language: English
+  civilization: Europe
+  genre:
+  - Political theory
+  canon_memberships:
+  - canon-top-100-books
+  summary: Founded modern social-contract theory on a stark account of human nature
+    and sovereignty.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-madame-bovary
+  title: Madame Bovary
+  author_id: author-gustave-flaubert
+  publication_year: 1857
+  language: French
+  civilization: Europe
+  genre:
+  - Novel
+  canon_memberships:
+  - canon-top-100-books
+  summary: Set the standard of the realist novel and of exact style.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-mahabharata
+  title: The Mahabharata
+  original_title: Mahabharatam
+  author_id: author-vyasa
+  publication_year: c. 400 BCE-400 CE
+  language: Sanskrit
+  civilization: India
+  genre:
+  - Epic poetry
+  - Scripture
+  canon_memberships:
+  - canon-top-100-books
+  summary: The longest epic poem known; a vast inquiry into duty, war and fate that
+    remains living culture across South and Southeast Asia.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-masnavi
+  title: The Masnavi
+  original_title: Masnavi-yi Ma'navi
+  author_id: poet-rumi
+  publication_year: 1258-1273
+  language: Persian
+  civilization: Islamic Civilization
+  genre:
+  - Poetry
+  - Mysticism
+  canon_memberships:
+  - canon-top-100-books
+  summary: Called the Quran in Persian; the summit of Sufi poetry and one of the
+    most read works of spiritual literature worldwide.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-meditations-on-first-philosophy
+  title: Meditations on First Philosophy
+  original_title: Meditationes de Prima Philosophia
+  author_id: author-rene-descartes
+  publication_year: 1641
+  language: Latin
+  civilization: Europe
+  genre:
+  - Philosophy
+  canon_memberships:
+  - canon-top-100-books
+  summary: Its method of doubt and the cogito opened modern philosophy and the problem
+    of mind and body.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-metamorphoses
+  title: Metamorphoses
+  author_id: poet-ovid
+  publication_year: 8
+  language: Latin
+  civilization: Rome
+  genre:
+  - Epic poetry
+  - Mythology
+  canon_memberships:
+  - canon-top-100-books
+  summary: The great storehouse of classical myth for European art and poetry.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-moby-dick
+  title: Moby-Dick
+  author_id: author-herman-melville
+  publication_year: 1851
+  language: English
+  civilization: North America
+  genre:
+  - Novel
+  canon_memberships:
+  - canon-top-100-books
+  summary: An encyclopaedic, metaphysical sea novel, the great American epic in prose.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-muallaqat
+  title: The Mu'allaqat
+  original_title: al-Mu'allaqat
+  author_id: poet-pre-islamic-arab-poets
+  publication_year: c. 550
+  language: Arabic
+  civilization: Arabia
+  genre:
+  - Poetry
+  canon_memberships:
+  - canon-top-100-books
+  summary: The suspended odes, the classical standard of Arabic poetry and a key
+    to Quranic Arabic.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-muqaddimah
+  title: The Muqaddimah
+  original_title: al-Muqaddima
+  author_id: author-ibn-khaldun
+  publication_year: 1377
+  language: Arabic
+  civilization: Islamic Civilization
+  genre:
+  - History
+  - Social science
+  canon_memberships:
+  - canon-top-100-books
+  summary: A theory of the rise and fall of states through asabiyya that anticipated
+    sociology, economics and the philosophy of history.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-narrow-road-to-the-deep-north
+  title: The Narrow Road to the Deep North
+  original_title: Oku no Hosomichi
+  author_id: poet-matsuo-basho
+  publication_year: 1694
+  language: Japanese
+  civilization: Japan
+  genre:
+  - Travel writing
+  - Poetry
+  canon_memberships:
+  - canon-top-100-books
+  summary: The masterpiece of haibun by the master of haiku, the form now written
+    worldwide.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-new-testament
+  title: The New Testament
+  original_title: He Kaine Diatheke
+  author_id: author-new-testament-writers
+  publication_year: c. 50-120
+  language: Koine Greek
+  civilization: Early Christianity
+  genre:
+  - Scripture
+  canon_memberships:
+  - canon-top-100-books
+  summary: The Gospels and Epistles founded Christianity and shaped European law,
+    art, ethics and institutions for two millennia.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-nicomachean-ethics
+  title: Nicomachean Ethics
+  original_title: Ethika Nikomacheia
+  author_id: author-aristotle
+  publication_year: c. 340 BCE
+  language: Ancient Greek
+  civilization: Greece
+  genre:
+  - Philosophy
+  - Ethics
+  canon_memberships:
+  - canon-top-100-books
+  summary: The classic account of virtue and human flourishing, central to Islamic,
+    Jewish and Christian ethics alike.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-nineteen-eighty-four
+  title: Nineteen Eighty-Four
+  author_id: author-george-orwell
+  publication_year: 1949
+  language: English
+  civilization: Europe
+  genre:
+  - Novel
+  canon_memberships:
+  - canon-top-100-books
+  summary: The defining modern novel of totalitarianism; its vocabulary entered every
+    major language.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-odyssey
+  title: The Odyssey
+  original_title: Odysseia
+  author_id: poet-homer
+  publication_year: c. 725 BCE
+  language: Ancient Greek
+  civilization: Greece
+  genre:
+  - Epic poetry
+  canon_memberships:
+  - canon-top-100-books
+  summary: The archetypal journey home; its craft of storytelling shaped narrative
+    from Virgil to Joyce.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-oedipus-rex
+  title: Oedipus Rex
+  original_title: Oidipous Tyrannos
+  author_id: author-sophocles
+  publication_year: c. 429 BCE
+  language: Ancient Greek
+  civilization: Greece
+  genre:
+  - Drama
+  canon_memberships:
+  - canon-top-100-books
+  summary: Aristotle's model tragedy; its themes of fate and self-knowledge echo
+    from philosophy to psychoanalysis.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-on-liberty
+  title: On Liberty
+  author_id: author-john-stuart-mill
+  publication_year: 1859
+  language: English
+  civilization: Europe
+  genre:
+  - Political theory
+  canon_memberships:
+  - canon-top-100-books
+  summary: The classic defence of individual freedom of thought and expression.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-on-the-revolutions
+  title: On the Revolutions of the Heavenly Spheres
+  original_title: De revolutionibus orbium coelestium
+  author_id: author-nicolaus-copernicus
+  publication_year: 1543
+  language: Latin
+  civilization: Europe
+  genre:
+  - Science
+  canon_memberships:
+  - canon-top-100-books
+  summary: Placed the sun at the centre and began the Scientific Revolution, drawing
+    on Maragha astronomers.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-one-hundred-years-of-solitude
+  title: One Hundred Years of Solitude
+  original_title: Cien años de soledad
+  author_id: author-gabriel-garcia-marquez
+  publication_year: 1967
+  language: Spanish
+  civilization: Latin America
+  genre:
+  - Novel
+  canon_memberships:
+  - canon-top-100-books
+  summary: The defining novel of magical realism and of the Latin American boom.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-origin-of-species
+  title: On the Origin of Species
+  author_id: author-charles-darwin
+  publication_year: 1859
+  language: English
+  civilization: Europe
+  genre:
+  - Science
+  canon_memberships:
+  - canon-top-100-books
+  summary: Set out evolution by natural selection, transforming biology and humanity's
+    understanding of its place in nature.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-panchatantra
+  title: The Panchatantra
+  original_title: Pancatantra
+  author_id: author-vishnu-sharma
+  publication_year: c. 200 BCE
+  language: Sanskrit
+  civilization: India
+  genre:
+  - Fables
+  canon_memberships:
+  - canon-top-100-books
+  summary: Animal fables on statecraft that travelled through Ibn al-Muqaffa's Kalila
+    wa-Dimna into dozens of languages.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-paradise-lost
+  title: Paradise Lost
+  author_id: poet-john-milton
+  publication_year: 1667
+  language: English
+  civilization: Europe
+  genre:
+  - Epic poetry
+  canon_memberships:
+  - canon-top-100-books
+  summary: The great English epic of the Fall, shaping the language of freedom, rebellion
+    and grace.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-poems-of-du-fu
+  title: The Poems of Du Fu
+  original_title: Du Gongbu Ji
+  author_id: poet-du-fu
+  publication_year: c. 760
+  language: Classical Chinese
+  civilization: China
+  genre:
+  - Poetry
+  canon_memberships:
+  - canon-top-100-books
+  summary: Revered as China's greatest poet, the poet-historian of the An Lushan
+    rebellion.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-popol-vuh
+  title: Popol Vuh
+  original_title: Popol Wuj
+  author_id: author-kiche-maya-authors
+  publication_year: c. 1550
+  language: K'iche'
+  civilization: Indigenous Traditions
+  genre:
+  - Mythology
+  - History
+  canon_memberships:
+  - canon-top-100-books
+  summary: The sacred narrative of the K'iche' Maya, the most important surviving
+    text of Mesoamerican civilization.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-posthumous-memoirs-of-bras-cubas
+  title: The Posthumous Memoirs of Brás Cubas
+  original_title: Memórias Póstumas de Brás Cubas
+  author_id: author-machado-de-assis
+  publication_year: 1881
+  language: Portuguese
+  civilization: Latin America
+  genre:
+  - Novel
+  canon_memberships:
+  - canon-top-100-books
+  summary: A sardonic novel narrated by a dead man, the cornerstone of Brazilian
+    literature.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-pride-and-prejudice
+  title: Pride and Prejudice
+  author_id: author-jane-austen
+  publication_year: 1813
+  language: English
+  civilization: Europe
+  genre:
+  - Novel
+  canon_memberships:
+  - canon-top-100-books
+  summary: The perfected novel of manners, read and adapted worldwide for two centuries.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-principia
+  title: Mathematical Principles of Natural Philosophy
+  original_title: Philosophiae Naturalis Principia Mathematica
+  author_id: author-isaac-newton
+  publication_year: 1687
+  language: Latin
+  civilization: Europe
+  genre:
+  - Science
+  - Mathematics
+  canon_memberships:
+  - canon-top-100-books
+  summary: Unified terrestrial and celestial motion under universal laws and founded
+    classical physics.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-quran
+  title: The Quran
+  original_title: al-Qur'an
+  author_id: author-quranic-revelation
+  publication_year: 610-632
+  language: Arabic
+  civilization: Islamic Civilization
+  genre:
+  - Scripture
+  canon_memberships:
+  - canon-top-100-books
+  summary: The foundational text of Islam; it shaped law, theology, ethics, the Arabic
+    language and a civilization stretching from Andalusia to Southeast Asia.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-ramayana
+  title: The Ramayana
+  original_title: Ramayanam
+  author_id: poet-valmiki
+  publication_year: c. 500-100 BCE
+  language: Sanskrit
+  civilization: India
+  genre:
+  - Epic poetry
+  canon_memberships:
+  - canon-top-100-books
+  summary: The epic of Rama, retold across South and Southeast Asia in countless
+    languages, rites and performances.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-records-of-the-grand-historian
+  title: Records of the Grand Historian
+  original_title: Shiji
+  author_id: author-sima-qian
+  publication_year: c. 94 BCE
+  language: Classical Chinese
+  civilization: China
+  genre:
+  - History
+  canon_memberships:
+  - canon-top-100-books
+  summary: The model for every later Chinese dynastic history and a masterpiece of
+    biographical narrative.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-republic
+  title: The Republic
+  original_title: Politeia
+  author_id: author-plato
+  publication_year: c. 375 BCE
+  language: Ancient Greek
+  civilization: Greece
+  genre:
+  - Philosophy
+  - Political theory
+  canon_memberships:
+  - canon-top-100-books
+  summary: The cornerstone of philosophy on justice, knowledge and the soul, read
+    and answered by thinkers from al-Farabi to the moderns.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-romance-of-the-three-kingdoms
+  title: Romance of the Three Kingdoms
+  original_title: Sanguo Yanyi
+  author_id: author-luo-guanzhong
+  publication_year: c. 1400
+  language: Chinese
+  civilization: China
+  genre:
+  - Novel
+  - History
+  canon_memberships:
+  - canon-top-100-books
+  summary: The great historical novel of China, shaping ideals of loyalty and strategy
+    across East Asia.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-rubaiyat
+  title: The Rubaiyat
+  original_title: Ruba'iyat
+  author_id: poet-omar-khayyam
+  publication_year: c. 1100
+  language: Persian
+  civilization: Islamic Civilization
+  genre:
+  - Poetry
+  canon_memberships:
+  - canon-top-100-books
+  summary: Quatrains on time and mortality; FitzGerald's 1859 version made them among
+    the most read poems in English.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-sahih-al-bukhari
+  title: Sahih al-Bukhari
+  original_title: al-Jami' al-Sahih
+  author_id: author-al-bukhari
+  publication_year: c. 846
+  language: Arabic
+  civilization: Islamic Civilization
+  genre:
+  - Hadith
+  - Religion
+  canon_memberships:
+  - canon-top-100-books
+  summary: The most authoritative Sunni hadith collection; with the Quran it underpins
+    Islamic law, worship and ethics.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-second-treatise-of-government
+  title: Second Treatise of Government
+  author_id: author-john-locke
+  publication_year: 1689
+  language: English
+  civilization: Europe
+  genre:
+  - Political theory
+  canon_memberships:
+  - canon-top-100-books
+  summary: Natural rights and government by consent; a direct source for constitutional
+    democracies.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-shahnameh
+  title: The Shahnameh
+  original_title: Shahnameh
+  author_id: poet-ferdowsi
+  publication_year: 1010
+  language: Persian
+  civilization: Islamic Civilization
+  genre:
+  - Epic poetry
+  - History
+  canon_memberships:
+  - canon-top-100-books
+  summary: The national epic of Iran; it preserved the Persian language and memory
+    across the Persianate world from Anatolia to India.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-shakuntala
+  title: The Recognition of Shakuntala
+  original_title: Abhijnanashakuntalam
+  author_id: poet-kalidasa
+  publication_year: c. 400
+  language: Sanskrit
+  civilization: India
+  genre:
+  - Drama
+  canon_memberships:
+  - canon-top-100-books
+  summary: The masterpiece of Sanskrit drama, whose translation moved Goethe and
+    the European Romantics.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-shijing
+  title: The Book of Songs
+  original_title: Shijing
+  author_id: poet-zhou-court-and-folk-poets
+  publication_year: c. 1000-600 BCE
+  language: Classical Chinese
+  civilization: China
+  genre:
+  - Poetry
+  canon_memberships:
+  - canon-top-100-books
+  summary: The oldest Chinese anthology of poetry, a Confucian classic at the root
+    of East Asian lyric.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-sirat-rasul-allah
+  title: The Life of the Messenger of God
+  original_title: Sirat Rasul Allah
+  author_id: author-ibn-ishaq
+  publication_year: c. 750
+  language: Arabic
+  civilization: Islamic Civilization
+  genre:
+  - Biography
+  - History
+  canon_memberships:
+  - canon-top-100-books
+  summary: The earliest surviving full biography of the Prophet Muhammad, source
+    of every later sira.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-social-contract
+  title: The Social Contract
+  original_title: Du contrat social
+  author_id: author-jean-jacques-rousseau
+  publication_year: 1762
+  language: French
+  civilization: Europe
+  genre:
+  - Political theory
+  canon_memberships:
+  - canon-top-100-books
+  summary: Its idea of popular sovereignty fed the French Revolution and modern democratic
+    theory.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-summa-theologiae
+  title: Summa Theologiae
+  author_id: author-thomas-aquinas
+  publication_year: 1265-1274
+  language: Latin
+  civilization: Europe
+  genre:
+  - Theology
+  - Philosophy
+  canon_memberships:
+  - canon-top-100-books
+  summary: The great synthesis of Aristotle and Christian doctrine, built in dialogue
+    with Ibn Sina and Ibn Rushd.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-tahafut-al-tahafut
+  title: The Incoherence of the Incoherence
+  original_title: Tahafut al-Tahafut
+  author_id: author-ibn-rushd
+  publication_year: c. 1180
+  language: Arabic
+  civilization: Islamic Civilization
+  genre:
+  - Philosophy
+  canon_memberships:
+  - canon-top-100-books
+  summary: Ibn Rushd's defence of philosophy against al-Ghazali; through Latin Averroism
+    it helped shape Scholasticism.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-tale-of-genji
+  title: The Tale of Genji
+  original_title: Genji Monogatari
+  author_id: author-murasaki-shikibu
+  publication_year: c. 1010
+  language: Japanese
+  civilization: Japan
+  genre:
+  - Novel
+  canon_memberships:
+  - canon-top-100-books
+  summary: Often called the world's first novel; the defining classic of Japanese
+    literature and aesthetics.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-tale-of-kieu
+  title: The Tale of Kieu
+  original_title: Truyện Kiều
+  author_id: poet-nguyen-du
+  publication_year: 1820
+  language: Vietnamese
+  civilization: Vietnam
+  genre:
+  - Poetry
+  canon_memberships:
+  - canon-top-100-books
+  summary: The national poem of Vietnam, known by heart by generations of readers.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-tao-te-ching
+  title: Tao Te Ching
+  original_title: Daodejing
+  author_id: author-laozi
+  publication_year: c. 400 BCE
+  language: Classical Chinese
+  civilization: China
+  genre:
+  - Philosophy
+  - Spirituality
+  canon_memberships:
+  - canon-top-100-books
+  summary: The founding text of Daoism and among the most translated works in history;
+    a compressed meditation on the Way and on non-action.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-the-art-of-war
+  title: The Art of War
+  original_title: Sunzi Bingfa
+  author_id: author-sunzi
+  publication_year: c. 500 BCE
+  language: Classical Chinese
+  civilization: China
+  genre:
+  - Strategy
+  canon_memberships:
+  - canon-top-100-books
+  summary: The classic of strategy, read by generals, statesmen and managers across
+    the world.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-the-prince
+  title: The Prince
+  original_title: Il Principe
+  author_id: author-niccolo-machiavelli
+  publication_year: 1532
+  language: Italian
+  civilization: Europe
+  genre:
+  - Political theory
+  canon_memberships:
+  - canon-top-100-books
+  summary: Separated politics from inherited moral theory and named a whole tradition
+    of realism.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-the-second-sex
+  title: The Second Sex
+  original_title: Le Deuxième Sexe
+  author_id: author-simone-de-beauvoir
+  publication_year: 1949
+  language: French
+  civilization: Europe
+  genre:
+  - Philosophy
+  canon_memberships:
+  - canon-top-100-books
+  summary: The foundational philosophical work of modern feminism.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-the-trial
+  title: The Trial
+  original_title: Der Process
+  author_id: author-franz-kafka
+  publication_year: 1925
+  language: German
+  civilization: Europe
+  genre:
+  - Novel
+  canon_memberships:
+  - canon-top-100-books
+  summary: Its nightmare of faceless authority gave the world the word Kafkaesque.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-things-fall-apart
+  title: Things Fall Apart
+  author_id: author-chinua-achebe
+  publication_year: 1958
+  language: English
+  civilization: Africa
+  genre:
+  - Novel
+  canon_memberships:
+  - canon-top-100-books
+  summary: The foundational novel of modern African literature, answering colonial
+    narratives from within Igbo life.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-thousand-and-one-nights
+  title: The Thousand and One Nights
+  original_title: Alf Layla wa-Layla
+  author_id: author-anonymous-storytellers-nights
+  publication_year: c. 800-1400
+  language: Arabic
+  civilization: Islamic Civilization
+  genre:
+  - Fiction
+  - Frame tale
+  canon_memberships:
+  - canon-top-100-books
+  summary: The great frame-tale collection of Islamic civilization; after Galland's
+    1704 translation it reshaped world storytelling.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-thus-spoke-zarathustra
+  title: Thus Spoke Zarathustra
+  original_title: Also sprach Zarathustra
+  author_id: author-friedrich-nietzsche
+  publication_year: 1883-1885
+  language: German
+  civilization: Europe
+  genre:
+  - Philosophy
+  canon_memberships:
+  - canon-top-100-books
+  summary: Nietzsche's poetic philosophy of the death of God and self-overcoming,
+    deeply felt in the twentieth century.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-tirukkural
+  title: The Tirukkural
+  original_title: Tirukkural
+  author_id: poet-thiruvalluvar
+  publication_year: c. 450
+  language: Tamil
+  civilization: India
+  genre:
+  - Poetry
+  - Ethics
+  canon_memberships:
+  - canon-top-100-books
+  summary: The classic of Tamil ethics in 1,330 couplets, translated into dozens
+    of languages.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-ulysses
+  title: Ulysses
+  author_id: author-james-joyce
+  publication_year: 1922
+  language: English
+  civilization: Europe
+  genre:
+  - Novel
+  canon_memberships:
+  - canon-top-100-books
+  summary: The landmark of literary modernism, recasting the Odyssey as a single
+    Dublin day.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-upanishads
+  title: The Principal Upanishads
+  original_title: Upanisad
+  author_id: author-vedic-sages
+  publication_year: c. 800-300 BCE
+  language: Sanskrit
+  civilization: India
+  genre:
+  - Philosophy
+  - Scripture
+  canon_memberships:
+  - canon-top-100-books
+  summary: Foundation of Vedanta and of Indian metaphysics; their inquiry into Brahman
+    and Atman influenced thought from Shankara to Schopenhauer.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-war-and-peace
+  title: War and Peace
+  original_title: Voyna i mir
+  author_id: author-leo-tolstoy
+  publication_year: 1869
+  language: Russian
+  civilization: Europe
+  genre:
+  - Novel
+  canon_memberships:
+  - canon-top-100-books
+  summary: A panorama of Russia in the Napoleonic wars that set the scale and depth
+    by which the novel is still measured.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-wealth-of-nations
+  title: The Wealth of Nations
+  original_title: An Inquiry into the Nature and Causes of the Wealth of Nations
+  author_id: author-adam-smith
+  publication_year: 1776
+  language: English
+  civilization: Europe
+  genre:
+  - Economics
+  canon_memberships:
+  - canon-top-100-books
+  summary: Founded modern economics; its ideas on markets and the division of labour
+    shaped policy worldwide.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: book-zhuangzi
+  title: Zhuangzi
+  original_title: Zhuangzi
+  author_id: author-zhuangzi
+  publication_year: c. 300 BCE
+  language: Classical Chinese
+  civilization: China
+  genre:
+  - Philosophy
+  canon_memberships:
+  - canon-top-100-books
+  summary: Daoist philosophy in parable and paradox, with lasting influence on Chan
+    and Zen Buddhism.
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4

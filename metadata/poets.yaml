@@ -1,0 +1,312 @@
+# Poet records for the Top 100 Greatest Books canon (canon/top-100-books).
+# Draft records from the Canon Editor agent, pending G4 review.
+records:
+- id: poet-attar
+  name: Farid al-Din Attar
+  birth_year: 1145
+  death_year: 1221
+  civilization: Islamic Civilization
+  region: Persia
+  language: Persian
+  major_works:
+  - book-conference-of-the-birds
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: poet-dante-alighieri
+  name: Dante Alighieri
+  birth_year: 1265
+  death_year: 1321
+  civilization: Europe
+  region: Italy
+  language: Italian
+  major_works:
+  - book-divine-comedy
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: poet-du-fu
+  name: Du Fu
+  birth_year: 712
+  death_year: 770
+  civilization: China
+  region: East Asia
+  language: Classical Chinese
+  major_works:
+  - book-poems-of-du-fu
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: poet-ferdowsi
+  name: Ferdowsi
+  birth_year: 940
+  death_year: 1020
+  civilization: Islamic Civilization
+  region: Persia
+  language: Persian
+  major_works:
+  - book-shahnameh
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: poet-hafez
+  name: Hafez
+  birth_year: 1325
+  death_year: 1390
+  civilization: Islamic Civilization
+  region: Persia
+  language: Persian
+  major_works:
+  - book-divan-of-hafez
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: poet-homer
+  name: Homer
+  birth_year: null
+  death_year: null
+  civilization: Greece
+  region: Aegean
+  language: Ancient Greek
+  major_works:
+  - book-iliad
+  - book-odyssey
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: poet-john-milton
+  name: John Milton
+  birth_year: 1608
+  death_year: 1674
+  civilization: Europe
+  region: England
+  language: English
+  major_works:
+  - book-paradise-lost
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: poet-kalidasa
+  name: Kalidasa
+  birth_year: null
+  death_year: null
+  civilization: India
+  region: South Asia
+  language: Sanskrit
+  major_works:
+  - book-shakuntala
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: poet-matsuo-basho
+  name: Matsuo Bashō
+  birth_year: 1644
+  death_year: 1694
+  civilization: Japan
+  region: East Asia
+  language: Japanese
+  major_works:
+  - book-narrow-road-to-the-deep-north
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: poet-mirza-ghalib
+  name: Mirza Ghalib
+  birth_year: 1797
+  death_year: 1869
+  civilization: Islamic Civilization
+  region: South Asia
+  language: Urdu
+  major_works:
+  - book-divan-of-ghalib
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: poet-nguyen-du
+  name: Nguyễn Du
+  birth_year: 1766
+  death_year: 1820
+  civilization: Vietnam
+  region: Southeast Asia
+  language: Vietnamese
+  major_works:
+  - book-tale-of-kieu
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: poet-omar-khayyam
+  name: Omar Khayyam
+  birth_year: 1048
+  death_year: 1131
+  civilization: Islamic Civilization
+  region: Persia
+  language: Persian
+  major_works:
+  - book-rubaiyat
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: poet-ovid
+  name: Ovid
+  birth_year: -43
+  death_year: 17
+  civilization: Rome
+  region: Italy
+  language: Latin
+  major_works:
+  - book-metamorphoses
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: poet-pre-islamic-arab-poets
+  name: Pre-Islamic Arab Poets (Imru' al-Qays and others)
+  birth_year: null
+  death_year: null
+  civilization: Arabia
+  region: Arabia
+  language: Arabic
+  major_works:
+  - book-muallaqat
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: poet-rabindranath-tagore
+  name: Rabindranath Tagore
+  birth_year: 1861
+  death_year: 1941
+  civilization: India
+  region: Bengal
+  language: Bengali
+  major_works:
+  - book-gitanjali
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: poet-rumi
+  name: Jalal al-Din Rumi
+  birth_year: 1207
+  death_year: 1273
+  civilization: Islamic Civilization
+  region: Anatolia
+  language: Persian
+  major_works:
+  - book-masnavi
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: poet-saadi
+  name: Saadi Shirazi
+  birth_year: 1210
+  death_year: 1291
+  civilization: Islamic Civilization
+  region: Persia
+  language: Persian
+  major_works:
+  - book-gulistan
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: poet-thiruvalluvar
+  name: Thiruvalluvar
+  birth_year: null
+  death_year: null
+  civilization: India
+  region: Tamil South India
+  language: Tamil
+  major_works:
+  - book-tirukkural
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: poet-valmiki
+  name: Valmiki
+  birth_year: null
+  death_year: null
+  civilization: India
+  region: South Asia
+  language: Sanskrit
+  major_works:
+  - book-ramayana
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: poet-virgil
+  name: Virgil
+  birth_year: -70
+  death_year: -19
+  civilization: Rome
+  region: Italy
+  language: Latin
+  major_works:
+  - book-aeneid
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: poet-walt-whitman
+  name: Walt Whitman
+  birth_year: 1819
+  death_year: 1892
+  civilization: North America
+  region: United States
+  language: English
+  major_works:
+  - book-leaves-of-grass
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: poet-zhou-court-and-folk-poets
+  name: Zhou Court and Folk Poets
+  birth_year: null
+  death_year: null
+  civilization: China
+  region: East Asia
+  language: Classical Chinese
+  major_works:
+  - book-shijing
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
