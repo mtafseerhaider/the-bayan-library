@@ -1,0 +1,89 @@
+# Memory architecture. Six layers, from the most volatile to the most
+# durable. Agents declare which layers they read and write in agents.yaml;
+# scripts/validate-registry.py rejects grants to undeclared layers.
+
+version: 1
+
+layers:
+  - id: working
+    name: Working Memory
+    scope: One model call or one tool loop.
+    storage: The model context window only. Never persisted.
+    retention: Discarded when the call ends.
+    compression: >-
+      Context is assembled by the retrieval ladder (metadata, summary,
+      executive summary, full text) and capped by the model token budget.
+    retrieval: Assembled fresh by the orchestrator for each call.
+    max_tokens: per_model_budget
+    privacy: inherits from loaded sources
+
+  - id: session
+    name: Session Memory
+    scope: One task run (for example one book summary or one daily cycle).
+    storage: Run log under .bayan/runs/<run-id>/ (git-ignored).
+    retention: 30 days, then summarised into project memory or deleted.
+    compression: >-
+      At each hand-off between agents the outgoing agent writes a hand-off
+      card of at most 300 tokens: goal, decisions, open questions, files
+      touched. Raw transcripts are never passed between agents.
+    retrieval: The current run's hand-off cards, newest first.
+    max_tokens: 2000
+    privacy: private
+
+  - id: project
+    name: Project Memory
+    scope: A multi-week initiative (a canon revision, a reading-path series).
+    storage: system/memory/projects/<project-id>.md, one file per project.
+    retention: Life of the project, then archived as a decision record.
+    compression: >-
+      Kept under 1,500 tokens. Sections: objective, decisions (with dates and
+      reasons), conventions, open questions, links. Superseded decisions are
+      struck through and moved to the archive section on the next rewrite.
+    retrieval: Loaded whole when an agent is assigned to the project.
+    max_tokens: 1500
+    privacy: repository
+
+  - id: repository
+    name: Repository Memory
+    scope: Facts about the repository itself (structure, conventions, IDs).
+    storage: >-
+      metadata/index.yaml (generated retrieval index), system/registry/*,
+      and docs/ specifications.
+    retention: Permanent; versioned in git.
+    compression: >-
+      The index stores one card per record (id, type, title, 1-line summary,
+      tags, path, token estimates). Agents read cards, not files.
+    retrieval: Filtered index lookups by type, tag, civilization or ID.
+    max_tokens: 4000
+    privacy: public
+
+  - id: canonical
+    name: Canonical Memory
+    scope: Approved, durable knowledge (canons, methodology, reviewed records).
+    storage: >-
+      Reviewed content in canon/, reading-paths/, metadata/ and docs/, plus
+      the generated knowledge graph.
+    retention: Permanent. Changes only through the G4 gate with a changelog.
+    compression: >-
+      Every canonical record carries a 1-line summary and an executive
+      summary so that full text is rarely loaded.
+    retrieval: Retrieval ladder plus graph neighbourhood queries (depth <= 2).
+    max_tokens: per_model_budget
+    privacy: public
+
+  - id: personal-reflection
+    name: Personal Reflection Memory
+    scope: The owner's journal, reflections, applications and review history.
+    storage: >-
+      notes/reflections/ in a private repository or an encrypted store that
+      is never published. Only pseudonymous aggregates may enter the public
+      repository.
+    retention: Owner-controlled. Never deleted or rewritten by an agent.
+    compression: >-
+      Monthly and annual digests written by the Reflection Journal Agent and
+      approved by the owner; raw entries stay untouched.
+    retrieval: >-
+      Only agents with an explicit grant, only the digest by default, and
+      only for the owner's own learning tasks.
+    max_tokens: 2000
+    privacy: private

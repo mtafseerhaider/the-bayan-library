@@ -1,0 +1,68 @@
+# Cost governance budgets (USD). Starting values sized for a personal
+# library producing roughly 100 summaries and a daily practice per month;
+# revisit at every quarterly review. Enforcement: the orchestrator refuses a
+# call that would exceed a hard cap, and scripts/cost-report.py flags
+# breaches from the usage ledger.
+
+version: 1
+currency: USD
+period: month
+
+monthly:
+  total_cap: 60.00
+  alert_thresholds: [0.5, 0.8, 1.0]   # share of cap that triggers an alert
+  hard_stop_at: 1.0                     # new non-essential runs pause
+  essential_workflows: [daily-cycle]    # may run to 110% before pausing
+
+# Envelopes partition the monthly cap. They must sum to total_cap.
+envelopes:
+  - {id: daily-practice, cap: 8.00, covers: [daily, daily-wisdom]}
+  - {id: content-production, cap: 22.00, covers: [study-notes, poetry, learning, learning-coach, quran, quran-learning]}
+  - {id: structure, cap: 5.00, covers: [metadata, knowledge-graph, documentation, automation]}
+  - {id: editorial, cap: 9.00, covers: [canon-editor, reading-guide, research, islamic-civilization]}
+  - {id: oversight, cap: 8.00, covers: [chief-librarian, quality-assurance, risk-management]}
+  - {id: escalation-reserve, cap: 8.00, covers: [escalations]}
+
+# The escalation budget pays only for calls the router escalated above an
+# agent's default model. When it is spent, further escalations need owner
+# approval for the rest of the month.
+escalation:
+  reserve_envelope: escalation-reserve
+  max_escalation_share: 0.25        # of all spend
+  max_opus_share: 0.35              # of all spend
+  per_call_justification: required
+
+# Per-run caps for workflows (USD). A run that would exceed its cap stops
+# and reports instead of continuing.
+workflows:
+  - {workflow_id: daily-cycle, per_run_cap: 0.25}
+  - {workflow_id: weekly-cycle, per_run_cap: 1.50}
+  - {workflow_id: monthly-cycle, per_run_cap: 5.00}
+  - {workflow_id: annual-cycle, per_run_cap: 25.00}
+  - {workflow_id: book-ingestion, per_run_cap: 0.60}
+  - {workflow_id: canon-revision, per_run_cap: 12.00}
+  - {workflow_id: reading-path-build, per_run_cap: 1.50}
+  - {workflow_id: graph-enrichment, per_run_cap: 1.00}
+  - {workflow_id: quran-study-session, per_run_cap: 1.20}
+  - {workflow_id: methodology-change, per_run_cap: 10.00}
+
+# Optional per-agent monthly caps (USD) inside their envelope. Agents not
+# listed share the envelope.
+agents:
+  - {agent_id: chief-librarian, monthly_cap: 3.00}
+  - {agent_id: canon-editor, monthly_cap: 6.00}
+  - {agent_id: islamic-civilization, monthly_cap: 4.00}
+  - {agent_id: quran-learning, monthly_cap: 3.00}
+  - {agent_id: study-notes, monthly_cap: 12.00}
+  - {agent_id: metadata, monthly_cap: 1.00}
+
+# Metrics reported every month by scripts/cost-report.py.
+metrics:
+  - {id: cost_per_accepted_artifact, description: Spend divided by merged outputs.}
+  - {id: opus_share, description: Share of spend on opus; target <= 0.35.}
+  - {id: escalation_rate, description: Share of calls escalated above default; target <= 0.15.}
+  - {id: cache_hit_rate, description: Cached input tokens over total input; target >= 0.5.}
+  - {id: batch_share, description: Share of batch-eligible calls sent via Batch API (ledger rows carry task); target >= 0.8.}
+  - {id: budget_overrun_count, description: Calls that exceeded a token budget; target 0 unjustified.}
+  - {id: tokens_per_artifact, description: Mean input and output tokens per merged output.}
+  - {id: rework_rate, description: Outputs rerun after QA failure; target <= 0.1.}

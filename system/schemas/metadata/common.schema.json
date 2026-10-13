@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mtafseerhaider/the-bayan-library/system/schemas/metadata/common.schema.json",
+  "title": "Shared definitions",
+  "$defs": {
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "agent_id": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "run_id": {
+          "type": "string"
+        },
+        "created_on": {
+          "type": "string",
+          "format": "date"
+        },
+        "reviewed_by": {
+          "type": "string"
+        },
+        "reviewed_on": {
+          "type": "string",
+          "format": "date"
+        },
+        "review_gate": {
+          "pattern": "^G[0-4]$"
+        }
+      }
+    }
+  }
+}

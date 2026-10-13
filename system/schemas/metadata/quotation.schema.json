@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mtafseerhaider/the-bayan-library/system/schemas/metadata/quotation.schema.json",
+  "title": "Quotation record",
+  "type": "object",
+  "required": [
+    "id",
+    "author",
+    "source"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^quote-[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "author": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    },
+    "theme": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "language": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string",
+      "maxLength": 900,
+      "description": "Retrieval layer 1: at most 120 words."
+    },
+    "executive_summary_path": {
+      "type": "string",
+      "description": "Retrieval layer 2: path to a <= 600-word executive summary."
+    },
+    "content_path": {
+      "type": "string",
+      "description": "Retrieval layer 3: path to the full content page."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "reviewed",
+        "canonical",
+        "deprecated"
+      ]
+    },
+    "replaced_by": {
+      "type": "string",
+      "description": "For deprecated records: the ID that supersedes this one."
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "provenance": {
+      "$ref": "common.schema.json#/$defs/provenance"
+    }
+  },
+  "additionalProperties": false
+}

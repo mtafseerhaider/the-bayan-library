@@ -1,0 +1,154 @@
+# Agent workflows. Each workflow is an ordered list of steps; each step
+# names one agent and the skills it uses. Every workflow ends at a review
+# gate: nothing an agent produces reaches `main` without a human merge.
+#
+# trigger kinds: schedule (cron, UTC), event (repository event), manual.
+#
+# review_gate is the minimum gate for the workflow's pull request. Items
+# produced by an agent with a stricter gate keep that stricter gate
+# (strictest wins), and private outputs (personal reflection memory) never
+# enter the pull request at all.
+#
+# Until the owner enables the opt-in agent-run workflow, every trigger
+# below is a schedule the owner (or a local runner) starts by hand; CI only
+# runs the deterministic pipelines in .github/workflows/.
+
+version: 1
+
+workflows:
+  # ---------------------------------------------------- Practice cycles
+  - workflow_id: daily-cycle
+    name: Daily practice cycle
+    trigger: {kind: schedule, cron: "0 4 * * *"}
+    steps:
+      - {agent: daily-wisdom, skills: [daily-selection], does: Read theme calendar and pick history; plan the bundle.}
+      - {agent: daily-word, skills: [daily-selection, vocabulary-analysis]}
+      - {agent: daily-concept, skills: [daily-selection, concept-explanation]}
+      - {agent: daily-book, skills: [daily-selection, knowledge-compression]}
+      - {agent: daily-thinker, skills: [daily-selection, knowledge-compression]}
+      - {agent: daily-poem, skills: [daily-selection, poetry-analysis]}
+      - {agent: daily-civilization, skills: [daily-selection, knowledge-compression]}
+      - {agent: daily-question, skills: [reflection-prompting]}
+      - {agent: daily-life-principle, skills: [daily-selection, wisdom-extraction]}
+      - {agent: memory-retention, skills: [spaced-repetition-scheduling], does: Build the day's review queue.}
+      - {agent: reflection-journal, skills: [reflection-prompting], does: Prepare the private journal prompt.}
+      - {agent: quality-assurance, skills: [evaluation-scoring], does: Score every entry.}
+      - {agent: daily-wisdom, skills: [markdown-formatting], does: Open one PR with the day's bundle.}
+    batch: true          # generated overnight via the Batch API
+    review_gate: G1
+    budget_ref: daily-cycle
+
+  - workflow_id: weekly-cycle
+    name: Weekly review
+    trigger: {kind: schedule, cron: "0 5 * * 0"}
+    steps:
+      - {agent: reflection-journal, skills: [knowledge-compression], does: Private weekly digest.}
+      - {agent: memory-retention, skills: [spaced-repetition-scheduling], does: Retention report.}
+      - {agent: knowledge-capture, skills: [study-note-generation], does: Empty the capture inbox.}
+      - {agent: quality-assurance, skills: [metadata-validation, link-validation], does: Repository health.}
+      - {agent: daily-wisdom, skills: [daily-selection], does: Next week's theme plan.}
+    review_gate: G1
+    budget_ref: weekly-cycle
+
+  - workflow_id: monthly-cycle
+    name: Monthly review
+    trigger: {kind: schedule, cron: "0 6 1 * *"}
+    steps:
+      - {agent: reflection-journal, skills: [knowledge-compression], does: Private monthly digest.}
+      - {agent: application-tracker, skills: [reflection-prompting], does: Application summary.}
+      - {agent: research, skills: [research-synthesis], does: Coverage gap report.}
+      - {agent: knowledge-graph, skills: [graph-query], does: Graph health report.}
+      - {agent: risk-management, skills: [risk-assessment, cost-reporting], does: Cost and risk report.}
+      - {agent: quality-assurance, skills: [evaluation-scoring], does: QA calibration against golden set.}
+      - {agent: daily-wisdom, skills: [daily-selection], does: Next month's theme calendar.}
+    review_gate: G2
+    budget_ref: monthly-cycle
+
+  - workflow_id: annual-cycle
+    name: Annual review
+    trigger: {kind: schedule, cron: "0 6 2 1 *"}
+    steps:
+      - {agent: reflection-journal, skills: [knowledge-compression], does: Private year in review.}
+      - {agent: canon-editor, skills: [bias-audit, representation-check], does: Annual canon audit.}
+      - {agent: reading-guide, skills: [reading-path-generation], does: Path refresh proposals.}
+      - {agent: quran-learning, skills: [quran-theme-mapping], does: Track and level review.}
+      - {agent: risk-management, skills: [risk-assessment], does: Risk register review.}
+      - {agent: chief-librarian, skills: [governance-review], does: System review and roadmap update.}
+    review_gate: G4
+    budget_ref: annual-cycle
+
+  # ---------------------------------------------------- Content pipelines
+  - workflow_id: book-ingestion
+    name: Book ingestion
+    trigger: {kind: manual}
+    steps:
+      - {agent: metadata, skills: [duplicate-detection, metadata-validation], does: Create or match the record.}
+      - {agent: difficulty-assessor, skills: [difficulty-assessment]}
+      - {agent: study-notes, skills: [book-summarization], does: Layered summaries.}
+      - {agent: study-notes, skills: [study-note-generation, concept-explanation], does: Concept notes.}
+      - {agent: knowledge-graph, skills: [knowledge-graph-generation], does: Relationship proposals.}
+      - {agent: metadata, skills: [tag-generation]}
+      - {agent: quality-assurance, skills: [evaluation-scoring, citation-verification]}
+    review_gate: G2
+    budget_ref: book-ingestion
+
+  - workflow_id: canon-revision
+    name: Canon revision
+    trigger: {kind: manual}
+    steps:
+      - {agent: research, skills: [research-synthesis], does: Research proposal and dossiers.}
+      - {agent: canon-editor, skills: [representation-check], does: Candidate evaluation.}
+      - {agent: canon-editor, skills: [comparative-analysis, influence-analysis], does: Comparative analysis.}
+      - {agent: canon-editor, skills: [bias-audit], does: Bias review.}
+      - {agent: canon-editor, skills: [canon-ranking], does: Draft ranking.}
+      - {agent: quality-assurance, skills: [evaluation-scoring]}
+      - {agent: chief-librarian, skills: [governance-review], does: Approval packet for the owner.}
+    review_gate: G4
+    budget_ref: canon-revision
+
+  - workflow_id: reading-path-build
+    name: Reading path build
+    trigger: {kind: manual}
+    steps:
+      - {agent: reading-guide, skills: [graph-query], does: Candidate works.}
+      - {agent: difficulty-assessor, skills: [difficulty-assessment]}
+      - {agent: reading-guide, skills: [reading-path-generation, representation-check]}
+      - {agent: learning-coach, skills: [concept-explanation], does: Primers for hard entries.}
+      - {agent: quality-assurance, skills: [evaluation-scoring]}
+    review_gate: G4
+    budget_ref: reading-path-build
+
+  - workflow_id: graph-enrichment
+    name: Graph enrichment
+    trigger: {kind: event, on: metadata records merged}
+    steps:
+      - {agent: knowledge-graph, skills: [graph-query, knowledge-graph-generation]}
+      - {agent: knowledge-graph, skills: [citation-verification]}
+      - {agent: quality-assurance, skills: [metadata-validation]}
+    review_gate: G2
+    budget_ref: graph-enrichment
+
+  - workflow_id: quran-study-session
+    name: Quran study session
+    trigger: {kind: manual}
+    steps:
+      - {agent: quran-learning, skills: [spaced-repetition-scheduling], does: Choose passage and tracks for the reader's level.}
+      - {agent: quran-arabic, skills: [vocabulary-analysis]}
+      - {agent: quran-root-analysis, skills: [arabic-root-extraction]}
+      - {agent: quran-traditional-study, skills: [tafsir-comparison]}
+      - {agent: quran-personal-transformation, skills: [reflection-prompting]}
+      - {agent: quality-assurance, skills: [citation-verification]}
+    review_gate: G3
+    budget_ref: quran-study-session
+
+  # ---------------------------------------------------- Governance
+  - workflow_id: methodology-change
+    name: Methodology change
+    trigger: {kind: manual}
+    steps:
+      - {agent: research, skills: [research-synthesis]}
+      - {agent: chief-librarian, skills: [methodology-design]}
+      - {agent: risk-management, skills: [risk-assessment]}
+      - {agent: chief-librarian, skills: [governance-review], does: Approval packet.}
+    review_gate: G4
+    budget_ref: methodology-change

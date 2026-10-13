@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mtafseerhaider/the-bayan-library/system/schemas/metadata/book.schema.json",
+  "title": "Book record",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "author_id",
+    "publication_year",
+    "language",
+    "civilization",
+    "genre"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^book-[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "original_title": {
+      "type": "string"
+    },
+    "author_id": {
+      "type": "string",
+      "pattern": "^(author|poet)-[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "publication_year": {
+      "type": [
+        "integer",
+        "string"
+      ],
+      "description": "Integer year (negative for BCE) or an approximate string such as 'c. 1377'."
+    },
+    "language": {
+      "type": "string"
+    },
+    "civilization": {
+      "type": "string"
+    },
+    "genre": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "translator": {
+      "type": "string"
+    },
+    "isbn": {
+      "type": "string"
+    },
+    "themes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "canon_memberships": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^canon-[a-z0-9]+(-[a-z0-9]+)*$"
+      },
+      "uniqueItems": true
+    },
+    "related_books": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^book-[a-z0-9]+(-[a-z0-9]+)*$"
+      },
+      "uniqueItems": true
+    },
+    "difficulty": {
+      "type": "object",
+      "properties": {
+        "level": {
+          "enum": [
+            "beginner",
+            "intermediate",
+            "scholar"
+          ]
+        },
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10
+        }
+      }
+    },
+    "license": {
+      "enum": [
+        "public-domain",
+        "copyrighted",
+        "open-license",
+        "unknown"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "maxLength": 900,
+      "description": "Retrieval layer 1: at most 120 words."
+    },
+    "executive_summary_path": {
+      "type": "string",
+      "description": "Retrieval layer 2: path to a <= 600-word executive summary."
+    },
+    "content_path": {
+      "type": "string",
+      "description": "Retrieval layer 3: path to the full content page."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "reviewed",
+        "canonical",
+        "deprecated"
+      ]
+    },
+    "replaced_by": {
+      "type": "string",
+      "description": "For deprecated records: the ID that supersedes this one."
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "provenance": {
+      "$ref": "common.schema.json#/$defs/provenance"
+    }
+  },
+  "additionalProperties": false
+}

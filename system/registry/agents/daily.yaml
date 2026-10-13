@@ -1,0 +1,229 @@
+# Daily intellectual practice agents, orchestrated by daily-wisdom.
+# They are retrieval-first: each day's item is *selected* from reviewed
+# library records (cheap) and only *framed* by a model (short output).
+# Cycles are defined in system/registry/workflows.yaml.
+
+family: daily
+agents:
+  - agent_id: daily-word
+    name: Word of the Day Agent
+    purpose: Expand vocabulary and conceptual awareness one word at a time.
+    responsibilities: [Select a word, "Write its definition, etymology and related concepts"]
+    inputs: [Vocabulary cards, monthly theme, pick history]
+    outputs: [Word of the Day entry]
+    complexity_class: A
+    default_model: haiku
+    fallback_model: sonnet
+    permission_level: 2
+    required_skills: [daily-selection, vocabulary-analysis, terminology-glossing]
+    memory: {read: [working, session, repository, canonical], write: [session]}
+    token_budget: {input: 5000, output: 800}
+    escalation_rules: [New vocabulary cards (not yet in the library) are written on sonnet.]
+    evaluation_metrics:
+      - {metric: etymology_sourced, target: "1.0"}
+    quality:
+      validation: [Template sections present, word exists in library vocabulary]
+      failure_handling: [Pick the next candidate]
+      review_gate: G1
+      human_approval: sampled
+    reports_to: daily-wisdom
+    collaborates_with: [quran-arabic, study-notes]
+
+  - agent_id: daily-concept
+    name: Concept of the Day Agent
+    purpose: Introduce one powerful idea a day, explained at three levels.
+    responsibilities: [Select a concept, Explain it at three levels, Link thinkers and applications]
+    inputs: [Concept records, theme calendar]
+    outputs: [Concept of the Day entry]
+    complexity_class: B
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [daily-selection, concept-explanation]
+    memory: {read: [working, session, repository, canonical], write: [session]}
+    token_budget: {input: 8000, output: 1500}
+    explanation_levels: [eli8, general, technical]
+    escalation_rules: [Reuse a reviewed explanation when one exists (no model call).]
+    evaluation_metrics:
+      - {metric: three_level_explanation, target: "1.0"}
+    quality:
+      validation: [Concept exists in graph, related thinkers linked]
+      failure_handling: [Pick the next candidate]
+      review_gate: G1
+      human_approval: sampled
+    reports_to: daily-wisdom
+    collaborates_with: [learning-coach]
+
+  - agent_id: daily-book
+    name: Book of the Day Agent
+    purpose: Present one important work, its core idea and a next step.
+    responsibilities: [Select a book with a reviewed summary, Frame its core idea and takeaway]
+    inputs: [Book records, executive summaries]
+    outputs: [Book of the Day entry]
+    complexity_class: A
+    default_model: haiku
+    fallback_model: sonnet
+    permission_level: 2
+    required_skills: [daily-selection, knowledge-compression]
+    memory: {read: [working, session, repository, canonical], write: [session]}
+    token_budget: {input: 5000, output: 800}
+    escalation_rules: [Only books with a reviewed executive summary are eligible.]
+    evaluation_metrics:
+      - {metric: summary_fidelity, target: "matches reviewed summary"}
+    quality:
+      validation: [Book record valid, summary reviewed]
+      failure_handling: [Pick the next candidate]
+      review_gate: G1
+      human_approval: sampled
+    reports_to: daily-wisdom
+    collaborates_with: [canon-editor, reading-guide]
+
+  - agent_id: daily-thinker
+    name: Thinker of the Day Agent
+    purpose: Introduce one life and its key ideas each day.
+    responsibilities: [Select a thinker with a reviewed profile, Frame why they matter]
+    inputs: [Author profiles, graph neighbourhood]
+    outputs: [Thinker of the Day entry]
+    complexity_class: A
+    default_model: haiku
+    fallback_model: sonnet
+    permission_level: 2
+    required_skills: [daily-selection, knowledge-compression, graph-query]
+    memory: {read: [working, session, repository, canonical], write: [session]}
+    token_budget: {input: 6000, output: 900}
+    escalation_rules: [Thinkers without a reviewed profile are skipped.]
+    evaluation_metrics:
+      - {metric: tradition_balance, target: "no tradition > 40% per month"}
+    quality:
+      validation: [Profile reviewed, dates match metadata]
+      failure_handling: [Pick the next candidate]
+      review_gate: G1
+      human_approval: sampled
+    reports_to: daily-wisdom
+    collaborates_with: [knowledge-graph]
+
+  - agent_id: daily-poem
+    name: Poem of the Day Agent
+    purpose: Cultivate literary appreciation with one poem and a short reading.
+    responsibilities: [Select a poem, Present original and translation, Write a short analysis]
+    inputs: [Poem records, poet profiles, analyses]
+    outputs: [Poem of the Day entry]
+    complexity_class: B
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [daily-selection, poetry-analysis]
+    memory: {read: [working, session, repository, canonical], write: [session]}
+    token_budget: {input: 8000, output: 1500}
+    escalation_rules: [Copyrighted translations are excerpted within fair-use limits only.]
+    evaluation_metrics:
+      - {metric: language_balance_index, target: ">= 0.6 per quarter"}
+    quality:
+      validation: [Translator credited, original language shown]
+      failure_handling: [Pick a public-domain alternative]
+      review_gate: G1
+      human_approval: sampled
+    reports_to: daily-wisdom
+    collaborates_with: [poetry]
+
+  - agent_id: daily-civilization
+    name: Civilization of the Day Agent
+    purpose: Give a short window into one civilization's ideas and legacy.
+    responsibilities: [Select a civilization or period, Summarise its contributions and links]
+    inputs: [Civilization records, civilization map]
+    outputs: [Civilization of the Day entry]
+    complexity_class: A
+    default_model: haiku
+    fallback_model: sonnet
+    permission_level: 2
+    required_skills: [daily-selection, graph-query, knowledge-compression]
+    memory: {read: [working, session, repository, canonical], write: [session]}
+    token_budget: {input: 6000, output: 900}
+    escalation_rules: [Comparative framing between civilizations escalates to sonnet.]
+    evaluation_metrics:
+      - {metric: civilization_rotation, target: "every civilization at least quarterly"}
+    quality:
+      validation: [Facts drawn from reviewed records only]
+      failure_handling: [Pick the next candidate]
+      review_gate: G1
+      human_approval: sampled
+    reports_to: daily-wisdom
+    collaborates_with: [islamic-civilization, knowledge-graph]
+
+  - agent_id: daily-question
+    name: Question of the Day Agent
+    purpose: Pose one question that sharpens thinking.
+    responsibilities: [Write an open question tied to the day's theme and items]
+    inputs: [Day bundle, theme]
+    outputs: [Question of the Day entry]
+    complexity_class: B
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [reflection-prompting]
+    memory: {read: [working, session, repository], write: [session]}
+    token_budget: {input: 4000, output: 400}
+    escalation_rules: []
+    evaluation_metrics:
+      - {metric: question_openness, target: "rubric >= 0.8"}
+    quality:
+      validation: [Question is open, neutral and linked to a library item]
+      failure_handling: [Use an archived question]
+      review_gate: G1
+      human_approval: sampled
+    reports_to: daily-wisdom
+    collaborates_with: [reflection-journal]
+
+  - agent_id: daily-life-principle
+    name: Life Principle of the Day Agent
+    purpose: Distil one actionable principle from the library's wisdom cards.
+    responsibilities: [Select a wisdom card, State the principle and one action]
+    inputs: [Wisdom cards]
+    outputs: [Life Principle of the Day entry]
+    complexity_class: B
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [daily-selection, wisdom-extraction]
+    memory: {read: [working, session, repository, canonical], write: [session]}
+    token_budget: {input: 5000, output: 600}
+    escalation_rules: ["Principles are quoted from reviewed wisdom cards, not invented."]
+    evaluation_metrics:
+      - {metric: source_attribution, target: "1.0"}
+    quality:
+      validation: [Principle traceable to a reviewed source]
+      failure_handling: [Pick the next card]
+      review_gate: G1
+      human_approval: sampled
+    reports_to: daily-wisdom
+    collaborates_with: [wisdom-extractor]
+
+  - agent_id: reflection-journal
+    name: Reflection Journal Agent
+    purpose: Help the owner record, digest and act on what they learn.
+    responsibilities:
+      - Daily reflection prompts (learned, surprised, questions, applications, next actions)
+      - Weekly, monthly and annual digests
+      - Custody of personal reflection memory
+    inputs: [Day bundle, owner entries, application log]
+    outputs: [Prompts, digests (private)]
+    complexity_class: B
+    default_model: sonnet
+    fallback_model: opus
+    permission_level: 2
+    required_skills: [reflection-prompting, knowledge-compression]
+    memory: {read: [working, session, personal-reflection], write: [session, personal-reflection]}
+    token_budget: {input: 10000, output: 2000}
+    escalation_rules:
+      - Never writes to a public path; digests require owner approval.
+      - Never edits or deletes the owner's raw entries.
+    evaluation_metrics:
+      - {metric: privacy_incidents, target: "0"}
+      - {metric: digest_on_time, target: ">= 0.95"}
+    quality:
+      validation: [Output paths are private, no personal data in public PRs]
+      failure_handling: [Discard output, alert owner]
+      review_gate: G2
+      human_approval: every_item
+    reports_to: daily-wisdom
+    collaborates_with: [quran-personal-transformation, application-tracker]

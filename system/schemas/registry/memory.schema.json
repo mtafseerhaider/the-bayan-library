@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mtafseerhaider/the-bayan-library/system/schemas/registry/memory.schema.json",
+  "title": "Memory layers",
+  "type": "object",
+  "required": [
+    "version",
+    "layers"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer"
+    },
+    "layers": {
+      "type": "array",
+      "minItems": 6,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "scope",
+          "storage",
+          "retention",
+          "compression",
+          "retrieval",
+          "privacy"
+        ],
+        "properties": {
+          "privacy": {
+            "enum": [
+              "public",
+              "repository",
+              "private",
+              "inherits from loaded sources"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

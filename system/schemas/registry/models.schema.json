@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mtafseerhaider/the-bayan-library/system/schemas/registry/models.schema.json",
+  "title": "Model catalog",
+  "type": "object",
+  "required": [
+    "version",
+    "models",
+    "escalation_ladder"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer"
+    },
+    "models": {
+      "type": "object",
+      "required": [
+        "haiku",
+        "sonnet",
+        "opus"
+      ],
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "model_id",
+          "context_window",
+          "default_effort",
+          "pricing",
+          "budget"
+        ],
+        "properties": {
+          "model_id": {
+            "type": "string",
+            "pattern": "^claude-"
+          },
+          "context_window": {
+            "type": "integer"
+          },
+          "default_effort": {
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          },
+          "pricing": {
+            "type": "object",
+            "required": [
+              "input_per_mtok",
+              "output_per_mtok"
+            ],
+            "properties": {
+              "input_per_mtok": {
+                "type": "number",
+                "minimum": 0
+              },
+              "output_per_mtok": {
+                "type": "number",
+                "minimum": 0
+              }
+            }
+          },
+          "budget": {
+            "type": "object",
+            "required": [
+              "max_input_tokens",
+              "max_output_tokens"
+            ],
+            "properties": {
+              "max_input_tokens": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "max_output_tokens": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "escalation_ladder": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "haiku",
+          "sonnet",
+          "opus"
+        ]
+      },
+      "minItems": 3,
+      "maxItems": 3
+    }
+  }
+}

@@ -1,0 +1,133 @@
+# Permission model: five cumulative tiers. Every agent belongs to exactly
+# one tier (validated by scripts/validate-registry.py).
+#
+# Universal rules, whatever the tier:
+#   - No agent pushes to `main` or `develop`. All writes arrive as a pull
+#     request from a conventional branch (docs/11): feature/*, docs/*,
+#     research/*, automation/*, refactor/* or fix/*.
+#   - No agent merges, approves, or dismisses a review. Merging is a human
+#     act performed by the repository owner or a delegated editor.
+#   - No agent reads or writes secrets, `.env` files or the private
+#     reflection store unless its memory grant names that store.
+#   - Tier 5 is the highest *agent* tier. The human repository owner
+#     (Editor-in-Chief, docs/02-governance-model.md) sits above every tier
+#     and is the only party who can grant final approval.
+
+version: 1
+
+tiers:
+  - tier: 1
+    name: Read Only
+    summary: Search, retrieve and analyse. Produces reports, never files.
+    allowed_actions:
+      - search
+      - retrieve
+      - analyse
+      - report
+    write_paths: []
+    default_review_gate: G0
+    escalate_to_tier: 2
+
+  - tier: 2
+    name: Content Drafting
+    summary: Drafts notes, summaries and metadata suggestions for review.
+    inherits: 1
+    allowed_actions:
+      - draft_note
+      - draft_summary
+      - suggest_metadata
+      - suggest_relationship
+    write_paths:
+      - drafts/**
+      - system/memory/projects/**   # project memory (see memory.yaml)
+    default_review_gate: G2
+    escalate_to_tier: 3
+
+  - tier: 3
+    name: Repository Modification
+    summary: Opens PRs that update content, metadata and the graph.
+    inherits: 2
+    allowed_actions:
+      - update_content
+      - update_metadata
+      - update_graph
+      - regenerate_index
+    write_paths:
+      - authors/**
+      - book-lists/**
+      - civilizations/**
+      - daily/**
+      - metadata/**
+      - notes/**
+      - poetry/**
+      - quotations/**
+      - quran/**
+      - scripts/**
+      - study-guides/**
+      - summaries/**
+      - system/generated/**         # regenerated catalogs only
+      - templates/**
+      - tests/**
+      - themes/**
+      - timelines/**
+    protected_paths:
+      - notes/reflections/**   # personal reflection memory, owner only
+    default_review_gate: G1
+    escalate_to_tier: 4
+
+  - tier: 4
+    name: Editorial Authority
+    summary: Proposes canon, reading-path and methodology changes.
+    inherits: 3
+    allowed_actions:
+      - propose_canon_change
+      - propose_ranking_change
+      - propose_reading_path_change
+      - propose_methodology_change
+    write_paths:
+      - canon/**
+      - reading-paths/**
+      - docs/03-global-canon-methodology.md
+      - docs/04-islamic-civilization-program.md
+      - docs/05-world-poetry-program.md
+      - docs/09-reading-path-framework.md
+      - docs/17-quran-lifelong-learning-program.md
+      - docs/18-daily-wisdom-and-intellectual-practice.md
+      - docs/19-learning-how-to-learn-framework.md
+      - docs/21-study-notes-and-knowledge-capture-system.md
+    default_review_gate: G4
+    escalate_to_tier: 5
+
+  - tier: 5
+    name: Chief Librarian
+    summary: Proposes governance and architecture changes; prepares approvals.
+    inherits: 4
+    allowed_actions:
+      - propose_governance_change
+      - propose_architecture_change
+      - prepare_final_approval
+    write_paths:
+      - docs/**
+      - system/**
+      - .github/**
+      - README.md
+    default_review_gate: G4
+    escalate_to_tier: null   # escalates to the human owner
+
+# Change classes that always require the mandatory gate, regardless of the
+# proposing agent's tier or the files touched.
+mandatory_review:
+  - change_class: canon_change
+    gate: G4
+  - change_class: ranking_change
+    gate: G4
+  - change_class: governance_change
+    gate: G4
+  - change_class: quran_methodology_change
+    gate: G4
+  - change_class: architecture_change
+    gate: G4
+  - change_class: religious_interpretation
+    gate: G3
+  - change_class: historical_claim
+    gate: G3

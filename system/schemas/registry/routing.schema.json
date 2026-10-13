@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mtafseerhaider/the-bayan-library/system/schemas/registry/routing.schema.json",
+  "title": "Routing framework",
+  "type": "object",
+  "required": [
+    "version",
+    "complexity_classes",
+    "escalation_rules",
+    "downgrade_rules",
+    "budget_policy",
+    "task_types"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer"
+    },
+    "complexity_classes": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": [
+          "class",
+          "name",
+          "model",
+          "effort"
+        ],
+        "properties": {
+          "class": {
+            "enum": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E"
+            ]
+          },
+          "model": {
+            "enum": [
+              "haiku",
+              "sonnet",
+              "opus"
+            ]
+          },
+          "effort": {
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        }
+      }
+    },
+    "escalation_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "from",
+          "to",
+          "justification_required",
+          "triggers"
+        ],
+        "properties": {
+          "triggers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "signal",
+                "operator",
+                "value",
+                "reason"
+              ],
+              "properties": {
+                "operator": {
+                  "enum": [
+                    "eq",
+                    "gt",
+                    "gte",
+                    "lt",
+                    "lte"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "downgrade_rules": {
+      "type": "object",
+      "required": [
+        "forbidden_on_opus",
+        "downgrade_to"
+      ]
+    },
+    "budget_policy": {
+      "type": "object"
+    },
+    "task_types": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "task",
+          "class",
+          "execution"
+        ],
+        "properties": {
+          "task": {
+            "type": "string",
+            "pattern": "^[a-z_]+$"
+          },
+          "class": {
+            "enum": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E"
+            ]
+          },
+          "execution": {
+            "enum": [
+              "script",
+              "hybrid",
+              "model"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,126 @@
+# Knowledge graph ontology. Extends docs/08-knowledge-graph-specification.md
+# with machine-checkable node prefixes, relationship signatures and the map
+# (subgraph) definitions used by generators and retrieval.
+
+version: 1
+
+evidence_levels:
+  - id: high
+    meaning: Documented in primary sources or broad scholarly consensus.
+    requires_citation: true
+  - id: moderate
+    meaning: Supported by credible scholarship; some debate exists.
+    requires_citation: true
+  - id: tentative
+    meaning: Interpretive or thematic link; labelled as such for readers.
+    requires_citation: false
+
+# Every node ID is `<prefix>-<slug>`; the prefix fixes the node type.
+node_types:
+  - {type: book, prefix: book, metadata_dir: books}
+  - {type: author, prefix: author, metadata_dir: authors}
+  - {type: poet, prefix: poet, metadata_dir: poets}
+  - {type: poem, prefix: poem, metadata_dir: poems}
+  - {type: civilization, prefix: civilization, metadata_dir: civilizations}
+  - {type: movement, prefix: movement, metadata_dir: movements}
+  - {type: school, prefix: school, metadata_dir: schools}
+  - {type: theme, prefix: theme, metadata_dir: themes}
+  - {type: concept, prefix: concept, metadata_dir: concepts}
+  - {type: event, prefix: event, metadata_dir: events}
+  - {type: institution, prefix: institution, metadata_dir: institutions}
+  - {type: canon, prefix: canon, metadata_dir: canons}
+  - {type: reading_path, prefix: path, metadata_dir: reading-paths}
+  - {type: quotation, prefix: quote, metadata_dir: quotations}
+  - {type: language, prefix: language, metadata_dir: languages}
+  - {type: surah, prefix: surah, metadata_dir: quran/surahs}
+  - {type: passage, prefix: passage, metadata_dir: quran/passages}
+  - {type: quranic_root, prefix: root, metadata_dir: quran/roots}
+  - {type: prophet, prefix: prophet, metadata_dir: quran/prophets}
+  - {type: note, prefix: note, metadata_dir: notes}
+
+# Relationship signatures. `inverse` is materialised at build time so that
+# every edge is navigable in both directions without being stored twice.
+# `symmetric: true` edges are their own inverse.
+relationship_types:
+  # Influence and lineage
+  - {type: influenced, inverse: influenced_by,
+     source: [author, poet, book, school, movement, civilization],
+     target: [author, poet, book, school, movement, civilization]}
+  - {type: studied_under, inverse: taught,
+     source: [author, poet], target: [author, poet]}
+  - {type: inspired, inverse: inspired_by,
+     source: [author, poet, book, poem, event], target: [author, poet, book, poem]}
+  - {type: preceded, inverse: succeeded,
+     source: [author, poet, book, event, school], target: [author, poet, book, event, school]}
+  # Authorship and transmission
+  - {type: wrote, inverse: written_by,
+     source: [author, poet], target: [book, poem]}
+  - {type: translated, inverse: translated_by,
+     source: [author, poet], target: [book, poem]}
+  # Discourse
+  - {type: critiqued, inverse: critiqued_by,
+     source: [author, poet, book, school], target: [author, poet, book, school, concept]}
+  - {type: responds_to, inverse: responded_to_by,
+     source: [book, poem, author, poet], target: [book, poem, author, poet, concept]}
+  - {type: references, inverse: referenced_by,
+     source: [book, poem, note, quotation], target: [book, poem, author, poet, passage, concept]}
+  - {type: expands, inverse: expanded_by, source: [book], target: [book]}
+  - {type: debated, inverse: debated, symmetric: true,
+     source: [author, poet], target: [author, poet]}
+  - {type: collaborated_with, inverse: collaborated_with, symmetric: true,
+     source: [author, poet], target: [author, poet]}
+  # Membership and classification
+  - {type: belongs_to, inverse: has_member,
+     source: [author, poet, book, poem, school, movement, concept, event, institution],
+     target: [civilization, school, movement, theme, language]}
+  - {type: member_of, inverse: includes,
+     source: [book, poem, author, poet], target: [canon, reading_path]}
+  - {type: has_theme, inverse: theme_of,
+     source: [book, poem, passage, surah, author, poet, note, quotation], target: [theme, concept]}
+  - {type: related_to, inverse: related_to, symmetric: true,
+     source: [theme, concept], target: [theme, concept]}
+  - {type: prerequisite_of, inverse: requires,
+     source: [book, concept], target: [book, concept]}
+  # Civilizational exchange
+  - {type: cultural_exchange, inverse: cultural_exchange, symmetric: true,
+     source: [civilization], target: [civilization]}
+  - {type: transmitted_to, inverse: received_from,
+     source: [civilization], target: [civilization]}
+  # Quran program
+  - {type: contains_passage, inverse: in_surah, source: [surah], target: [passage]}
+  - {type: uses_root, inverse: root_in, source: [passage, concept], target: [quranic_root]}
+  - {type: mentions_prophet, inverse: prophet_in, source: [passage, surah], target: [prophet]}
+  - {type: commented_on, inverse: commentary_by,
+     source: [author, book], target: [surah, passage]}
+
+# Maps are named subgraphs. Generators emit one file per map and retrieval
+# loads a map instead of the whole graph.
+maps:
+  - id: influence-map
+    description: Who and what shaped whom, across time and tradition.
+    node_types: [author, poet, book, school, movement]
+    relationship_types: [influenced, studied_under, inspired, preceded, responds_to, critiqued]
+  - id: civilization-map
+    description: Civilizations, their figures and the exchanges between them.
+    node_types: [civilization, author, poet, book, institution, event]
+    relationship_types: [belongs_to, cultural_exchange, transmitted_to]
+  - id: theme-map
+    description: Themes and concepts and the works that carry them.
+    node_types: [theme, concept, book, poem, passage]
+    relationship_types: [has_theme, related_to, prerequisite_of]
+  - id: canon-map
+    description: Canons, their members and those members' context.
+    node_types: [canon, book, poem, author, poet, civilization]
+    relationship_types: [member_of, wrote, belongs_to]
+  - id: quran-map
+    description: Surahs, passages, roots, prophets, themes and commentary.
+    node_types: [surah, passage, quranic_root, prophet, theme, concept, author, book]
+    relationship_types: [contains_passage, uses_root, mentions_prophet, has_theme, commented_on]
+  - id: poetry-map
+    description: Poets, poems, forms, movements and languages.
+    node_types: [poet, poem, movement, language, theme, civilization]
+    relationship_types: [wrote, influenced, belongs_to, has_theme, translated, inspired]
+  - id: reading-path-map
+    description: Paths and the prerequisite order of their works.
+    node_types: [reading_path, book, concept]
+    relationship_types: [member_of, prerequisite_of]

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mtafseerhaider/the-bayan-library/system/schemas/registry/permissions.schema.json",
+  "title": "Permission tiers",
+  "type": "object",
+  "required": [
+    "version",
+    "tiers",
+    "mandatory_review"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer"
+    },
+    "tiers": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": [
+          "tier",
+          "name",
+          "allowed_actions",
+          "write_paths",
+          "default_review_gate"
+        ],
+        "properties": {
+          "tier": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "write_paths": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "default_review_gate": {
+            "pattern": "^G[0-4]$"
+          }
+        }
+      }
+    },
+    "mandatory_review": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "change_class",
+          "gate"
+        ]
+      }
+    }
+  }
+}
