@@ -2,7 +2,15 @@
   // Default markdownlint rules apply; see docs/12-documentation-standards.md.
   "default": true,
 
+  // Wrap prose at 80 columns; tables cannot be wrapped.
+  "MD013": { "tables": false },
+
   // Allow repeated subsection names (e.g. "Objective", "Deliverables")
   // when they sit under different parent headings.
-  "MD024": { "siblings_only": true }
+  "MD024": { "siblings_only": true },
+
+  // HTML GitHub needs for centered layout and collapsible sections.
+  "MD033": {
+    "allowed_elements": ["h1", "p", "b", "i", "br", "img", "details", "summary"]
+  }
 }
