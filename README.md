@@ -118,6 +118,8 @@ the-bayan-library/
 ├── metadata/         Catalog, bibliography, and tag vocabularies
 ├── templates/        Book, author, poet, and note templates
 ├── scripts/          Index generation and validation tools
+├── system/           Agent, skill, routing and budget registries
+├── tests/            Tests for the tooling
 ├── book-lists/       Supplementary curated lists
 ├── ebooks/           Public-domain texts where licensing allows
 ├── assets/           Images and diagrams
@@ -375,6 +377,12 @@ Two efficiency principles guide the design:
   retrieval keep context small and costs low without sacrificing accuracy.
 
 Read the [AI Maintainer Operating Manual](docs/20-ai-maintainer-operating-manual.md).
+
+The implementation lives in [`docs/architecture/`](docs/architecture/)
+(seventeen architecture documents: agents, skills, permissions, model
+routing, token budgets, memory, graph, workflows, QA, cost and risk) and in
+the machine-readable registries under [`system/`](system/), which CI
+validates on every pull request.
 
 ## Contribution Guide
 
