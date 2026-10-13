@@ -1,0 +1,69 @@
+# Release pipeline: a maintainer pushes a semantic version tag (docs/11).
+# The release is built only from a fully valid tree and carries the graph,
+# the retrieval index and the generated catalogs as assets.
+name: release
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: validate release
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: npx --yes markdownlint-cli2@0.14.0 "**/*.md" "#node_modules"
+      - run: python scripts/validate-registry.py
+      - run: python scripts/generate-registry-docs.py --check
+      - run: python scripts/validate-metadata.py --fail-on major
+      - run: python scripts/validate-knowledge-graph.py
+      - run: python scripts/validate-reading-paths.py
+      - run: python scripts/validate-links.py
+      - run: python scripts/build-index.py --check
+      - run: python -m unittest discover -s tests -t tests
+
+  publish:
+    name: publish release
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Build release bundle
+        run: |
+          python scripts/generate-knowledge-graph.py --out build/graph
+          mkdir -p build/release
+          tar -czf build/release/knowledge-graph.tar.gz -C build graph
+          tar -czf build/release/retrieval-index.tar.gz \
+            metadata/index.yaml $(ls -d metadata/index 2>/dev/null)
+          tar -czf build/release/catalogs.tar.gz system/generated
+          tar -czf build/release/registry.tar.gz system/registry system/schemas
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: >-
+          gh release create "$TAG" build/release/*
+          --title "The Bayan Library $TAG"
+          --generate-notes
+          --verify-tag

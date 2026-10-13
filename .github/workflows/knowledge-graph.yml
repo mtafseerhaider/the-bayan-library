@@ -1,0 +1,49 @@
+# Graph pipeline: validates relationships, builds the full graph, the
+# per-map subgraphs and Mermaid previews, and uploads them as an artifact.
+# Nothing is committed: the graph is a build product of metadata.
+name: knowledge-graph
+
+on:
+  pull_request:
+    paths:
+      - "metadata/**"
+      - "system/registry/knowledge-graph.yaml"
+  push:
+    branches: [main]
+    paths:
+      - "metadata/**"
+      - "system/registry/knowledge-graph.yaml"
+  schedule:
+    - cron: "0 3 * * 1"   # weekly health check, Mondays 03:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  graph:
+    name: knowledge graph
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Validate relationships
+        run: python scripts/validate-knowledge-graph.py
+      - name: Build graph and maps
+        run: python scripts/generate-knowledge-graph.py --out build/graph
+      - name: Summarise
+        run: |
+          echo "### Knowledge graph" >> "$GITHUB_STEP_SUMMARY"
+          echo '```json' >> "$GITHUB_STEP_SUMMARY"
+          cat build/graph/stats.json >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: knowledge-graph
+          path: build/graph/
+          retention-days: 30

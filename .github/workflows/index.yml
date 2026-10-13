@@ -1,0 +1,47 @@
+# Index pipeline: the retrieval index (metadata/index.yaml and the
+# metadata/index/*.jsonl shards) is committed so agents can read it without
+# running code. CI verifies it is current and publishes a fresh copy as an
+# artifact. Regenerate locally with: python scripts/build-index.py
+name: index
+
+on:
+  pull_request:
+    paths:
+      - "metadata/**"
+      - "summaries/**"
+      - "scripts/bayan/index.py"
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  index:
+    name: retrieval index
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Committed index is current
+        run: python scripts/build-index.py --check
+      - name: Build index copy
+        if: always()
+        run: |
+          mkdir -p build/index-root
+          cp -r system metadata build/index-root/ 2>/dev/null || true
+          python scripts/build-index.py --root build/index-root
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: retrieval-index
+          path: |
+            build/index-root/metadata/index.yaml
+            build/index-root/metadata/index/
+          retention-days: 30
