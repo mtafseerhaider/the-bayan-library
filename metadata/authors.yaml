@@ -1,0 +1,1177 @@
+# Author records for the Top 100 Greatest Books canon (canon/top-100-books).
+# Draft records from the Canon Editor agent, pending G4 review.
+records:
+- id: author-adam-smith
+  name: Adam Smith
+  birth_year: 1723
+  death_year: 1790
+  civilization: Europe
+  region: Scotland
+  disciplines:
+  - Economics
+  - Ethics
+  major_works:
+  - book-wealth-of-nations
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-al-bukhari
+  name: Muhammad ibn Ismail al-Bukhari
+  birth_year: 810
+  death_year: 870
+  civilization: Islamic Civilization
+  region: Central Asia
+  disciplines:
+  - Hadith
+  major_works:
+  - book-sahih-al-bukhari
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-al-ghazali
+  name: Abu Hamid al-Ghazali
+  birth_year: 1058
+  death_year: 1111
+  civilization: Islamic Civilization
+  region: Persia
+  disciplines:
+  - Theology
+  - Mysticism
+  - Ethics
+  major_works:
+  - book-ihya-ulum-al-din
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-al-khwarizmi
+  name: Muhammad ibn Musa al-Khwarizmi
+  birth_year: 780
+  death_year: 850
+  civilization: Islamic Civilization
+  region: Baghdad
+  disciplines:
+  - Mathematics
+  - Astronomy
+  major_works:
+  - book-algebra
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-al-shafii
+  name: Muhammad ibn Idris al-Shafi'i
+  birth_year: 767
+  death_year: 820
+  civilization: Islamic Civilization
+  region: Hejaz and Egypt
+  disciplines:
+  - Jurisprudence
+  - Legal Theory
+  major_works:
+  - book-al-risala
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-anonymous-storytellers-nights
+  name: Anonymous Storytellers of the Nights
+  birth_year: null
+  death_year: null
+  civilization: Islamic Civilization
+  region: Persia, Iraq and Egypt
+  disciplines:
+  - Fiction
+  major_works:
+  - book-thousand-and-one-nights
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-aristotle
+  name: Aristotle
+  birth_year: -384
+  death_year: -322
+  civilization: Greece
+  region: Athens
+  disciplines:
+  - Philosophy
+  - Science
+  major_works:
+  - book-nicomachean-ethics
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-augustine
+  name: Augustine of Hippo
+  birth_year: 354
+  death_year: 430
+  civilization: Rome
+  region: North Africa
+  disciplines:
+  - Theology
+  - Philosophy
+  major_works:
+  - book-confessions
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-buddhist-oral-tradition
+  name: Early Buddhist Tradition (sayings of the Buddha)
+  birth_year: null
+  death_year: null
+  civilization: India
+  region: South Asia
+  disciplines:
+  - Scripture
+  - Ethics
+  major_works:
+  - book-dhammapada
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-cao-xueqin
+  name: Cao Xueqin
+  birth_year: 1715
+  death_year: 1763
+  civilization: China
+  region: East Asia
+  disciplines:
+  - Fiction
+  major_works:
+  - book-dream-of-the-red-chamber
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-charles-darwin
+  name: Charles Darwin
+  birth_year: 1809
+  death_year: 1882
+  civilization: Europe
+  region: England
+  disciplines:
+  - Biology
+  major_works:
+  - book-origin-of-species
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-chinua-achebe
+  name: Chinua Achebe
+  birth_year: 1930
+  death_year: 2013
+  civilization: Africa
+  region: Nigeria
+  disciplines:
+  - Fiction
+  major_works:
+  - book-things-fall-apart
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-confucius
+  name: Confucius (Kong Qiu) and his disciples
+  birth_year: -551
+  death_year: -479
+  civilization: China
+  region: East Asia
+  disciplines:
+  - Philosophy
+  - Ethics
+  major_works:
+  - book-analects
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-euclid
+  name: Euclid
+  birth_year: null
+  death_year: null
+  civilization: Greece
+  region: Alexandria
+  disciplines:
+  - Mathematics
+  major_works:
+  - book-elements
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-franz-kafka
+  name: Franz Kafka
+  birth_year: 1883
+  death_year: 1924
+  civilization: Europe
+  region: Bohemia
+  disciplines:
+  - Fiction
+  major_works:
+  - book-the-trial
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-friedrich-nietzsche
+  name: Friedrich Nietzsche
+  birth_year: 1844
+  death_year: 1900
+  civilization: Europe
+  region: Germany
+  disciplines:
+  - Philosophy
+  major_works:
+  - book-thus-spoke-zarathustra
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-fyodor-dostoevsky
+  name: Fyodor Dostoevsky
+  birth_year: 1821
+  death_year: 1881
+  civilization: Europe
+  region: Russia
+  disciplines:
+  - Fiction
+  major_works:
+  - book-brothers-karamazov
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-gabriel-garcia-marquez
+  name: Gabriel García Márquez
+  birth_year: 1927
+  death_year: 2014
+  civilization: Latin America
+  region: Colombia
+  disciplines:
+  - Fiction
+  major_works:
+  - book-one-hundred-years-of-solitude
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-george-orwell
+  name: George Orwell
+  birth_year: 1903
+  death_year: 1950
+  civilization: Europe
+  region: England
+  disciplines:
+  - Fiction
+  major_works:
+  - book-nineteen-eighty-four
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-giovanni-boccaccio
+  name: Giovanni Boccaccio
+  birth_year: 1313
+  death_year: 1375
+  civilization: Europe
+  region: Italy
+  disciplines:
+  - Fiction
+  major_works:
+  - book-decameron
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-gustave-flaubert
+  name: Gustave Flaubert
+  birth_year: 1821
+  death_year: 1880
+  civilization: Europe
+  region: France
+  disciplines:
+  - Fiction
+  major_works:
+  - book-madame-bovary
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-hebrew-scriptural-tradition
+  name: Hebrew Scriptural Tradition
+  birth_year: null
+  death_year: null
+  civilization: Ancient Israel
+  region: Levant
+  disciplines:
+  - Scripture
+  major_works:
+  - book-hebrew-bible
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-herman-melville
+  name: Herman Melville
+  birth_year: 1819
+  death_year: 1891
+  civilization: North America
+  region: United States
+  disciplines:
+  - Fiction
+  major_works:
+  - book-moby-dick
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-herodotus
+  name: Herodotus
+  birth_year: -484
+  death_year: -425
+  civilization: Greece
+  region: Asia Minor
+  disciplines:
+  - History
+  major_works:
+  - book-histories
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-ibn-al-haytham
+  name: Ibn al-Haytham (Alhazen)
+  birth_year: 965
+  death_year: 1040
+  civilization: Islamic Civilization
+  region: Basra and Cairo
+  disciplines:
+  - Optics
+  - Mathematics
+  major_works:
+  - book-book-of-optics
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-ibn-ishaq
+  name: Ibn Ishaq (recension of Ibn Hisham)
+  birth_year: 704
+  death_year: 767
+  civilization: Islamic Civilization
+  region: Hejaz and Iraq
+  disciplines:
+  - Sira
+  - History
+  major_works:
+  - book-sirat-rasul-allah
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-ibn-khaldun
+  name: Ibn Khaldun
+  birth_year: 1332
+  death_year: 1406
+  civilization: Islamic Civilization
+  region: Maghreb
+  disciplines:
+  - History
+  - Sociology
+  major_works:
+  - book-muqaddimah
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-ibn-rushd
+  name: Ibn Rushd (Averroes)
+  birth_year: 1126
+  death_year: 1198
+  civilization: Islamic Civilization
+  region: Al-Andalus
+  disciplines:
+  - Philosophy
+  - Jurisprudence
+  major_works:
+  - book-tahafut-al-tahafut
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-ibn-sina
+  name: Ibn Sina (Avicenna)
+  birth_year: 980
+  death_year: 1037
+  civilization: Islamic Civilization
+  region: Persia
+  disciplines:
+  - Philosophy
+  - Medicine
+  - Logic
+  major_works:
+  - book-canon-of-medicine
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-immanuel-kant
+  name: Immanuel Kant
+  birth_year: 1724
+  death_year: 1804
+  civilization: Europe
+  region: Prussia
+  disciplines:
+  - Philosophy
+  major_works:
+  - book-critique-of-pure-reason
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-isaac-newton
+  name: Isaac Newton
+  birth_year: 1643
+  death_year: 1727
+  civilization: Europe
+  region: England
+  disciplines:
+  - Physics
+  - Mathematics
+  major_works:
+  - book-principia
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-james-joyce
+  name: James Joyce
+  birth_year: 1882
+  death_year: 1941
+  civilization: Europe
+  region: Ireland
+  disciplines:
+  - Fiction
+  major_works:
+  - book-ulysses
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-jane-austen
+  name: Jane Austen
+  birth_year: 1775
+  death_year: 1817
+  civilization: Europe
+  region: England
+  disciplines:
+  - Fiction
+  major_works:
+  - book-pride-and-prejudice
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-jean-jacques-rousseau
+  name: Jean-Jacques Rousseau
+  birth_year: 1712
+  death_year: 1778
+  civilization: Europe
+  region: France
+  disciplines:
+  - Political Thought
+  major_works:
+  - book-social-contract
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-johann-wolfgang-von-goethe
+  name: Johann Wolfgang von Goethe
+  birth_year: 1749
+  death_year: 1832
+  civilization: Europe
+  region: Germany
+  disciplines:
+  - Drama
+  - Poetry
+  major_works:
+  - book-faust
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-john-locke
+  name: John Locke
+  birth_year: 1632
+  death_year: 1704
+  civilization: Europe
+  region: England
+  disciplines:
+  - Philosophy
+  - Political Thought
+  major_works:
+  - book-second-treatise-of-government
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-john-stuart-mill
+  name: John Stuart Mill
+  birth_year: 1806
+  death_year: 1873
+  civilization: Europe
+  region: England
+  disciplines:
+  - Philosophy
+  - Political Thought
+  major_works:
+  - book-on-liberty
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-jorge-luis-borges
+  name: Jorge Luis Borges
+  birth_year: 1899
+  death_year: 1986
+  civilization: Latin America
+  region: Argentina
+  disciplines:
+  - Fiction
+  major_works:
+  - book-ficciones
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-karl-marx
+  name: Karl Marx and Friedrich Engels
+  birth_year: 1818
+  death_year: 1883
+  civilization: Europe
+  region: Germany
+  disciplines:
+  - Political Thought
+  - Economics
+  major_works:
+  - book-communist-manifesto
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-kiche-maya-authors
+  name: K'iche' Maya Authors
+  birth_year: null
+  death_year: null
+  civilization: Indigenous Traditions
+  region: Mesoamerica
+  disciplines:
+  - Mythology
+  - History
+  major_works:
+  - book-popol-vuh
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-laozi
+  name: Laozi (traditional attribution)
+  birth_year: null
+  death_year: null
+  civilization: China
+  region: East Asia
+  disciplines:
+  - Philosophy
+  - Spirituality
+  major_works:
+  - book-tao-te-ching
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-leo-tolstoy
+  name: Leo Tolstoy
+  birth_year: 1828
+  death_year: 1910
+  civilization: Europe
+  region: Russia
+  disciplines:
+  - Fiction
+  major_works:
+  - book-war-and-peace
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-lu-xun
+  name: Lu Xun
+  birth_year: 1881
+  death_year: 1936
+  civilization: China
+  region: East Asia
+  disciplines:
+  - Fiction
+  major_works:
+  - book-call-to-arms
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-luo-guanzhong
+  name: Luo Guanzhong
+  birth_year: null
+  death_year: null
+  civilization: China
+  region: East Asia
+  disciplines:
+  - Fiction
+  - History
+  major_works:
+  - book-romance-of-the-three-kingdoms
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-machado-de-assis
+  name: Machado de Assis
+  birth_year: 1839
+  death_year: 1908
+  civilization: Latin America
+  region: Brazil
+  disciplines:
+  - Fiction
+  major_works:
+  - book-posthumous-memoirs-of-bras-cubas
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-mande-griots
+  name: Mande Griots (oral tradition)
+  birth_year: null
+  death_year: null
+  civilization: Africa
+  region: West Africa
+  disciplines:
+  - Epic
+  - History
+  major_works:
+  - book-epic-of-sundiata
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-marcel-proust
+  name: Marcel Proust
+  birth_year: 1871
+  death_year: 1922
+  civilization: Europe
+  region: France
+  disciplines:
+  - Fiction
+  major_works:
+  - book-in-search-of-lost-time
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-mary-wollstonecraft
+  name: Mary Wollstonecraft
+  birth_year: 1759
+  death_year: 1797
+  civilization: Europe
+  region: England
+  disciplines:
+  - Political Thought
+  major_works:
+  - book-a-vindication-of-the-rights-of-woman
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-michel-de-montaigne
+  name: Michel de Montaigne
+  birth_year: 1533
+  death_year: 1592
+  civilization: Europe
+  region: France
+  disciplines:
+  - Essays
+  - Philosophy
+  major_works:
+  - book-essays-montaigne
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-miguel-de-cervantes
+  name: Miguel de Cervantes
+  birth_year: 1547
+  death_year: 1616
+  civilization: Europe
+  region: Spain
+  disciplines:
+  - Fiction
+  major_works:
+  - book-don-quixote
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-murasaki-shikibu
+  name: Murasaki Shikibu
+  birth_year: null
+  death_year: null
+  civilization: Japan
+  region: East Asia
+  disciplines:
+  - Fiction
+  major_works:
+  - book-tale-of-genji
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-naguib-mahfouz
+  name: Naguib Mahfouz
+  birth_year: 1911
+  death_year: 2006
+  civilization: Islamic Civilization
+  region: Egypt
+  disciplines:
+  - Fiction
+  major_works:
+  - book-cairo-trilogy
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-new-testament-writers
+  name: New Testament Writers (Evangelists and Apostles)
+  birth_year: null
+  death_year: null
+  civilization: Early Christianity
+  region: Eastern Mediterranean
+  disciplines:
+  - Scripture
+  major_works:
+  - book-new-testament
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-niccolo-machiavelli
+  name: Niccolò Machiavelli
+  birth_year: 1469
+  death_year: 1527
+  civilization: Europe
+  region: Italy
+  disciplines:
+  - Political Thought
+  major_works:
+  - book-the-prince
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-nicolaus-copernicus
+  name: Nicolaus Copernicus
+  birth_year: 1473
+  death_year: 1543
+  civilization: Europe
+  region: Poland
+  disciplines:
+  - Astronomy
+  major_works:
+  - book-on-the-revolutions
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-plato
+  name: Plato
+  birth_year: -428
+  death_year: -348
+  civilization: Greece
+  region: Athens
+  disciplines:
+  - Philosophy
+  major_works:
+  - book-republic
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-quranic-revelation
+  name: The Quranic Revelation (revealed to the Prophet Muhammad)
+  birth_year: null
+  death_year: null
+  civilization: Islamic Civilization
+  region: Arabia
+  disciplines:
+  - Scripture
+  major_works:
+  - book-quran
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-rene-descartes
+  name: René Descartes
+  birth_year: 1596
+  death_year: 1650
+  civilization: Europe
+  region: France
+  disciplines:
+  - Philosophy
+  - Mathematics
+  major_works:
+  - book-meditations-on-first-philosophy
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-sigmund-freud
+  name: Sigmund Freud
+  birth_year: 1856
+  death_year: 1939
+  civilization: Europe
+  region: Austria
+  disciplines:
+  - Psychology
+  major_works:
+  - book-interpretation-of-dreams
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-sima-qian
+  name: Sima Qian
+  birth_year: -145
+  death_year: -86
+  civilization: China
+  region: East Asia
+  disciplines:
+  - History
+  major_works:
+  - book-records-of-the-grand-historian
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-simone-de-beauvoir
+  name: Simone de Beauvoir
+  birth_year: 1908
+  death_year: 1986
+  civilization: Europe
+  region: France
+  disciplines:
+  - Philosophy
+  major_works:
+  - book-the-second-sex
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-sin-leqi-unninni
+  name: Sîn-lēqi-unninni (editor of the Standard Babylonian version)
+  birth_year: null
+  death_year: null
+  civilization: Mesopotamia
+  region: Mesopotamia
+  disciplines:
+  - Epic
+  major_works:
+  - book-gilgamesh
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-sophocles
+  name: Sophocles
+  birth_year: -497
+  death_year: -406
+  civilization: Greece
+  region: Athens
+  disciplines:
+  - Drama
+  major_works:
+  - book-oedipus-rex
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-sunzi
+  name: Sunzi (Sun Tzu)
+  birth_year: null
+  death_year: null
+  civilization: China
+  region: East Asia
+  disciplines:
+  - Strategy
+  major_works:
+  - book-the-art-of-war
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-thomas-aquinas
+  name: Thomas Aquinas
+  birth_year: 1225
+  death_year: 1274
+  civilization: Europe
+  region: Italy
+  disciplines:
+  - Theology
+  - Philosophy
+  major_works:
+  - book-summa-theologiae
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-thomas-hobbes
+  name: Thomas Hobbes
+  birth_year: 1588
+  death_year: 1679
+  civilization: Europe
+  region: England
+  disciplines:
+  - Political Thought
+  major_works:
+  - book-leviathan
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-thucydides
+  name: Thucydides
+  birth_year: -460
+  death_year: -400
+  civilization: Greece
+  region: Athens
+  disciplines:
+  - History
+  major_works:
+  - book-history-of-the-peloponnesian-war
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-toni-morrison
+  name: Toni Morrison
+  birth_year: 1931
+  death_year: 2019
+  civilization: North America
+  region: United States
+  disciplines:
+  - Fiction
+  major_works:
+  - book-beloved
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-vedic-sages
+  name: Vedic Sages (Upanishadic tradition)
+  birth_year: null
+  death_year: null
+  civilization: India
+  region: South Asia
+  disciplines:
+  - Philosophy
+  - Scripture
+  major_works:
+  - book-upanishads
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-victor-hugo
+  name: Victor Hugo
+  birth_year: 1802
+  death_year: 1885
+  civilization: Europe
+  region: France
+  disciplines:
+  - Fiction
+  - Poetry
+  major_works:
+  - book-les-miserables
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-vishnu-sharma
+  name: Vishnu Sharma (traditional attribution)
+  birth_year: null
+  death_year: null
+  civilization: India
+  region: South Asia
+  disciplines:
+  - Fables
+  - Statecraft
+  major_works:
+  - book-panchatantra
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-vyasa
+  name: Vyasa (traditional attribution)
+  birth_year: null
+  death_year: null
+  civilization: India
+  region: South Asia
+  disciplines:
+  - Epic
+  - Scripture
+  major_works:
+  - book-bhagavad-gita
+  - book-mahabharata
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-william-shakespeare
+  name: William Shakespeare
+  birth_year: 1564
+  death_year: 1616
+  civilization: Europe
+  region: England
+  disciplines:
+  - Drama
+  - Poetry
+  major_works:
+  - book-hamlet
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-wu-chengen
+  name: Wu Cheng'en (attributed)
+  birth_year: 1500
+  death_year: 1582
+  civilization: China
+  region: East Asia
+  disciplines:
+  - Fiction
+  major_works:
+  - book-journey-to-the-west
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-zhou-diviners
+  name: Zhou Diviners and Commentators
+  birth_year: null
+  death_year: null
+  civilization: China
+  region: East Asia
+  disciplines:
+  - Divination
+  - Philosophy
+  major_works:
+  - book-i-ching
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4
+- id: author-zhuangzi
+  name: Zhuangzi (Zhuang Zhou)
+  birth_year: -369
+  death_year: -286
+  civilization: China
+  region: East Asia
+  disciplines:
+  - Philosophy
+  major_works:
+  - book-zhuangzi
+  status: draft
+  provenance:
+    agent_id: canon-editor
+    created_on: '2026-10-13'
+    review_gate: G4

@@ -6,8 +6,24 @@ retrieval_ladder:
 - summary
 - executive
 - full
-types: {}
+types:
+  author:
+    count: 76
+    shard: metadata/index/author.jsonl
+    card_tokens: 3156
+  book:
+    count: 100
+    shard: metadata/index/book.jsonl
+    card_tokens: 3978
+  canon:
+    count: 1
+    shard: metadata/index/canon.jsonl
+    card_tokens: 48
+  poet:
+    count: 22
+    shard: metadata/index/poet.jsonl
+    card_tokens: 829
 totals:
-  records: 0
-  card_tokens: 0
+  records: 199
+  card_tokens: 8011
 relationships: 0
