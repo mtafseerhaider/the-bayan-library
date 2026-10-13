@@ -76,7 +76,7 @@ relationship_types:
   - {type: member_of, inverse: includes,
      source: [book, poem, author, poet], target: [canon, reading_path]}
   - {type: has_theme, inverse: theme_of,
-     source: [book, poem, passage, surah, author, poet, note, quotation], target: [theme, concept]}
+     source: [book, poem, passage, surah, author, poet, note, quotation, concept], target: [theme, concept]}
   - {type: related_to, inverse: related_to, symmetric: true,
      source: [theme, concept], target: [theme, concept]}
   - {type: prerequisite_of, inverse: requires,

@@ -128,7 +128,12 @@ def route(reg: Registries, spec: dict[str, Any]) -> Decision:
     while True:
         rule = next((r for r in rules["escalation_rules"]
                      if r["from"] == decision.model), None)
-        if rule is None or ladder.index(rule["to"]) > ladder.index(ceiling):
+        if rule is None or rule["to"] not in ladder:
+            break
+        # A rule climbs exactly one rung (validate-registry enforces it);
+        # anything else is ignored here so a misedited rule cannot loop.
+        if ladder.index(rule["to"]) != ladder.index(decision.model) + 1 or \
+                ladder.index(rule["to"]) > ladder.index(ceiling):
             break
         fired = [t for t in rule["triggers"] if _fires(t, signals)]
         if not fired:
@@ -143,24 +148,38 @@ def route(reg: Registries, spec: dict[str, Any]) -> Decision:
         if rule["justification_required"] and not spec.get("justification"):
             decision.status = "needs_justification"
 
-    # 4. Fallback when the chosen model failed or is unavailable.
+    # 4. Fallback when the chosen model failed or is unavailable. The
+    #    agent's fallback_model is used when it is available, one rung
+    #    away and under the ceiling; otherwise the nearest available rung
+    #    above, then the nearest below. The ceiling still holds, so
+    #    forbidden work never reaches opus by way of an outage, and an
+    #    upward fallback is recorded as an escalation.
     failed = set(spec.get("failed_models", []) or [])
     if decision.model in failed:
+        rung = ladder.index(decision.model)
+        available = [m for m in ladder if m not in failed
+                     and ladder.index(m) <= ladder.index(ceiling)]
         agent = reg.agents.get(spec.get("agent", ""), {})
         fallback = agent.get("fallback_model")
-        if not fallback or fallback in failed:
-            candidates = [m for m in ladder if m not in failed
-                          and ladder.index(m) <= ladder.index(ceiling)]
-            fallback = candidates[-1] if candidates else None
+        if fallback not in available or \
+                abs(ladder.index(fallback) - rung) != 1:
+            above = [m for m in available if ladder.index(m) > rung]
+            below = [m for m in available if ladder.index(m) < rung]
+            fallback = above[0] if above else below[-1] if below else None
         if fallback is None:
             decision.status = "blocked"
             decision.notes.append("no model available")
             return decision
-        if ladder.index(fallback) < ladder.index(decision.model):
+        if ladder.index(fallback) < rung:
             decision.degraded = True
             decision.notes.append(
                 f"fallback {decision.model} -> {fallback}: result is "
                 "degraded and the review gate is raised one level")
+        else:
+            decision.escalations.append({
+                "from": decision.model, "to": fallback,
+                "reasons": [f"fallback: {decision.model} failed or "
+                            "unavailable"]})
         decision.model = fallback
 
     model = reg.model(decision.model)

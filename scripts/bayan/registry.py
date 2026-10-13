@@ -195,6 +195,24 @@ def check(reg: Registries, report: Report) -> None:
             report.add("major", "unknown-task",
                        f"batch_eligible lists unknown task {task!r}",
                        "routing.yaml")
+    # Escalation climbs exactly one rung per rule; the router relies on it.
+    ladder = reg.models["escalation_ladder"]
+    rule_sources: list[str] = []
+    for rule in reg.routing["escalation_rules"]:
+        step = f"{rule['from']} -> {rule['to']}"
+        if rule["from"] not in ladder or rule["to"] not in ladder:
+            report.add("critical", "ladder",
+                       f"escalation rule {step} names a model outside the "
+                       "ladder", "routing.yaml")
+        elif ladder.index(rule["to"]) != ladder.index(rule["from"]) + 1:
+            report.add("critical", "escalation-rung",
+                       f"escalation rule {step} must climb exactly one "
+                       "rung", "routing.yaml")
+        if rule["from"] in rule_sources:
+            report.add("major", "duplicate-rule",
+                       f"second escalation rule from {rule['from']} is "
+                       "never used", "routing.yaml")
+        rule_sources.append(rule["from"])
 
     # Skills.
     for skill_id, skill in reg.skills.items():
@@ -277,6 +295,10 @@ def check(reg: Registries, report: Report) -> None:
     budget_ids = {w["workflow_id"] for w in reg.budgets["workflows"]}
     for workflow in reg.workflows["workflows"]:
         where = f"workflows.yaml#{workflow['workflow_id']}"
+        if workflow["workflow_id"] in workflow_ids:
+            report.add("critical", "duplicate-workflow",
+                       f"workflow_id {workflow['workflow_id']!r} defined "
+                       "twice", where)
         workflow_ids.add(workflow["workflow_id"])
         if workflow["review_gate"] not in gates:
             report.add("critical", "gate", "unknown review gate", where)

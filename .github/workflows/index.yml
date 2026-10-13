@@ -31,17 +31,17 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Committed index is current
         run: python scripts/build-index.py --check
-      - name: Build index copy
+      # Rebuild in the checkout (a throwaway) so the artifact is a fresh
+      # build with real token estimates, even when the committed index is
+      # stale. Summaries and content pages must be present for the counts.
+      - name: Rebuild index for the artifact
         if: always()
-        run: |
-          mkdir -p build/index-root
-          cp -r system metadata build/index-root/ 2>/dev/null || true
-          python scripts/build-index.py --root build/index-root
+        run: python scripts/build-index.py
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
           name: retrieval-index
           path: |
-            build/index-root/metadata/index.yaml
-            build/index-root/metadata/index/
+            metadata/index.yaml
+            metadata/index/
           retention-days: 30

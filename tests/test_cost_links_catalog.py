@@ -34,8 +34,26 @@ class CostTests(unittest.TestCase):
         found = cost.alerts(self.reg, summary)
         self.assertTrue(any("canon-editor" in a for a in found))
         self.assertTrue(any("opus share" in a for a in found))
+        # The opus call is far over its 100K/10K budget, with no reason.
+        self.assertEqual(summary["metrics"]["budget_overrun_count"], 1)
+        self.assertTrue(any("without justification" in a for a in found))
         text = cost.render(self.reg, summary, "2026-10")
         self.assertIn("# Cost Report 2026-10", text)
+        self.assertIn("| Rework rate | 0.0% |", text)
+
+    def test_rework_and_justified_overruns(self):
+        rows = self.ledger([
+            {"agent_id": "study-notes", "model": "sonnet",
+             "input_tokens": 40000, "output_tokens": 500, "accepted": True,
+             "budget_justification": "Primary text cannot be cut."},
+            {"agent_id": "study-notes", "model": "sonnet",
+             "input_tokens": 8000, "output_tokens": 500, "rerun": True},
+        ])
+        metrics = cost.summarise(self.reg, rows)["metrics"]
+        self.assertEqual(metrics["budget_overrun_count"], 1)
+        self.assertEqual(metrics["unjustified_overrun_count"], 0)
+        self.assertEqual(metrics["rework_rate"], 0.5)
+        self.assertEqual(metrics["tokens_per_artifact"]["input"], 48000)
 
 
 class LinkTests(unittest.TestCase):

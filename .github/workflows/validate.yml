@@ -4,6 +4,9 @@ name: validate
 
 on:
   pull_request:
+    # labeled/unlabeled: the `agent permissions` job keys on the
+    # ai-generated label, which is usually added after the PR is opened.
+    types: [opened, synchronize, reopened, labeled, unlabeled]
   push:
     branches: [main, develop]
   workflow_dispatch:

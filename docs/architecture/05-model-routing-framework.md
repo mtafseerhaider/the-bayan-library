@@ -220,7 +220,7 @@ defence.
 
 | Situation | Action | Result marking | Gate effect |
 | --- | --- | --- | --- |
-| Model unavailable (outage, rate limit after retries) | Use the agent's `fallback_model` from its registry entry | `degraded: true` | Gate raised one level (max G4) |
+| Model unavailable (outage, rate limit after retries) | Use the agent's `fallback_model` when it is available, one rung away and under the task's ceiling; otherwise the nearest available rung above, then below. The `forbidden_on_opus` ceiling still holds, so an outage never puts forbidden work on opus. An upward fallback is recorded as an escalation | `degraded: true` when the fallback is lower | Gate raised one level (max G4) when degraded |
 | Fallback is lower than the default (opus to sonnet) | Run, but the output cannot merge until rerun on the default model or waived by the owner | `degraded: true`, `rerun_required: true` | G4 outputs stay blocked until rerun or waiver |
 | Model refusal | Log the refusal; retry once on the same model with a clarified spec; never route around a refusal by switching model | `refused: true` | Second refusal goes to the owner as a finding |
 | QA failure (first) | Retry once at the same tier with the QA findings in the Local context layer | `attempts: 2` | Unchanged |
@@ -275,10 +275,12 @@ function route(spec):
 
     # 4. Fallback when the chosen model failed or is unavailable
     if d.model in spec.failed_models:
-        fb = agent.fallback_model, or the highest model <= ceiling
-             that has not failed
+        available = models <= ceiling that have not failed
+        fb = agent.fallback_model if it is available and one rung away,
+             else the nearest available rung above, else the nearest below
         if fb is none: d.status = "blocked"; return d
         if rung(fb) < rung(d.model): d.degraded = true
+        else: d.escalations.append({from, to: fb, reasons: ["fallback"]})
         d.model = fb
 
     # 5. Model ID, caps and effort from models.yaml

@@ -34,7 +34,7 @@ Related documents: [Workflow Architecture](09-workflow-architecture.md),
 
 | Workflow | Job names | Triggers | Permissions | Outputs |
 |---|---|---|---|---|
-| `validate.yml` | `markdownlint`, `registry`, `content`, `unit tests`, `agent permissions` (only on PRs labelled `ai-generated`) | `pull_request`; `push` to `main` and `develop`; `workflow_dispatch` | `contents: read` | Check results (required status checks) |
+| `validate.yml` | `markdownlint`, `registry`, `content`, `unit tests`, `agent permissions` (only on PRs labelled `ai-generated`) | `pull_request` (opened, synchronize, reopened, labeled, unlabeled, so a label added after opening still runs the permission check); `push` to `main` and `develop`; `workflow_dispatch` | `contents: read` | Check results (required status checks) |
 | `metadata.yml` | `metadata` | `pull_request` on `metadata/**`, `system/schemas/**`, `system/registry/knowledge-graph.yaml`; `push` to `main` on `metadata/**`, `system/schemas/**`; `workflow_dispatch` | `contents: read` | Findings in the job summary |
 | `knowledge-graph.yml` | `knowledge graph` | `pull_request` and `push` to `main` on `metadata/**`, `system/registry/knowledge-graph.yaml`; weekly cron `0 3 * * 1` (Monday 03:00 UTC); `workflow_dispatch` | `contents: read` | Artifact `knowledge-graph` (`build/graph/`) |
 | `index.yml` | `retrieval index` | `pull_request` on `metadata/**`, `summaries/**`, `scripts/bayan/index.py`; `push` to `main`; `workflow_dispatch` | `contents: read` | Drift result; artifact `retrieval-index` |
@@ -52,7 +52,7 @@ Related documents: [Workflow Architecture](09-workflow-architecture.md),
 | `content` | `python scripts/validate-reading-paths.py` | membership, size or order finding |
 | `content` | `python scripts/validate-links.py` | broken link or anchor |
 | `content` | `python scripts/build-index.py --check` | `metadata/index*` out of date |
-| `unit tests` | `python -m unittest discover -s tests -t tests -v` (47 tests, fixtures in `tests/fixtures/library/`) | any failing test |
+| `unit tests` | `python -m unittest discover -s tests -t tests -v` (62 tests, fixtures in `tests/fixtures/library/`) | any failing test |
 | `agent permissions` | `python scripts/check-permissions.py --pr-body-env PR_BODY --base origin/<base>` | a changed file outside the agent's tier or on a protected path |
 
 The job names in `validate.yml` are the required status checks of
@@ -79,7 +79,7 @@ flowchart LR
 |---|---|---|
 | `metadata.yml` | job `metadata`: `validate-metadata.py` (fail on major), minor findings to the job summary, `build-index.py --check` | Narrow, fast feedback for record PRs |
 | `knowledge-graph.yml` | job `knowledge graph`: `validate-knowledge-graph.py`; `generate-knowledge-graph.py --out build/graph`; summary; upload artifact `knowledge-graph` | Graph is never committed; the Monday run catches slow drift |
-| `index.yml` | job `retrieval index`: `build-index.py --check`; build a copy; upload artifact `retrieval-index` | Committed index must match the build |
+| `index.yml` | job `retrieval index`: `build-index.py --check`; rebuild in the checkout; upload artifact `retrieval-index` | Committed index must match the build |
 | `release.yml` | `validate release`: full validation and tests; `publish release`: build graph, index, catalog and registry bundles, `gh release create` | Only job with write permission |
 
 ## Pipelines
@@ -114,7 +114,7 @@ no agent at all; a `chore(documentation)` PR regenerates them.
 
 All scripts are Python 3.11+ (CI runs 3.12) with the two dependencies
 pinned in `requirements.txt` (`PyYAML==6.0.3`, `jsonschema==4.26.0`), share
-code in `scripts/bayan/`, and are tested by 47 stdlib unittest tests under
+code in `scripts/bayan/`, and are tested by 62 stdlib unittest tests under
 `tests/` with fixtures in `tests/fixtures/library/`.
 
 ### Exit Codes

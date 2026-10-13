@@ -6,7 +6,7 @@ import json
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Iterable, Iterator
+from typing import Any, Iterable
 
 import yaml
 
@@ -120,13 +120,16 @@ class Report:
         return EXIT_FINDINGS if self.failed(fail_on) else EXIT_OK
 
 
-def iter_files(base: Path, patterns: Iterable[str]) -> Iterator[Path]:
-    seen: set[Path] = set()
-    for pattern in patterns:
-        for path in sorted(base.glob(pattern)):
-            if path.is_file() and path not in seen:
-                seen.add(path)
-                yield path
+def read_optional(root: Path, relative: str | None) -> str:
+    """Text of `root/relative`, or "" when the path is unset or missing.
+
+    Index cards and context packs both resolve summary and content paths
+    this way, so a missing page costs nothing and estimates to 0 tokens.
+    """
+    if not relative:
+        return ""
+    path = root / relative
+    return path.read_text(encoding="utf-8") if path.is_file() else ""
 
 
 def estimate_tokens(text: str) -> int:

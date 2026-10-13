@@ -16,17 +16,10 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from .common import dump_yaml, estimate_tokens, rel
+from .common import dump_yaml, estimate_tokens, read_optional, rel
 from .metadata import Library, Record
 
 SUMMARY_FIELDS = ("summary", "description", "definition")
-
-
-def _read(root: Path, value: str | None) -> str:
-    if not value:
-        return ""
-    path = root / value
-    return path.read_text(encoding="utf-8") if path.is_file() else ""
 
 
 def card(record: Record, root: Path) -> dict:
@@ -48,9 +41,9 @@ def card(record: Record, root: Path) -> dict:
     entry["tokens"] = {
         "card": 0,
         "summary": estimate_tokens(entry.get("summary", "")),
-        "executive": estimate_tokens(_read(root, entry.get(
+        "executive": estimate_tokens(read_optional(root, entry.get(
             "executive_summary"))),
-        "full": estimate_tokens(_read(root, entry.get("content"))),
+        "full": estimate_tokens(read_optional(root, entry.get("content"))),
     }
     entry["tokens"]["card"] = estimate_tokens(json.dumps(
         {k: v for k, v in entry.items() if k not in ("summary", "tokens")},

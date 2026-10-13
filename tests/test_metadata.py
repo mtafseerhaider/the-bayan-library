@@ -57,6 +57,20 @@ class MetadataTests(unittest.TestCase):
             "civilization": "X", "genre": ["Y"]})
         self.assertIn("file-name", self.codes())
 
+    def test_nested_list_file_is_not_a_shard(self):
+        # quran/surahs.yaml is the list file of a nested type; one record
+        # in it must not be mistaken for a one-record shard.
+        self.repo.write("metadata/quran/surahs.yaml",
+                        [{"id": "surah-al-fatiha", "name": "Al-Fatiha"}])
+        self.assertNotIn("file-name", self.codes())
+        self.repo.write("metadata/quran/surahs/first.yaml",
+                        [{"id": "surah-al-baqara", "name": "Al-Baqara"}])
+        self.assertIn("file-name", self.codes())
+
+    def test_unreadable_base_ref_is_an_error_not_a_pass(self):
+        with self.assertRaises(metadata.RefError):
+            metadata.ids_at_ref(self.repo.root, "no-such-ref")
+
     def test_tags_must_come_from_vocabulary(self):
         data = self.repo.read_yaml("metadata/books/book-muqaddimah.yaml")
         data["tags"].append("not-a-tag")

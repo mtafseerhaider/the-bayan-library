@@ -16,7 +16,7 @@ import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from .common import estimate_tokens
+from .common import estimate_tokens, read_optional
 
 LAYERS = ("card", "summary", "executive", "full")
 STATUS_WEIGHT = {"canonical": 1.0, "reviewed": 0.9, "draft": 0.5,
@@ -100,9 +100,11 @@ def build(root: Path, targets: dict[str, float], budget: int,
             if layer == "summary":
                 pieces = [item.card.get("summary", "")]
             elif layer == "executive":
-                pieces = [_read(root, item.card.get("executive_summary"))]
+                pieces = [read_optional(
+                    root, item.card.get("executive_summary"))]
             else:
-                pieces = chunks(_read(root, item.card.get("content")))
+                pieces = chunks(read_optional(
+                    root, item.card.get("content")))
             pieces = [p for p in pieces if p]
             if not pieces:
                 item.layer = layer          # nothing to load at this layer
@@ -128,10 +130,3 @@ def build(root: Path, targets: dict[str, float], budget: int,
         "missing": missing,
         "dropped": dropped,
     }
-
-
-def _read(root: Path, value: str | None) -> str:
-    if not value:
-        return ""
-    path = root / value
-    return path.read_text(encoding="utf-8") if path.is_file() else ""

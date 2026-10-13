@@ -80,6 +80,20 @@ class RegistryTests(unittest.TestCase):
         self.repo.write(path, data)
         self.assertIn("opus-forbidden", self.codes())
 
+    def test_escalation_rules_climb_one_rung(self):
+        path = "system/registry/routing.yaml"
+        data = self.repo.read_yaml(path)
+        data["escalation_rules"][0]["to"] = "opus"     # haiku -> opus
+        self.repo.write(path, data)
+        self.assertIn("escalation-rung", self.codes())
+
+    def test_duplicate_workflow_id(self):
+        path = "system/registry/workflows.yaml"
+        data = self.repo.read_yaml(path)
+        data["workflows"].append(dict(data["workflows"][0]))
+        self.repo.write(path, data)
+        self.assertIn("duplicate-workflow", self.codes())
+
     def test_skill_dependencies_are_acyclic(self):
         reg = self.repo.registries()
         order = registry.topological_order(reg.skills)

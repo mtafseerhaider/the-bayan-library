@@ -39,8 +39,7 @@ jobs:
           if [ -n "${GITHUB_BASE_REF}" ]; then
             base="--base-ref origin/${GITHUB_BASE_REF}"
           fi
-          python scripts/validate-metadata.py --fail-on major $base \
-            | tee metadata-report.txt
+          python scripts/validate-metadata.py --fail-on major $base
       - name: Report minor findings
         if: always()
         run: python scripts/validate-metadata.py --fail-on critical >> "$GITHUB_STEP_SUMMARY" || true

@@ -144,6 +144,8 @@ steps write no line. Shown wrapped here; stored as one line.
 | `task` | Optional task type from `routing.yaml`; used to decide batch eligibility. A line without it counts as eligible |
 | `batch` | Sent through the Message Batches API |
 | `escalated` | Routed above the agent's default model |
+| `rerun` | Optional; the call repeats an earlier one after a QA failure (feeds `rework_rate`) |
+| `budget_justification` | Optional; why the call was allowed to exceed the model's token budget (an overrun without it is unjustified) |
 | `accepted` | Output merged (set when the PR merges; false until then) |
 
 Cost per line is computed, not stored:
@@ -185,9 +187,9 @@ writes `system/reports/cost/YYYY-MM.md`, committed through a PR at G0
 | `escalation_rate` | Share of calls escalated above default | <= 0.15 |
 | `cache_hit_rate` | Cached input tokens over total input | >= 0.5 |
 | `batch_share` | Batch calls over batch-eligible calls (lines whose `task` is in `batch_eligible`, or that carry no `task`) | >= 0.8 |
-| `budget_overrun_count` | Calls that exceeded a token budget | 0 unjustified |
+| `budget_overrun_count` | Calls whose billed tokens exceed the model's budget in `models.yaml`; the report also counts those without a `budget_justification` and alerts when that is not zero | 0 unjustified |
 | `tokens_per_artifact` | Mean input and output tokens per merged output | Trend down |
-| `rework_rate` | Outputs rerun after QA failure | <= 0.1 |
+| `rework_rate` | Calls flagged `rerun` (repeated after a QA failure) over all calls | <= 0.1 |
 
 ## Alert Thresholds
 

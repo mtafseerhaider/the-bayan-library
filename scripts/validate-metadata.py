@@ -27,7 +27,11 @@ def main() -> int:
     if reg_report.failed("critical"):
         reg_report.print()
         return EXIT_USAGE
-    report, lib = metadata.run(root, reg, args.base_ref)
+    try:
+        report, lib = metadata.run(root, reg, args.base_ref)
+    except metadata.RefError as exc:
+        print(f"error: {exc} (fetch the base branch first)", file=sys.stderr)
+        return EXIT_USAGE
     report.print()
     print(f"{len(lib.records)} records, {len(lib.relationships)} "
           "relationships")

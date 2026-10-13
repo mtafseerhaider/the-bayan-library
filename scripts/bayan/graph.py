@@ -51,9 +51,12 @@ def node_type(lib: Library, node_id: str) -> str | None:
 
 
 def derived_edges(lib: Library) -> list[dict]:
+    """Edges implied by record fields. `_field` and `_location` say where
+    each one came from; build() strips them."""
     prefixes = set(lib.prefix_to_type)
     edges = []
     for record in sorted(lib.records.values(), key=lambda r: r.id):
+        where = f"{rel(record.path, lib.root)}#{record.id}"
         for name, (kind, direction) in DERIVED_FIELDS.items():
             value = record.data.get(name)
             for target in value if isinstance(value, list) else [value]:
@@ -63,8 +66,16 @@ def derived_edges(lib: Library) -> list[dict]:
                 source, dest = (record.id, target) if direction == "out" \
                     else (target, record.id)
                 edges.append({"source": source, "relationship": kind,
-                              "target": dest, "derived": True})
+                              "target": dest, "derived": True,
+                              "_field": name, "_location": where})
     return edges
+
+
+def _signature_ok(lib: Library, signature: dict, edge: dict) -> bool:
+    source_type = node_type(lib, edge["source"])
+    target_type = node_type(lib, edge["target"])
+    return (source_type is None or source_type in signature["source"]) and \
+        (target_type is None or target_type in signature["target"])
 
 
 def validate(lib: Library, reg: Registries, report: Report) -> None:
@@ -72,6 +83,17 @@ def validate(lib: Library, reg: Registries, report: Report) -> None:
     inverses = _inverses(reg)
     evidence = {e["id"]: e for e in reg.graph["evidence_levels"]}
     seen: dict[tuple, str] = {}
+    # Derived edges pass the same signature check as stored ones: a record
+    # field the schema allows must still imply an edge the ontology allows.
+    for edge in derived_edges(lib):
+        signature = signatures.get(edge["relationship"])
+        if signature and not _signature_ok(lib, signature, edge):
+            report.add("critical", "signature",
+                       f"{edge['_field']} implies "
+                       f"{node_type(lib, edge['source'])} "
+                       f"-{edge['relationship']}-> "
+                       f"{node_type(lib, edge['target'])}, which the "
+                       "ontology does not allow", edge["_location"])
     for edge in lib.relationships:
         where = edge.get("_location", "metadata/relationships")
         source, kind, target = (edge.get("source"), edge.get("relationship"),
@@ -106,6 +128,10 @@ def validate(lib: Library, reg: Registries, report: Report) -> None:
         if level is None:
             report.add("minor", "evidence",
                        "no confidence level; defaulting to tentative", where)
+        elif level not in evidence:
+            report.add("critical", "evidence",
+                       f"unknown confidence level {level!r}; use one of "
+                       + ", ".join(evidence), where)
         elif evidence[level]["requires_citation"] and \
                 not edge.get("citations"):
             report.add("major", "citation",
@@ -133,15 +159,17 @@ def build(lib: Library, reg: Registries) -> dict:
             edges.append(edge)
 
     explicit = [
-        {k: v for k, v in e.items() if not k.startswith("_")}
-        for e in lib.relationships
+        e for e in lib.relationships
         if e.get("relationship") in signatures
         and e.get("source") in lib.records and e.get("target") in lib.records
     ]
     for edge in explicit + derived_edges(lib):
-        edge = {"confidence": "tentative", **edge}
-        add(edge)
         signature = signatures[edge["relationship"]]
+        if not _signature_ok(lib, signature, edge):
+            continue            # validate() reports it; never materialise it
+        edge = {"confidence": "tentative",
+                **{k: v for k, v in edge.items() if not k.startswith("_")}}
+        add(edge)
         add({**edge, "source": edge["target"], "target": edge["source"],
              "relationship": signature["inverse"], "inverse_of":
              edge["relationship"]})

@@ -38,6 +38,35 @@ class GraphTests(unittest.TestCase):
             "source": "author-ibn-sina", "relationship": "influenced",
             "target": "author-ibn-khaldun", "confidence": "high"}]))
 
+    def test_unknown_confidence_is_a_finding_not_a_crash(self):
+        self.assertIn("evidence", self.check([{
+            "source": "author-al-farabi", "relationship": "influenced",
+            "target": "author-ibn-khaldun", "confidence": "medium"}]))
+
+    def test_derived_edges_must_fit_the_ontology(self):
+        # Drop `author` from `wrote`: the book's author_id then implies an
+        # edge the ontology forbids, reported against the record and left
+        # out of the build.
+        path = "system/registry/knowledge-graph.yaml"
+        data = self.repo.read_yaml(path)
+        for relation in data["relationship_types"]:
+            if relation["type"] == "wrote":
+                relation["source"] = ["poet"]
+        self.repo.write(path, data)
+        reg = self.repo.registries()
+        lib = metadata.load(self.repo.root, reg)
+        report = Report("graph")
+        graph.validate(lib, reg, report)
+        # Reported against each record that implies the edge: the book's
+        # author_id and the author's major_works.
+        hits = {f.location for f in report.findings if f.code == "signature"}
+        self.assertTrue(any("book-muqaddimah" in h for h in hits), hits)
+        self.assertTrue(any("author-ibn-khaldun" in h for h in hits), hits)
+        triples = {(e["source"], e["relationship"], e["target"])
+                   for e in graph.build(lib, reg)["edges"]}
+        self.assertNotIn(("author-ibn-khaldun", "wrote", "book-muqaddimah"),
+                         triples)
+
     def test_dangling_and_duplicate(self):
         codes = self.check([
             {"source": "author-al-farabi", "relationship": "influenced",

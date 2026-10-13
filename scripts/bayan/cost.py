@@ -7,7 +7,11 @@ Ledger format: JSON Lines, one object per model call:
      "skill_id": "vocabulary-analysis", "model": "claude-haiku-5-5",
      "input_tokens": 4100, "output_tokens": 620, "cache_read_tokens": 3000,
      "task": "vocabulary_analysis", "batch": true, "escalated": false,
-     "accepted": true}
+     "rerun": false, "accepted": true}
+
+Optional fields: `task` (batch eligibility), `rerun` (the call repeats an
+earlier one after a QA failure) and `budget_justification` (why a call was
+allowed to exceed the model's token budget in models.yaml).
 """
 
 from __future__ import annotations
@@ -80,6 +84,13 @@ def summarise(reg: Registries, rows: list[dict]) -> dict:
         totals["batch_calls"] += 1 if row.get("batch") and eligible else 0
         totals["escalated_calls"] += 1 if row.get("escalated") else 0
         totals["escalated_cost"] += cost if row.get("escalated") else 0
+        totals["reruns"] += 1 if row.get("rerun") else 0
+        budget = reg.model(name)["budget"]
+        over = (row.get("input_tokens", 0) > budget["max_input_tokens"]
+                or row.get("output_tokens", 0) > budget["max_output_tokens"])
+        totals["overruns"] += 1 if over else 0
+        if over and not row.get("budget_justification"):
+            totals["unjustified_overruns"] += 1
         if name == "opus":
             totals["opus_cost"] += cost
         if row.get("accepted"):
@@ -116,6 +127,13 @@ def summarise(reg: Registries, rows: list[dict]) -> dict:
             "output": round(totals["output"] / accepted)
             if accepted else None,
         },
+        # Calls whose billed tokens exceed the model budget in models.yaml;
+        # unjustified ones carry no budget_justification.
+        "budget_overrun_count": int(totals["overruns"]),
+        "unjustified_overrun_count": int(totals["unjustified_overruns"]),
+        # Share of calls that repeat an earlier call after a QA failure.
+        "rework_rate": round(totals["reruns"] / totals["calls"], 4)
+        if rows else 0.0,
     }
     return {"metrics": metrics,
             "by": {k: dict(sorted(v.items())) for k, v in by.items()},
@@ -158,6 +176,9 @@ def alerts(reg: Registries, summary: dict) -> list[str]:
         found.append(f"ALERT: escalation share "
                      f"{metrics['escalation_share']:.0%} above "
                      f"{escalation['max_escalation_share']:.0%}")
+    if metrics["unjustified_overrun_count"]:
+        found.append(f"ALERT: {metrics['unjustified_overrun_count']} calls "
+                     "exceeded a token budget without justification")
     return found
 
 
@@ -177,7 +198,14 @@ def render(reg: Registries, summary: dict, period: str) -> str:
              f"| Opus share | {metrics['opus_share']:.1%} |",
              f"| Escalation rate | {metrics['escalation_rate']:.1%} |",
              f"| Cache hit rate | {metrics['cache_hit_rate']:.1%} |",
-             f"| Batch share | {metrics['batch_share']:.1%} |", ""]
+             f"| Batch share | {metrics['batch_share']:.1%} |",
+             f"| Budget overruns (unjustified) | "
+             f"{metrics['budget_overrun_count']} "
+             f"({metrics['unjustified_overrun_count']}) |",
+             f"| Tokens per accepted artifact (in / out) | "
+             f"{_count(metrics['tokens_per_artifact']['input'])} / "
+             f"{_count(metrics['tokens_per_artifact']['output'])} |",
+             f"| Rework rate | {metrics['rework_rate']:.1%} |", ""]
     found = alerts(reg, summary)
     lines += ["## Alerts", ""]
     lines += [f"- {a}" for a in found] if found else ["- None."]
@@ -197,3 +225,7 @@ def render(reg: Registries, summary: dict, period: str) -> str:
 
 def _money(value) -> str:
     return "-" if value is None else f"${value:.2f}"
+
+
+def _count(value) -> str:
+    return "-" if value is None else f"{value:,}"

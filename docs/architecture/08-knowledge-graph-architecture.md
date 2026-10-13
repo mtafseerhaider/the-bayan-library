@@ -65,7 +65,7 @@ with the lexicographically smaller ID as `source`.
 | `collaborated_with` | `collaborated_with` | yes | author, poet | author, poet |
 | `belongs_to` | `has_member` | no | author, poet, book, poem, school, movement, concept, event, institution | civilization, school, movement, theme, language |
 | `member_of` | `includes` | no | book, poem, author, poet | canon, reading_path |
-| `has_theme` | `theme_of` | no | book, poem, passage, surah, author, poet, note, quotation | theme, concept |
+| `has_theme` | `theme_of` | no | book, poem, passage, surah, author, poet, note, quotation, concept | theme, concept |
 | `related_to` | `related_to` | yes | theme, concept | theme, concept |
 | `prerequisite_of` | `requires` | no | book, concept | book, concept |
 | `cultural_exchange` | `cultural_exchange` | yes | civilization | civilization |
@@ -99,7 +99,10 @@ list. At scale they are sharded by source node, one file per source:
 Each edge has the same fields in either layout. Reference fields on records
 (for example an author ID on a book, or canon memberships) are also turned
 into edges at build time and marked `derived: true`; they are not stored
-twice.
+twice. A derived edge passes the same signature check as a stored one: a
+field the record schema allows must still imply a relationship the ontology
+allows, or the validator reports it against the record and the build leaves
+it out.
 
 ```yaml
 # metadata/relationships/author/i/author-ibn-sina.yaml (illustrative)

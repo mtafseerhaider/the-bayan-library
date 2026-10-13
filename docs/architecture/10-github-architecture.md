@@ -53,7 +53,7 @@ the-bayan-library/
 | `system/reports/cost/` | Monthly cost reports `YYYY-MM.md` | yes | 5 |
 | `system/memory/projects/` | Project memory, one file per project | yes | 2 |
 | `scripts/bayan/` | `common`, `registry`, `metadata`, `links`, `graph`, `index`, `router`, `retrieval`, `cost`, `catalog` | yes | 3 |
-| `tests/` | 47 unittest tests, fixtures in `tests/fixtures/library/`, suggested `tests/golden/<skill-id>/` | yes | 3 |
+| `tests/` | 62 unittest tests, fixtures in `tests/fixtures/library/`, suggested `tests/golden/<skill-id>/` | yes | 3 |
 | `drafts/` | Tier-2 drafts, promoted by a tier-3 agent or a human | yes | 2 |
 | `.bayan/runs/<run-id>/` | Run logs, hand-off cards, session memory | no | orchestrator |
 | `.bayan/ledger/YYYY-MM.jsonl` | Usage ledger, one line per model call | no | orchestrator |

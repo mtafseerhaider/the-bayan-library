@@ -1,3 +1,5 @@
+import copy
+import dataclasses
 import unittest
 
 from helpers import TempRepo
@@ -80,6 +82,39 @@ class RouterTests(unittest.TestCase):
                        failed_models=["opus"])
         self.assertEqual(d.model, "sonnet")
         self.assertTrue(d.degraded)
+
+    def test_fallback_keeps_forbidden_work_off_opus(self):
+        # documentation's registry fallback is opus, but formatting is
+        # forbidden there: the fallback stops at the ceiling.
+        d = self.route(task="formatting", agent="documentation",
+                       failed_models=["haiku"])
+        self.assertEqual(d.model, "sonnet")
+        self.assertFalse(d.degraded)
+        self.assertEqual(len(d.escalations), 1)
+        self.assertIn("fallback", d.escalations[0]["reasons"][0])
+        d = self.route(task="formatting", agent="documentation",
+                       failed_models=["haiku", "sonnet"])
+        self.assertEqual(d.status, "blocked")
+
+    def test_fallback_climbs_to_the_nearest_rung(self):
+        # daily-concept's fallback is opus, two rungs above haiku.
+        d = self.route(task="knowledge_compression", agent="daily-concept",
+                       failed_models=["haiku"])
+        self.assertEqual(d.model, "sonnet")
+        d = self.route(task="knowledge_compression", agent="daily-concept",
+                       failed_models=["haiku", "sonnet"])
+        self.assertEqual(d.model, "opus")
+
+    def test_misedited_escalation_rule_does_not_loop(self):
+        routing = copy.deepcopy(self.reg.routing)
+        for rule in routing["escalation_rules"]:
+            if rule["from"] == "sonnet":
+                rule["to"] = "sonnet"
+        reg = dataclasses.replace(self.reg, routing=routing)
+        d = router.route(reg, {"task": "book_summary", "justification": "x",
+                               "signals": {"canon_decision": True}})
+        self.assertEqual(d.model, "sonnet")
+        self.assertEqual(d.escalations, [])
 
     def test_unknown_task(self):
         with self.assertRaises(router.RoutingError):

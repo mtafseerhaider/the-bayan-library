@@ -114,7 +114,7 @@ def load(root: Path, reg: Registries, report: Report | None = None
                 if report:
                     report.add("critical", "yaml", str(exc), location)
                 continue
-            sharded = path.parent != base
+            sharded = path != list_file
             if sharded and len(items) == 1 and report:
                 expected = f"{items[0].get('id')}.yaml"
                 if path.name != expected:
@@ -221,14 +221,26 @@ def check_tags(lib: Library, report: Report) -> None:
                            f"{rel(record.path, lib.root)}#{record.id}")
 
 
+class RefError(ValueError):
+    """A git ref needed for a check cannot be read."""
+
+
 def ids_at_ref(root: Path, ref: str) -> set[str]:
-    """IDs recorded in the committed retrieval index at a git ref."""
+    """IDs recorded in the committed retrieval index at a git ref.
+
+    An unreadable ref raises RefError: a check that silently compared
+    against nothing would pass a deleted ID.
+    """
     try:
         listing = subprocess.run(
             ["git", "ls-tree", "-r", "--name-only", ref, "metadata/index/"],
             cwd=root, capture_output=True, text=True, check=True).stdout
-    except (subprocess.CalledProcessError, FileNotFoundError):
-        return set()
+    except FileNotFoundError as exc:
+        raise RefError("git is not installed") from exc
+    except subprocess.CalledProcessError as exc:
+        raise RefError(f"cannot read {ref!r}: "
+                       f"{exc.stderr.strip() or 'git ls-tree failed'}"
+                       ) from exc
     ids: set[str] = set()
     for name in listing.split():
         if not name.endswith(".jsonl"):

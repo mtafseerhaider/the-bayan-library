@@ -65,6 +65,6 @@ metrics:
   - {id: escalation_rate, description: Share of calls escalated above default; target <= 0.15.}
   - {id: cache_hit_rate, description: Cached input tokens over total input; target >= 0.5.}
   - {id: batch_share, description: Share of batch-eligible calls sent via Batch API (ledger rows carry task); target >= 0.8.}
-  - {id: budget_overrun_count, description: Calls that exceeded a token budget; target 0 unjustified.}
+  - {id: budget_overrun_count, description: Calls whose billed tokens exceed the model budget in models.yaml; target 0 without a budget_justification.}
   - {id: tokens_per_artifact, description: Mean input and output tokens per merged output.}
-  - {id: rework_rate, description: Outputs rerun after QA failure; target <= 0.1.}
+  - {id: rework_rate, description: Calls flagged rerun (repeated after a QA failure) over all calls; target <= 0.1.}
