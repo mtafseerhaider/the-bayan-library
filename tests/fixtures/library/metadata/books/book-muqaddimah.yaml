@@ -1,0 +1,14 @@
+id: book-muqaddimah
+title: The Muqaddimah
+author_id: author-ibn-khaldun
+publication_year: c. 1377
+language: Arabic
+civilization: Islamic Civilization
+genre: [History, Philosophy of History]
+tags: [history, civilization]
+status: canonical
+summary: >-
+  An introduction to history that explains how group solidarity builds and
+  then exhausts dynasties.
+executive_summary_path: summaries/executive-summaries/book-muqaddimah.md
+content_path: summaries/by-book/book-muqaddimah.md

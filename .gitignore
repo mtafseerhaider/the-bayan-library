@@ -1,0 +1,13 @@
+# Build outputs (graph, release bundles)
+build/
+
+# Runtime state: run logs, session memory, usage ledger (may be personal)
+.bayan/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Node (markdownlint via npx)
+node_modules/
